@@ -2,6 +2,7 @@ abstract class AppStrings {
   static const String appName = 'Doctory',
       welcome = 'اهلا بك في',
       letsStart = 'هيا لنبدأ',
+      phone = 'رقم الهاتف',
       login = 'تسجيل الدخول',
       email = 'البريد الالكتروني',
       password = 'كلمة المرور',
