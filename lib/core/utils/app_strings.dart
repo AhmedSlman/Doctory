@@ -10,5 +10,8 @@ abstract class AppStrings {
       createAccount = 'انشاء حساب',
       fullName = 'الاسم الكامل',
       mobileNumber = 'رقم الهاتف',
-      dateOfBirth = 'تاريخ الميلاد';
+      dateOfBirth = 'تاريخ الميلاد',
+      categories = 'الاقسام';
+
+
 }

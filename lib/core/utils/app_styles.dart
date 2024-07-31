@@ -14,4 +14,9 @@ abstract class AppStyles {
     fontWeight: FontWeight.w600,
     color: AppColors.blueForText,
   );
+  static const sBlack15 = TextStyle(
+    fontSize: 15,
+    fontFamily: "Cairo",
+    color: AppColors.blackForText,
+  );
 }

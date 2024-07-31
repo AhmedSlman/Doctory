@@ -4,12 +4,14 @@ import 'package:doctory/features/auth/presentation/views/sign_up_view.dart';
 import 'package:doctory/features/splash/splash_view.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/home/presentation/views/home_view.dart';
+
 final GoRouter router = GoRouter(
   routes: [
-    GoRoute(
-      path: RouterNames.splash,
-      builder: (context, state) => const SplashView(),
-    ),
+    // GoRoute(
+    //   path: RouterNames.splash,
+    //   builder: (context, state) => const SplashView(),
+    // ),
     GoRoute(
       path: RouterNames.login,
       builder: (context, state) => const LoginView(),
@@ -18,5 +20,10 @@ final GoRouter router = GoRouter(
       path: RouterNames.signup,
       builder: (context, state) => const SignUpView(),
     ),
+    GoRoute(
+      path: RouterNames.home,
+      builder: (context, state) => const HomeView(),
+    ),
+
   ],
 );
