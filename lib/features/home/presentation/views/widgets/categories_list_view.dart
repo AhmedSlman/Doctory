@@ -8,17 +8,20 @@ class CategoriesListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height *.14,
-      child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context,index)
-          {
-            return  const Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 11),
-              child:CustomCategoriesListViewItem(),
-            );
-          }
+    return Padding(
+      padding:  EdgeInsets.only(right: MediaQuery.of(context).size.width*0.05),
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height *.14,
+        child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context,index)
+            {
+              return  const Padding(
+                padding:  EdgeInsets.symmetric(horizontal: 5),
+                child:CustomCategoriesListViewItem(),
+              );
+            }
+        ),
       ),
     );
   }

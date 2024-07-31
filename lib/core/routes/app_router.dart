@@ -23,6 +23,10 @@ final GoRouter router = GoRouter(
       builder: (context, state) => const SignUpView(),
     ),
     GoRoute(
+      path: RouterNames.forgetPassword,
+      builder: (context, state) => VerificationPage(),
+    ),
+    GoRoute(
       path: RouterNames.home,
       builder: (context, state) => const HomeView(),
     ),

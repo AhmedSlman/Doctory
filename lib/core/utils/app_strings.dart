@@ -11,7 +11,9 @@ abstract class AppStrings {
       fullName = 'الاسم الكامل',
       mobileNumber = 'رقم الهاتف',
       dateOfBirth = 'تاريخ الميلاد',
-      categories = 'الاقسام';
+      categories = 'الاقسام',
+      offers='العروض';
+
 
 
 }
