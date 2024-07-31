@@ -60,4 +60,20 @@ abstract class AppStyles {
 
   );
 
+  static const s10 = TextStyle(
+    fontSize: 10,
+    fontFamily: "Cairo",
+    fontWeight: FontWeight.normal,
+    color: AppColors.greyForIcon,
+
+  );
+
+  static const sTextButton = TextStyle(
+    fontSize: 9,
+    fontFamily: "Cairo",
+    fontWeight: FontWeight.bold,
+    color: AppColors.whiteColor,
+
+  );
+
 }

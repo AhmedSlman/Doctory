@@ -12,7 +12,8 @@ abstract class AppStrings {
       mobileNumber = 'رقم الهاتف',
       dateOfBirth = 'تاريخ الميلاد',
       categories = 'الاقسام',
-      offers='العروض';
+      offers='العروض',
+      bookNow='احجز الآن';
 
 
 
