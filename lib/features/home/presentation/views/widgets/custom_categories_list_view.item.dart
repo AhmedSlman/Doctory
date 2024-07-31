@@ -1,3 +1,4 @@
+import 'package:doctory/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/app_colors.dart';
@@ -8,12 +9,20 @@ class CustomCategoriesListViewItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  AspectRatio(
-      aspectRatio: 2.9/2.9,
+      aspectRatio: 1.1,
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(13),
             color: AppColors.whiteColor
 
+        ),
+        child:const Center(
+          child:  Text(
+            ' نساء و توليد ',
+            textAlign: TextAlign.center,
+            style: AppStyles.sPrimaryColor14,
+
+          ),
         ),
       ),
     );

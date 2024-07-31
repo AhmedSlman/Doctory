@@ -1,4 +1,5 @@
 import 'package:doctory/core/routes/router_names.dart';
+import 'package:doctory/features/auth/presentation/views/forget_password.dart';
 import 'package:doctory/features/auth/presentation/views/login_view.dart';
 import 'package:doctory/features/auth/presentation/views/sign_up_view.dart';
 import 'package:doctory/features/splash/splash_view.dart';
@@ -19,6 +20,10 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: RouterNames.signup,
       builder: (context, state) => const SignUpView(),
+    ),
+    GoRoute(
+      path: RouterNames.forgetPassword,
+      builder: (context, state) => VerificationPage(),
     ),
     GoRoute(
       path: RouterNames.home,

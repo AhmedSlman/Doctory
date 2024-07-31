@@ -24,5 +24,40 @@ abstract class AppStyles {
     fontSize: 15,
     fontFamily: "Cairo",
     color: AppColors.blackForText,
+      overflow: TextOverflow.ellipsis
+
   );
+  static const sBlack12 = TextStyle(
+    fontSize: 12,
+    fontFamily: "Cairo",
+    color: AppColors.blackForText,
+    overflow: TextOverflow.ellipsis,
+
+  );
+
+  static const sPrimaryColor14 = TextStyle(
+    fontSize: 14,
+    fontFamily: "Cairo",
+    fontWeight: FontWeight.normal,
+    color: AppColors.primaryColor,
+  );
+
+  static const sOldPrice = TextStyle(
+    fontSize: 11,
+    fontFamily: "Cairo",
+    fontWeight: FontWeight.normal,
+    color: AppColors.greyForIcon,
+    decoration: TextDecoration.lineThrough,
+    decorationColor: AppColors.greyForIcon,
+    decorationThickness: 2,
+
+  );
+  static const sPrice = TextStyle(
+    fontSize: 12,
+    fontFamily: "Cairo",
+    fontWeight: FontWeight.normal,
+    color: AppColors.blackForText,
+
+  );
+
 }
