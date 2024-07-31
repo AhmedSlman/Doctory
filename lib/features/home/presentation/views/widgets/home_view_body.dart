@@ -1,4 +1,3 @@
-import 'package:doctory/core/utils/app_assets.dart';
 import 'package:doctory/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -12,28 +11,21 @@ class HomeViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Padding(
-      padding:EdgeInsets.symmetric(horizontal: 50),
-      child:  Column(
+      padding: EdgeInsets.symmetric(horizontal: 50),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-           CustomHomeAppBar(),
+          CustomHomeAppBar(),
           Text(
-              AppStrings.categories,
+            AppStrings.categories,
             style: AppStyles.sBlack15,
           ),
           SizedBox(
             height: 10,
           ),
           CategoriesListView(),
-
         ],
       ),
     );
   }
 }
-
-
-
-
-
-

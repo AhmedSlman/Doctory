@@ -1,9 +1,8 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'package:doctory/core/routes/app_router.dart';
+import 'package:doctory/core/routes/router_names.dart';
 import 'package:doctory/core/utils/app_assets.dart';
-import 'package:doctory/core/utils/app_colors.dart';
-import 'package:doctory/core/utils/app_strings.dart';
-import 'package:doctory/core/utils/app_styles.dart';
 import 'package:doctory/core/widgets/custom_button.dart';
 import 'package:doctory/features/auth/presentation/widgets/forget_password_app_bar.dart';
 import 'package:doctory/features/auth/presentation/widgets/reset_code_form_widget.dart';
@@ -22,7 +21,7 @@ class VerificationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 28),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -50,6 +49,7 @@ class VerificationPage extends StatelessWidget {
                 if (kDebugMode) {
                   print("Entered Code: $code");
                 }
+                context.go(RouterNames.changePassword);
               },
             ),
           ],
