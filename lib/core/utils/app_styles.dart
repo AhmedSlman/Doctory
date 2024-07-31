@@ -8,6 +8,12 @@ abstract class AppStyles {
     fontWeight: FontWeight.w600,
     color: AppColors.blueForText,
   );
+  static const s17 = TextStyle(
+    fontSize: 17,
+    fontFamily: "Cairo",
+    fontWeight: FontWeight.w600,
+    color: AppColors.blackForText,
+  );
   static const s16 = TextStyle(
     fontSize: 16,
     fontFamily: "Cairo",
