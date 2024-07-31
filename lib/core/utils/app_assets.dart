@@ -5,4 +5,5 @@ abstract class AppAssets {
   static const String calenderIconImage = 'assets/images/calendar.png';
   static const String medicineIconImage = 'assets/images/medicine.png';
   static const String settingIconImage = 'assets/images/settings.png';
+  static const String resetCodeImage = "assets/images/resetcode.png";
 }
