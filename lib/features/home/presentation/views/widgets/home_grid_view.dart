@@ -58,18 +58,21 @@ class HomeGridView extends StatelessWidget {
                     padding: const EdgeInsets.all(4.0),
                     child: Text(
                       'عرض تنظيف اسنان ',
-                      style: AppStyles.sBlack12.copyWith(fontWeight: FontWeight.w500),
+                      style: AppStyles.sBlack12
+                          .copyWith(fontWeight: FontWeight.w500),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.008),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: MediaQuery.of(context).size.width * 0.008),
                     child: Row(
                       children: [
                         const Text(
                           '400 جنيه',
                           style: AppStyles.sOldPrice,
                         ),
-                        SizedBox(width: MediaQuery.of(context).size.width * 0.005),
+                        SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.005),
                         const Text(
                           '100 جنيه',
                           style: AppStyles.sPrice,
@@ -111,7 +114,6 @@ class HomeGridView extends StatelessWidget {
                 ),
               ),
             ),
-
           ],
         );
       },
