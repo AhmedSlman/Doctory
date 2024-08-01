@@ -5,4 +5,6 @@ abstract class RouterNames {
   static const String home = '/';
   static const String forgetPassword = '/profile';
   static const String changePassword = '/changePassword';
+  static const String booking = '/booking';
+
 }

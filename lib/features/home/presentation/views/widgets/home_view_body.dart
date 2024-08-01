@@ -29,7 +29,7 @@ class HomeViewBody extends StatelessWidget {
             style: AppStyles.sBlack15,
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-          const Expanded(child: const HomeGridView()),
+          const Expanded(child: HomeGridView()),
         ],
       ),
     );

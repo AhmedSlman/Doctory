@@ -13,7 +13,9 @@ abstract class AppStrings {
       dateOfBirth = 'تاريخ الميلاد',
       categories = 'الاقسام',
       offers='العروض',
-      bookNow='احجز الآن';
+      bookNow='احجز الآن',
+      booking='الحجز',
+      more='المزيد';
 
 
 

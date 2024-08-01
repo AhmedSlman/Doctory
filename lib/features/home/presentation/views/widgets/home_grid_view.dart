@@ -1,5 +1,8 @@
+import 'package:doctory/core/routes/app_router.dart';
+import 'package:doctory/core/routes/router_names.dart';
 import 'package:doctory/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/app_styles.dart';
 
@@ -92,7 +95,7 @@ class HomeGridView extends StatelessWidget {
                 height: MediaQuery.of(context).size.height * 0.03,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Add your onPressed code here!
+                    GoRouter.of(context).push(RouterNames.booking);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primaryColor,

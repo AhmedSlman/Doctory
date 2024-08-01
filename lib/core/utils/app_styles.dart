@@ -76,4 +76,20 @@ abstract class AppStyles {
 
   );
 
+  static const sTitle = TextStyle(
+    fontSize: 25,
+    fontFamily: "Cairo",
+    fontWeight: FontWeight.w600,
+    color: AppColors.blackForText,
+  );
+
+  static const sSubTitleGrey = TextStyle(
+    fontSize: 13,
+    fontFamily: "Cairo",
+    fontWeight: FontWeight.normal,
+    color: AppColors.greyForIcon,
+
+  );
+
+
 }

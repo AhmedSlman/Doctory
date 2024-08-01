@@ -3,6 +3,7 @@ import 'package:doctory/features/auth/presentation/views/change_password.dart';
 import 'package:doctory/features/auth/presentation/views/forget_password.dart';
 import 'package:doctory/features/auth/presentation/views/login_view.dart';
 import 'package:doctory/features/auth/presentation/views/sign_up_view.dart';
+import 'package:doctory/features/booking/presentation/views/booking_view.dart';
 import 'package:doctory/features/splash/splash_view.dart';
 import 'package:go_router/go_router.dart';
 
@@ -37,6 +38,10 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: RouterNames.changePassword,
       builder: (context, state) => const ChangePassword(),
+    ),
+    GoRoute(
+      path: RouterNames.booking,
+      builder: (context, state) => const BookingView(),
     ),
   ],
 );
