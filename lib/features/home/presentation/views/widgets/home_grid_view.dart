@@ -12,13 +12,13 @@ class HomeGridView extends StatelessWidget {
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      padding: EdgeInsets.symmetric(horizontal: width * 0.05),
+      padding: EdgeInsets.symmetric(horizontal: width * 0.02),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: width * 0.02,
         mainAxisSpacing: height * 0.015,
       ),
-      itemCount: 10,
+      itemCount: 10,       
       itemBuilder: (context, index) {
         return Container(
           decoration: BoxDecoration(
@@ -53,11 +53,13 @@ class HomeGridView extends StatelessWidget {
                 padding: const EdgeInsets.all(4.0),
                 child: Text(
                   'عرض تنظيف اسنان ',
-                  style: AppStyles.sBlack12.copyWith(fontWeight: FontWeight.w500),
+                  style:
+                      AppStyles.sBlack12.copyWith(fontWeight: FontWeight.w500),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.008),
+                padding: EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width * 0.008),
                 child: Row(
                   children: [
                     const Text(
