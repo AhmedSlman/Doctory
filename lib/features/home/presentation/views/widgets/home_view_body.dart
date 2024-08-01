@@ -10,29 +10,27 @@ class HomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: MediaQuery.of(context).size.width * 0.05),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const CustomHomeAppBar(),
-            const Text(
-              AppStrings.categories,
-              style: AppStyles.sBlack15,
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-            const CategoriesListView(),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-            const Text(
-              AppStrings.offers,
-              style: AppStyles.sBlack15,
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-            const HomeGridView(),
-          ],
-        ),
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          horizontal: MediaQuery.of(context).size.width * 0.025),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const CustomHomeAppBar(),
+          const Text(
+            AppStrings.categories,
+            style: AppStyles.sBlack15,
+          ),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+          const CategoriesListView(),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+          const Text(
+            AppStrings.offers,
+            style: AppStyles.sBlack15,
+          ),
+          SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+          const Expanded(child: const HomeGridView()),
+        ],
       ),
     );
   }
