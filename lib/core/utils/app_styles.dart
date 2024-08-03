@@ -69,7 +69,7 @@ abstract class AppStyles {
   );
 
   static const sTextButton = TextStyle(
-    fontSize: 9,
+    fontSize: 11,
     fontFamily: "Cairo",
     fontWeight: FontWeight.bold,
     color: AppColors.whiteColor,

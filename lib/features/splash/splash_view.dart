@@ -28,7 +28,7 @@ class SplashView extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
+             Text(
               AppStrings.welcome,
               style: AppStyles.s18,
             ),

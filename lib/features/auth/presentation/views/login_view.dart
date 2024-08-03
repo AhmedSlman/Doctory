@@ -65,7 +65,7 @@ class LoginView extends StatelessWidget {
               onPressed: () {},
             ),
             TextButton(
-              child: const Text(
+              child: Text(
                 AppStrings.createAccount,
                 style: AppStyles.s16,
               ),

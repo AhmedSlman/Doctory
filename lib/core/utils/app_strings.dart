@@ -15,7 +15,11 @@ abstract class AppStrings {
       offers='العروض',
       bookNow='احجز الآن',
       booking='الحجز',
-      more='المزيد';
+      homePage='الرئيسيه',
+      more='المزيد',
+      pharmacies='الصيدليات',
+      call='الاتصال';
+
 
 
 

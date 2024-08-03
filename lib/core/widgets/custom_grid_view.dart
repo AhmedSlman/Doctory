@@ -1,18 +1,26 @@
-import 'package:doctory/core/routes/app_router.dart';
-import 'package:doctory/core/routes/router_names.dart';
-import 'package:doctory/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../../../../core/utils/app_strings.dart';
-import '../../../../../core/utils/app_styles.dart';
+import 'package:doctory/core/utils/app_colors.dart';
+import 'package:doctory/core/utils/app_styles.dart';
 
-class HomeGridView extends StatelessWidget {
-  const HomeGridView({super.key});
+import '../routes/router_names.dart';
+import '../../features/home/data/models/grid_view_item_model.dart';
+
+class CustomGridView extends StatelessWidget {
+  final List<GridViewItemModel> items;
+  final String buttonText;
+
+  const CustomGridView({
+    super.key,
+    required this.items,
+    required this.buttonText,
+  });
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+
     return GridView.builder(
       physics: const BouncingScrollPhysics(), // Prevent internal scrolling
       padding: EdgeInsets.symmetric(horizontal: width * 0.0008),
@@ -21,8 +29,9 @@ class HomeGridView extends StatelessWidget {
         crossAxisSpacing: width * 0.02,
         mainAxisSpacing: height * 0.015,
       ),
-      itemCount: 10,
+      itemCount: items.length,
       itemBuilder: (context, index) {
+        final item = items[index];
         return Stack(
           children: [
             Container(
@@ -49,7 +58,7 @@ class HomeGridView extends StatelessWidget {
                       height: height * 0.12,
                       width: double.infinity,
                       child: Image.asset(
-                        'assets/images/test1.png',
+                        item.image,
                         fit: BoxFit.fill,
                       ),
                     ),
@@ -57,33 +66,30 @@ class HomeGridView extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(4.0),
                     child: Text(
-                      'عرض تنظيف اسنان ',
-                      style: AppStyles.sBlack12
-                          .copyWith(fontWeight: FontWeight.w500),
+                      item.title,
+                      style: AppStyles.sBlack12.copyWith(fontWeight: FontWeight.w500),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: MediaQuery.of(context).size.width * 0.008),
+                    padding: EdgeInsets.symmetric(horizontal: width * 0.008),
                     child: Row(
                       children: [
-                        const Text(
-                          '400 جنيه',
+                        Text(
+                          item.oldPrice ?? '',
                           style: AppStyles.sOldPrice,
                         ),
-                        SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.005),
-                        const Text(
-                          '100 جنيه',
-                          style: AppStyles.sPrice,
+                        SizedBox(width: width * 0.005),
+                        Text(
+                          item.newPrice ?? item.address!,
+                          style: item.newPrice != null ? AppStyles.sPrice : AppStyles.s10,
                         ),
                       ],
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.all(5.0),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
                     child: Text(
-                      'مركز النور للاسنان',
+                      item.clinicName ?? item.phoneNumber!,
                       style: AppStyles.s10,
                     ),
                   ),
@@ -91,14 +97,14 @@ class HomeGridView extends StatelessWidget {
               ),
             ),
             Positioned(
-              left: MediaQuery.of(context).size.width * 0.025,
-              bottom: MediaQuery.of(context).size.height * 0.03,
+              left: width * 0.025,
+              bottom: height * 0.03,
               child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.15,
-                height: MediaQuery.of(context).size.height * 0.03,
+                width: width * 0.15,
+                height: height * 0.03,
                 child: ElevatedButton(
                   onPressed: () {
-                    GoRouter.of(context).push(RouterNames.booking);
+                    // Handle button press action here
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primaryColor,
@@ -107,8 +113,8 @@ class HomeGridView extends StatelessWidget {
                     ),
                     padding: const EdgeInsets.symmetric(horizontal: 0),
                   ),
-                  child: const Text(
-                    AppStrings.bookNow,
+                  child: Text(
+                    buttonText,
                     style: AppStyles.sTextButton,
                   ),
                 ),

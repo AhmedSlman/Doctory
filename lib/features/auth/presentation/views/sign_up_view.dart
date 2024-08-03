@@ -75,7 +75,7 @@ class SignUpView extends StatelessWidget {
                 onPressed: () {},
               ),
               TextButton(
-                child: const Text(
+                child:  Text(
                   AppStrings.login,
                   style: AppStyles.s16,
                 ),

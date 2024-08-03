@@ -16,7 +16,7 @@ class CustomCategoriesListViewItem extends StatelessWidget {
             color: AppColors.whiteColor
 
         ),
-        child:const Center(
+        child: Center(
           child:  Text(
             ' نساء و توليد ',
             textAlign: TextAlign.center,
