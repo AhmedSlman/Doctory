@@ -6,10 +6,12 @@ import 'package:doctory/features/auth/presentation/views/sign_up_view.dart';
 import 'package:doctory/features/booking/presentation/views/booking_view.dart';
 import 'package:doctory/features/home/presentation/views/botton_nav_bar_view.dart';
 import 'package:doctory/features/pharmacies/presentation/views/pharmacies_view.dart';
+import 'package:doctory/features/settings/presentation/views/change_password_view.dart';
 import 'package:doctory/features/splash/splash_view.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/home/presentation/views/home_view.dart';
+import '../../features/settings/presentation/views/personal_info_view.dart';
 
 final GoRouter router = GoRouter(
   routes: [
@@ -47,8 +49,16 @@ final GoRouter router = GoRouter(
     ),
 
     GoRoute(
-      path: RouterNames.pharmaciesScreen,
+      path: RouterNames.bottomNavBar,
       builder: (context, state) => const BottomNavBarView(),
+    ),
+    GoRoute(
+      path: RouterNames.personalInfoView,
+      builder: (context, state) => const PersonalInfoView(),
+    ),
+    GoRoute(
+      path: RouterNames.changePasswordView,
+      builder: (context, state) => const ChangePasswordView(),
     ),
   ],
 );

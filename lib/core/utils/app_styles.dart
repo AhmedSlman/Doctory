@@ -77,7 +77,7 @@ abstract class AppStyles {
   );
 
   static const sTitle = TextStyle(
-    fontSize: 25,
+    fontSize: 20,
     fontFamily: "Cairo",
     fontWeight: FontWeight.w600,
     color: AppColors.blackForText,

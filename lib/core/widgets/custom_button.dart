@@ -10,6 +10,7 @@ class CustomButton extends StatelessWidget {
     required this.onPressed,
     required this.width,
     required this.height,
+    this.textColor,
   });
 
   final Color? buttonColor;
@@ -17,6 +18,7 @@ class CustomButton extends StatelessWidget {
   final VoidCallback onPressed;
   final double width;
   final double height;
+  final Color? textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +32,20 @@ class CustomButton extends StatelessWidget {
             backgroundColor: buttonColor ?? AppColors.primaryColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
+              side: const BorderSide(
+                color:AppColors.primaryColor,
+              ),
             ),
           ),
           onPressed: onPressed,
           child: Text(
             text,
-            style: AppStyles.s18
-                .copyWith(color: AppColors.whiteColor, fontSize: 17),
+            style: AppStyles.s18.copyWith(
+              color: textColor ?? AppColors.whiteColor,
+              fontSize: 13,
+            ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
           ),
         ),
       ),

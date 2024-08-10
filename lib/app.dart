@@ -13,6 +13,9 @@ class Doctory extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: AppColors.scaffoldColor,
+        bottomNavigationBarTheme:const BottomNavigationBarThemeData(
+          backgroundColor: AppColors.greyForIcon,
+        ),
       ),
       routerConfig: router,
       locale: const Locale('ar'),

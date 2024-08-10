@@ -1,9 +1,8 @@
 import 'package:doctory/core/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../core/utils/app_colors.dart';
-import '../view_models/cubit/home_cubit.dart';
+import '../view_models/bottom_nav_bar_cubit/home_cubit.dart';
 
 class BottomNavBarView extends StatelessWidget {
   const BottomNavBarView({super.key});
@@ -20,48 +19,42 @@ class BottomNavBarView extends StatelessWidget {
           return Scaffold(
             body: cubit.bottomNavScreens[cubit.currentIndex],
             bottomNavigationBar: BottomNavigationBar(
-
               currentIndex: cubit.currentIndex,
-              backgroundColor: AppColors.bottomNavColor,
               selectedItemColor: AppColors.primaryColor,
-
-
+              unselectedItemColor: AppColors.greyForIcon,
               onTap: (index) {
                 cubit.changeBottom(index);
               },
               items: const [
                 BottomNavigationBarItem(
                   icon: ImageIcon(
+                    AssetImage('assets/images/home.png'),
+                  ),
+                  label: AppStrings.homePage,
+                ),
+                BottomNavigationBarItem(
+                  icon: ImageIcon(
                     AssetImage('assets/images/medicine.png'),
                   ),
-                  label: AppStrings.pharmacies, // Provide a non-null label
-
+                  label: AppStrings.pharmacies,
                 ),
                 BottomNavigationBarItem(
                   icon: ImageIcon(
-                      AssetImage('assets/images/calendar.png')
+                    AssetImage('assets/images/calendar.png'),
                   ),
-                  label: AppStrings.booking, // Provide a non-null label
-
+                  label: AppStrings.booking,
                 ),
                 BottomNavigationBarItem(
                   icon: ImageIcon(
-                      AssetImage('assets/images/home.png')
+                    AssetImage('assets/images/settings.png'),
                   ),
-                  label: AppStrings.homePage, // Provide a non-null label
-
-
+                  label: AppStrings.settings,
                 ),
-
-
-
-
-                // Add Settings if needed
               ],
             ),
           );
         },
       ),
-    );;
+    );
   }
 }
