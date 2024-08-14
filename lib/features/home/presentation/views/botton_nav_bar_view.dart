@@ -22,6 +22,7 @@ class BottomNavBarView extends StatelessWidget {
               currentIndex: cubit.currentIndex,
               selectedItemColor: AppColors.primaryColor,
               unselectedItemColor: AppColors.greyForIcon,
+              backgroundColor: AppColors.primaryColor,
               onTap: (index) {
                 cubit.changeBottom(index);
               },

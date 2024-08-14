@@ -30,7 +30,14 @@ abstract class AppStrings {
       selectAnOption='اختار النوع',
       currentPassword='كلمه المرور الحاليه',
       newPassword='كلمه المرور الجديده',
-      confirmNewPassword='تأكيد كلمة المرور الجديده';
+      confirmNewPassword='تأكيد كلمة المرور الجديده',
+      reservationTime='مواعيد الحجوزات',
+      rating='التقيم',
+      reportAProblem='الابلاغ عن مشكلة';
+
+
+
+
 
 
 

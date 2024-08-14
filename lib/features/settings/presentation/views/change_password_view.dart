@@ -7,8 +7,8 @@ class ChangePasswordView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(child: Scaffold(
-      body: ChangePasswordViewBody(),
-    ));
+    return const Scaffold(
+      body: SafeArea(child: ChangePasswordViewBody()),
+    );
   }
 }

@@ -6,7 +6,9 @@ import 'package:doctory/features/auth/presentation/views/sign_up_view.dart';
 import 'package:doctory/features/booking/presentation/views/booking_view.dart';
 import 'package:doctory/features/home/presentation/views/botton_nav_bar_view.dart';
 import 'package:doctory/features/pharmacies/presentation/views/pharmacies_view.dart';
+import 'package:doctory/features/settings/presentation/views/booking_time_view.dart';
 import 'package:doctory/features/settings/presentation/views/change_password_view.dart';
+import 'package:doctory/features/settings/presentation/views/report_a_problem_view.dart';
 import 'package:doctory/features/splash/splash_view.dart';
 import 'package:go_router/go_router.dart';
 
@@ -59,6 +61,14 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: RouterNames.changePasswordView,
       builder: (context, state) => const ChangePasswordView(),
+    ),
+    GoRoute(
+      path: RouterNames.bookingTime,
+      builder: (context, state) => const BookingTimeView(),
+    ),
+    GoRoute(
+      path: RouterNames.reportProblemView,
+      builder: (context, state) => const ReportAProblemView(),
     ),
   ],
 );
