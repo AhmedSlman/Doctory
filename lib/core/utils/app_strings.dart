@@ -14,6 +14,7 @@ abstract class AppStrings {
       categories = 'الاقسام',
       offers='العروض',
       bookNow='احجز الآن',
+      cancelBooking='الغاءالحجز',
       booking='الحجز',
       homePage='الرئيسيه',
       more='المزيد',
@@ -32,8 +33,13 @@ abstract class AppStrings {
       newPassword='كلمه المرور الجديده',
       confirmNewPassword='تأكيد كلمة المرور الجديده',
       reservationTime='مواعيد الحجوزات',
-      rating='التقيم',
-      reportAProblem='الابلاغ عن مشكلة';
+      rating='تقييم',
+      yourRating='تقييمك',
+      reportAProblem='الابلاغ عن مشكلة',
+      send='ارسال',
+    uploadPhoto='ارفاق صوره';
+
+
 
 
 

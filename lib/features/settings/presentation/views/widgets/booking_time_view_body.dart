@@ -1,10 +1,17 @@
+import 'package:doctory/core/routes/router_names.dart';
 import 'package:doctory/core/utils/app_strings.dart';
 import 'package:doctory/core/widgets/custom_app_bar.dart';
+import 'package:doctory/core/widgets/custom_button.dart';
+import 'package:doctory/core/widgets/custom_text_field.dart';
+import 'package:doctory/features/settings/presentation/views/widgets/report_problem_textfield.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_styles.dart';
+import '../../../../../core/widgets/custom_rating_bar.dart';
 import '../../../../booking/presentation/views/widgets/doctors_list_view.dart';
+import '../show_dialogs/rating_dialog.dart';
 
 class BookingTimeViewBody extends StatelessWidget {
   const BookingTimeViewBody({super.key});
@@ -130,7 +137,14 @@ class ReservationListViewItem extends StatelessWidget {
                   width: screenWidth * 0.2,
                   height: screenHeight * 0.04,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return const RatingScreenDialog();
+                        },
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primaryColor,
                       shape: RoundedRectangleBorder(
@@ -155,3 +169,4 @@ class ReservationListViewItem extends StatelessWidget {
     );
   }
 }
+

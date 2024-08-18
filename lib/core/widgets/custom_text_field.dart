@@ -5,10 +5,6 @@ import 'package:flutter/material.dart';
 
 import '../utils/app_colors.dart';
 
-import 'package:flutter/material.dart';
-import '../utils/app_colors.dart';
-import '../utils/app_styles.dart';
-
 class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
   final FormFieldValidator<String>? validator;
@@ -23,8 +19,8 @@ class CustomTextField extends StatelessWidget {
   final ValueChanged<String>? onFieldSubmitted;
   final bool readOnly;
   final VoidCallback? onTap;
-  final TextStyle? textStyle; // Added property for text style
-
+  final TextStyle? textStyle;
+  final TextAlign? textAlign;
   const CustomTextField({
     super.key,
     this.controller,
@@ -40,7 +36,8 @@ class CustomTextField extends StatelessWidget {
     this.onFieldSubmitted,
     this.readOnly = false,
     this.onTap,
-    this.textStyle, // Initialize text style
+    this.textStyle,
+    this.textAlign, // Initialize text style
   });
 
   @override
@@ -57,6 +54,7 @@ class CustomTextField extends StatelessWidget {
       controller: controller,
       validator: validator,
       keyboardType: keyboardType,
+      textAlign: textAlign ?? TextAlign.start,
       obscureText: obsecure,
       onChanged: onChanged,
       onEditingComplete: onEditingCompleted,
@@ -74,29 +72,29 @@ class CustomTextField extends StatelessWidget {
         fillColor: AppColors.whiteColor,
         border: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColors.whiteColor),
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(25),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColors.blueForText),
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(25),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: AppColors.primaryColor),
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(25),
         ),
       ),
     );
   }
 }
 
-class BirthDateTextField extends StatefulWidget {
-  const BirthDateTextField({super.key});
+class DateTextField extends StatefulWidget {
+  const DateTextField({super.key});
 
   @override
-  State<BirthDateTextField> createState() => _BirthDateTextFieldState();
+  State<DateTextField> createState() => _DateTextFieldState();
 }
 
-class _BirthDateTextFieldState extends State<BirthDateTextField> {
+class _DateTextFieldState extends State<DateTextField> {
   final TextEditingController _controller = TextEditingController();
 
   Future<void> _selectBirthDate(BuildContext context) async {

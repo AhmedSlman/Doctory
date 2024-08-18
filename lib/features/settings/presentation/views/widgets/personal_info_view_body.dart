@@ -1,6 +1,4 @@
-import 'package:doctory/core/utils/app_colors.dart';
 import 'package:doctory/core/widgets/custom_app_bar.dart';
-import 'package:doctory/core/widgets/custom_button.dart';
 import 'package:doctory/features/settings/presentation/views/widgets/save_changes_button.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/utils/app_strings.dart';
@@ -36,7 +34,7 @@ class PersonalInfoViewBody extends StatelessWidget {
             children: [
               const Expanded(
                 flex: 2,
-                child: BirthDateTextField(),
+                child: DateTextField(),
               ),
               const SizedBox(width: 15), // Adjust spacing between fields
               Expanded(

@@ -9,11 +9,14 @@ import '../../features/home/data/models/grid_view_item_model.dart';
 class CustomGridView extends StatelessWidget {
   final List<GridViewItemModel> items;
   final String buttonText;
+  final VoidCallback onPressed; // Add a callback for the button
 
   const CustomGridView({
     super.key,
     required this.items,
     required this.buttonText,
+    required  this.onPressed, // Add a callback for the button
+
   });
 
   @override
@@ -103,9 +106,7 @@ class CustomGridView extends StatelessWidget {
                 width: width * 0.15,
                 height: height * 0.03,
                 child: ElevatedButton(
-                  onPressed: () {
-                    // Handle button press action here
-                  },
+                  onPressed: onPressed,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primaryColor,
                     shape: RoundedRectangleBorder(
