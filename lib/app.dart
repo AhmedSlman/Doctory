@@ -14,7 +14,7 @@ class Doctory extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: AppColors.scaffoldColor,
         bottomNavigationBarTheme:const BottomNavigationBarThemeData(
-          backgroundColor: AppColors.greyForIcon,
+          backgroundColor: AppColors.blackForText,
         ),
       ),
       routerConfig: router,

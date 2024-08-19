@@ -24,7 +24,7 @@ class PharmaciesViewBody extends StatelessWidget {
           const SizedBox(
             height: 25,
           ),
-          Expanded(child: CustomGridView(items:pharmaciesGridViewItems, buttonText:AppStrings.call,)),
+          Expanded(child: CustomGridView(items:pharmaciesGridViewItems, buttonText:AppStrings.call, onPressed: () {  },)),
         ],
       ),
     );

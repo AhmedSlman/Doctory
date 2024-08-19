@@ -12,6 +12,8 @@ abstract class AppColors {
   static const gradientColor = Color(0xFF8ED2FF);
   static const gradientColor2 = Color(0xFFDDF1FF);
   static const bottomNavColor = Color(0xFFF3F3F3);
+  static const greyColor = Color(0xFFF3F3F3);
+
 
 
 }

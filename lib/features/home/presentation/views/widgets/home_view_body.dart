@@ -1,5 +1,6 @@
 import 'package:doctory/core/utils/app_styles.dart';
 import 'package:doctory/features/home/data/data_source/grid_view_data_source.dart';
+import 'package:doctory/features/settings/presentation/views/show_dialogs/booking_dialog.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/utils/app_strings.dart';
 import 'categories_list_view.dart';
@@ -30,7 +31,14 @@ class HomeViewBody extends StatelessWidget {
             style: AppStyles.sBlack15,
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-           Expanded(child: CustomGridView(items: gridViewItems, buttonText: AppStrings.bookNow,)),
+           Expanded(child: CustomGridView(items: gridViewItems, buttonText: AppStrings.bookNow,onPressed: (){
+             showDialog(
+               context: context,
+               builder: (BuildContext context) {
+                 return const BookingDialog();
+               },
+             );
+           },)),
         ],
       ),
     );

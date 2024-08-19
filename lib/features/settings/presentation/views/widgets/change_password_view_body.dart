@@ -20,7 +20,7 @@ class ChangePasswordViewBody extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomAppBar(title: AppStrings.changePassword),
+          const CustomAppBar(title: AppStrings.changePassword,showBackButton: true,),
           SizedBox(height: screenHeight * 0.03),
           const CustomTextField(
             hintText: AppStrings.currentPassword,

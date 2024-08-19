@@ -4,6 +4,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/app_styles.dart';
+import '../../../../../core/widgets/custom_rating_bar.dart';
 
 class DoctorsListViewItem extends StatelessWidget {
   const DoctorsListViewItem({super.key});
@@ -94,21 +95,7 @@ class DoctorsListViewItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                RatingBar.builder(
-                  itemSize: screenWidth * 0.05,
-                  initialRating: 3,
-                  minRating: 1,
-                  direction: Axis.horizontal,
-                  allowHalfRating: true,
-                  itemCount: 5,
-                  itemBuilder: (context, _) => const Icon(
-                    Icons.star,
-                    color: Colors.amber,
-                  ),
-                  onRatingUpdate: (rating) {
-                    print(rating);
-                  },
-                ),
+               const CustomRatingBar(),
                 const SizedBox(height: 20),
                 SizedBox(
                   width: screenWidth * 0.2,

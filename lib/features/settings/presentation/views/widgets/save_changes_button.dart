@@ -12,8 +12,7 @@ class SaveChangesButton extends StatelessWidget {
       children: [
         Expanded(
           child: CustomButton(
-            text: 'حفظ التغيرات',
-
+            text: 'حفظ',
             onPressed: () {},
             height: MediaQuery.of(context).size.height* 0.065,
             width: double.infinity,
@@ -26,7 +25,7 @@ class SaveChangesButton extends StatelessWidget {
             onPressed: () {},
             height: MediaQuery.of(context).size.height* 0.065,
             width: double.infinity,
-            buttonColor: AppColors.scaffoldColor,
+            buttonColor: AppColors.whiteColor,
           ),
         ),
       ],

@@ -10,7 +10,8 @@ abstract class RouterNames {
   static const String bottomNavBar = '/';
   static const String personalInfoView = '/personalInfoView';
   static const String changePasswordView = '/changePasswordView';
-
+  static const String bookingTime = '/bookingTime';
+  static const String reportProblemView = '/reportProblemView';
 
 
 
