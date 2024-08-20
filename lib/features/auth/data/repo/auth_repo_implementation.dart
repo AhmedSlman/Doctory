@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:doctory/features/auth/data/models/user_model.dart';
+import 'package:doctory/features/auth/data/repo/auth_repo_abstract.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-import '../models/user_model.dart';
-import 'auth_repo_abstract.dart';
 
 class AuthRepoImplementation implements AuthRepository {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -19,7 +18,7 @@ class AuthRepoImplementation implements AuthRepository {
   @override
   Future<UserModel> signIn(String email, String password) async {
     final UserCredential userCredential =
-    await _firebaseAuth.signInWithEmailAndPassword(
+        await _firebaseAuth.signInWithEmailAndPassword(
       email: email,
       password: password,
     );

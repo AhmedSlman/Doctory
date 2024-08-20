@@ -16,33 +16,35 @@ class SettingsViewBody extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(
           horizontal: MediaQuery.of(context).size.width * 0.025),
-      child:  Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-           const CustomAppBar(title:AppStrings.settings),
-           SettingsContainer(title: AppStrings.personalInformation,
-            onTap: () => GoRouter.of(context).push(RouterNames.personalInfoView),),
-          const SizedBox(
-            height: 18,
-          ),
-           SettingsContainer(title: AppStrings.changePassword,
-            onTap: () =>GoRouter.of(context).push(RouterNames.changePasswordView),),
-          const SizedBox(
-            height: 18,
-          ),
-           SettingsContainer(title: AppStrings.bookingTime,
-             onTap: () =>GoRouter.of(context).push(RouterNames.bookingTime),),
-          const SizedBox(
-            height: 18,
-          ),
-           SettingsContainer(title: AppStrings.sendProblem,
-             onTap: () =>GoRouter.of(context).push(RouterNames.reportProblemView),),
-
-          TextButton(onPressed: (){}, child:Text(AppStrings.logOut,
-            style: AppStyles.sBlack15.copyWith(
-                color: AppColors.redColor
-            ),))
-        ],
+      child:  SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+             const CustomAppBar(title:AppStrings.settings),
+             SettingsContainer(title: AppStrings.personalInformation,
+              onTap: () => GoRouter.of(context).push(RouterNames.personalInfoView),),
+            const SizedBox(
+              height: 18,
+            ),
+             SettingsContainer(title: AppStrings.changePassword,
+              onTap: () =>GoRouter.of(context).push(RouterNames.changePasswordView),),
+            const SizedBox(
+              height: 18,
+            ),
+             SettingsContainer(title: AppStrings.bookingTime,
+               onTap: () =>GoRouter.of(context).push(RouterNames.bookingTime),),
+            const SizedBox(
+              height: 18,
+            ),
+             SettingsContainer(title: AppStrings.sendProblem,
+               onTap: () =>GoRouter.of(context).push(RouterNames.reportProblemView),),
+        
+            TextButton(onPressed: (){}, child:Text(AppStrings.logOut,
+              style: AppStyles.sBlack15.copyWith(
+                  color: AppColors.redColor
+              ),))
+          ],
+        ),
       ),
     );
   }

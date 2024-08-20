@@ -37,7 +37,13 @@ abstract class AppStrings {
       yourRating='تقييمك',
       reportAProblem='الابلاغ عن مشكلة',
       send='ارسال',
-    uploadPhoto='ارفاق صوره';
+      doctorServices='خدمات الدكتور',
+      infoAboutReservation='معلومات عن الحجز',
+      doctorSummary='نبذه عن الدكتور',
+      examinationPrice='سعر الكشف',
+      waitingTime='وقت الانتظار',
+      customersOpinions='اراء العملاء',
+      uploadPhoto='ارفاق صوره';
 
 
 

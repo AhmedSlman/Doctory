@@ -19,14 +19,14 @@ class HomeViewBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const CustomHomeAppBar(),
-           const Text(
+            Text(
             AppStrings.categories,
             style: AppStyles.sBlack15,
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.01),
           const CategoriesListView(),
           SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-           const Text(
+            Text(
             AppStrings.offers,
             style: AppStyles.sBlack15,
           ),

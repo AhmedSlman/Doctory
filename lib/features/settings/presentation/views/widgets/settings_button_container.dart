@@ -2,6 +2,7 @@ import 'package:doctory/core/routes/router_names.dart';
 import 'package:doctory/core/utils/app_colors.dart';
 import 'package:doctory/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 class SettingsContainer extends StatelessWidget {
@@ -19,7 +20,7 @@ class SettingsContainer extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.06,
+        height: 40,
         width: double.infinity,
         decoration: BoxDecoration(
           color: AppColors.whiteColor,

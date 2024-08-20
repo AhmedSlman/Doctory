@@ -1,5 +1,6 @@
+import 'package:doctory/core/routes/router_names.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_strings.dart';
@@ -15,7 +16,7 @@ class DoctorsListViewItem extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Container(
-      height: screenHeight * 0.15,
+      height: 150,
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
@@ -24,7 +25,8 @@ class DoctorsListViewItem extends StatelessWidget {
       child: Row(
         children: [
           ClipRRect(
-            borderRadius: const BorderRadius.horizontal(right: Radius.circular(16)),
+            borderRadius:
+                const BorderRadius.horizontal(right: Radius.circular(16)),
             child: SizedBox(
               height: screenHeight * 0.15,
               width: screenWidth * 0.3,
@@ -95,19 +97,22 @@ class DoctorsListViewItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-               const CustomRatingBar(),
+                const CustomRatingBar(),
                 const SizedBox(height: 20),
                 SizedBox(
                   width: screenWidth * 0.2,
                   height: screenHeight * 0.04,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      GoRouter.of(context).push(RouterNames.doctorProfileInfo);
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primaryColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5),
                       ),
-                      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
                     ),
                     child: Text(
                       AppStrings.more,

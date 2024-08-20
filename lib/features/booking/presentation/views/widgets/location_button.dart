@@ -9,7 +9,7 @@ class LocationButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: MediaQuery.of(context).size.height*0.06,
+        height: 45,
         width: MediaQuery.of(context).size.width*0.14,
         decoration: BoxDecoration(
           border: Border.all(

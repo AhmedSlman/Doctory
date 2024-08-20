@@ -26,7 +26,7 @@ class RatingScreenDialog extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(AppStrings.rating, style: AppStyles.sBlack15),
+             Text(AppStrings.rating, style: AppStyles.sBlack15),
             const SizedBox(height: 5),
             const CustomRatingBar(),
             const SizedBox(height: 8), // Adjusted spacing

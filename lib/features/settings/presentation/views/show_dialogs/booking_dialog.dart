@@ -28,7 +28,7 @@ class BookingDialog extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(AppStrings.booking, style: AppStyles.sBlack15),
+                   Text(AppStrings.booking, style: AppStyles.sBlack15),
                   TextButton(
                     onPressed: () {
                     },

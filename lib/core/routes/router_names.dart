@@ -12,7 +12,5 @@ abstract class RouterNames {
   static const String changePasswordView = '/changePasswordView';
   static const String bookingTime = '/bookingTime';
   static const String reportProblemView = '/reportProblemView';
-
-
-
+  static const String doctorProfileInfo = '/doctorProfileInfo';
 }

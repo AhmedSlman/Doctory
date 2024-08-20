@@ -1,6 +1,4 @@
-import 'package:doctory/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/widgets/custom_app_bar.dart';
 import 'drop_down_menu_button.dart';
@@ -13,33 +11,28 @@ class BookingViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.03),
-      child: Column(
+      padding: EdgeInsets.symmetric(
+          horizontal: MediaQuery.of(context).size.width * 0.03),
+      child: Column(children: [
+        const CustomAppBar(
+          title: AppStrings.booking,
+        ),
+        Row(
           children: [
-            const CustomAppBar(title: AppStrings.booking,),
-            Row(
-              children: [
-                const DropDownButtonMenu(),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width *0.025,
-                ),
-                const DropDownButtonMenu2(),
-               const Spacer(),
-
-                const LocationButton()
-              ],
+            const DropDownButtonMenu(),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.025,
             ),
-             SizedBox(
-              height: MediaQuery.of(context).size.height*0.015,
-            ),
-            const Expanded(child:DoctorsListView())
-
-
-          ]
-      ),
+            const DropDownButtonMenu2(),
+            const Spacer(),
+            const LocationButton()
+          ],
+        ),
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.015,
+        ),
+        const Expanded(child: DoctorsListView())
+      ]),
     );
   }
 }
-
-
-

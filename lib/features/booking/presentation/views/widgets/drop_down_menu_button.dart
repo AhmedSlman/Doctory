@@ -24,7 +24,7 @@ class _DropDownButtonMenuState extends State<DropDownButtonMenu> {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width /3,
-      height: MediaQuery.of(context).size.height /19,
+      height: 40,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8.0),
@@ -98,7 +98,7 @@ class _DropDownButtonMenuState2 extends State<DropDownButtonMenu2> {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width /3,
-      height: MediaQuery.of(context).size.height /19,
+      height: 40,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8.0),

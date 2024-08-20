@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class CustomAppBar extends StatelessWidget {
-  final String title;
-  final bool showBackButton; // Option to show the back button
+  final String? title;
+  final bool showBackButton;
 
   const CustomAppBar({
     super.key,
-    required this.title,
-    this.showBackButton = false, // Default is false (no back button)
+     this.title,
+    this.showBackButton = false,
   });
 
   @override
@@ -30,7 +30,7 @@ class CustomAppBar extends StatelessWidget {
             ),
           Center(
             child: Text(
-              title,
+              title ??'',
               style: AppStyles.sTitle,
               textAlign: TextAlign.center,
             ),

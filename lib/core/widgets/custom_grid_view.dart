@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:doctory/core/utils/app_colors.dart';
 import 'package:doctory/core/utils/app_styles.dart';
@@ -103,8 +104,8 @@ class CustomGridView extends StatelessWidget {
               left: width * 0.025,
               bottom: height * 0.03,
               child: SizedBox(
-                width: width * 0.15,
-                height: height * 0.03,
+                width: 60.w,
+                height: 25.h,
                 child: ElevatedButton(
                   onPressed: onPressed,
                   style: ElevatedButton.styleFrom(
