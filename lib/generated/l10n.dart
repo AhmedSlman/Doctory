@@ -130,6 +130,16 @@ class S {
     );
   }
 
+  /// `Please enter the code sent via SMS \n to the number`
+  String get pinCodeMessage {
+    return Intl.message(
+      'Please enter the code sent via SMS \n to the number',
+      name: 'pinCodeMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Create Account`
   String get createAccount {
     return Intl.message(

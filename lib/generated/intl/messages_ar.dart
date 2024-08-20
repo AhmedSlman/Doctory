@@ -65,6 +65,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("المعلومات الشخصيه"),
         "pharmacies": MessageLookupByLibrary.simpleMessage("الصيدليات"),
         "phone": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
+        "pinCodeMessage": MessageLookupByLibrary.simpleMessage(
+            "يرجى إدخال الرمز المرسل في رسالة نصية\\n  علي الرقم"),
         "rating": MessageLookupByLibrary.simpleMessage("تقييم"),
         "reportAProblem":
             MessageLookupByLibrary.simpleMessage("الابلاغ عن مشكلة"),

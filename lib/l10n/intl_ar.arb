@@ -7,6 +7,7 @@
       "email": "البريد الالكتروني",
       "password": "كلمة المرور",
       "forgotPassword": "نسيت كلمة المرور؟",
+      "pinCodeMessage": "يرجى إدخال الرمز المرسل في رسالة نصية\\n  علي الرقم",
       "createAccount": "انشاء حساب",
       "fullName": "الاسم الكامل",
       "mobileNumber": "رقم الهاتف",

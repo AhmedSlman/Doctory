@@ -8,11 +8,14 @@ import 'package:doctory/features/auth/presentation/widgets/auth_text_form_field_
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../generated/l10n.dart';
+
 class SignUpView extends StatelessWidget {
   const SignUpView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final isLTR = Localizations.localeOf(context).languageCode == 'en';
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -33,50 +36,50 @@ class SignUpView extends StatelessWidget {
               Image.asset(AppAssets.logo),
               SizedBox(height: MediaQuery.of(context).size.height * 0.02),
               Align(
-                alignment: Alignment.centerRight,
+                alignment: isLTR ?Alignment.centerLeft : Alignment.centerRight,
                 child: Text(
-                  AppStrings.createAccount,
+                  S.of(context).createAccount,
                   style: AppStyles.s18.copyWith(fontWeight: FontWeight.w400),
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-              const AuthTextFormFieldWidget(
-                hintText: AppStrings.fullName,
+               AuthTextFormFieldWidget(
+                hintText: S.of(context).fullName,
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-              const AuthTextFormFieldWidget(
-                hintText: AppStrings.phone,
+               AuthTextFormFieldWidget(
+                hintText: S.of(context).phone,
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-              const AuthTextFormFieldWidget(
-                hintText: AppStrings.email,
+               AuthTextFormFieldWidget(
+                hintText: S.of(context).email,
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-              const AuthTextFormFieldWidget(
-                hintText: AppStrings.dateOfBirth,
+               AuthTextFormFieldWidget(
+                hintText: S.of(context).dateOfBirth,
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-              const AuthTextFormFieldWidget(
-                hintText: AppStrings.password,
+               AuthTextFormFieldWidget(
+                hintText: S.of(context).password,
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.02),
               Row(
                 children: [
                   Radio(value: 1, groupValue: 1, onChanged: (_) {}),
-                  const Text("ذكر"),
+                   Text(S.of(context).male,),
                   Radio(value: 0, groupValue: 1, onChanged: (_) {}),
-                  const Text("أنثي"),
+                   Text(S.of(context).female,),
                 ],
               ),
               CustomButton(
-                text: AppStrings.createAccount,
+                text:S.of(context).createAccount,
                 width: MediaQuery.of(context).size.width * 0.5,
                 height: MediaQuery.of(context).size.height * 0.07,
                 onPressed: () {},
               ),
               TextButton(
                 child:  Text(
-                  AppStrings.login,
+                  S.of(context).login,
                   style: AppStyles.s16,
                 ),
                 onPressed: () {

@@ -5,6 +5,8 @@ import 'package:doctory/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../generated/l10n.dart';
+
 class ForgetPasswordAppBar extends StatelessWidget {
   const ForgetPasswordAppBar({super.key});
 
@@ -19,9 +21,10 @@ class ForgetPasswordAppBar extends StatelessWidget {
           icon: const Icon(Icons.arrow_back_ios),
         ),
         Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              AppStrings.forgotPassword,
+            S.of(context).forgotPassword,
               style: AppStyles.s18.copyWith(color: AppColors.blackForText),
             ),
             Padding(
@@ -29,7 +32,7 @@ class ForgetPasswordAppBar extends StatelessWidget {
               child: RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
-                  text: ' يرجى إدخال الرمز المرسل في رسالة نصية\n  علي الرقم ',
+                  text: S.of(context).pinCodeMessage,
                   style: DefaultTextStyle.of(context).style,
                   children: const <TextSpan>[
                     TextSpan(

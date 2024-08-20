@@ -3,6 +3,7 @@ import 'package:doctory/features/home/data/data_source/grid_view_data_source.dar
 import 'package:doctory/features/settings/presentation/views/show_dialogs/booking_dialog.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/utils/app_strings.dart';
+import '../../../../../generated/l10n.dart';
 import 'categories_list_view.dart';
 import 'custom_home_appbar.dart';
 import '../../../../../core/widgets/custom_grid_view.dart';
@@ -27,7 +28,8 @@ class HomeViewBody extends StatelessWidget {
           const CategoriesListView(),
           SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             Text(
-            AppStrings.offers,
+              S.of(context).offers,
+            //AppStrings.offers,
             style: AppStyles.sBlack15,
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.02),

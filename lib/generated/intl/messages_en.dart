@@ -65,6 +65,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Personal Information"),
         "pharmacies": MessageLookupByLibrary.simpleMessage("Pharmacies"),
         "phone": MessageLookupByLibrary.simpleMessage("Phone Number"),
+        "pinCodeMessage": MessageLookupByLibrary.simpleMessage(
+            "Please enter the code sent via SMS \n to the number"),
         "rating": MessageLookupByLibrary.simpleMessage("Rating"),
         "reportAProblem":
             MessageLookupByLibrary.simpleMessage("Report a Problem"),

@@ -10,6 +10,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../generated/l10n.dart';
+
 class VerificationPage extends StatelessWidget {
   VerificationPage({super.key});
 
@@ -43,7 +45,7 @@ class VerificationPage extends StatelessWidget {
             CustomButton(
               width: MediaQuery.of(context).size.width * 0.6,
               height: MediaQuery.of(context).size.height * 0.07,
-              text: "ارسال",
+              text: S.of(context).send,
               onPressed: () {
                 final code = _controllers.map((c) => c.text).join();
                 if (kDebugMode) {

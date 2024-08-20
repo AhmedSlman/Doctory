@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart'; // Import ScreenUtil
 
 import 'core/utils/app_colors.dart';
+import 'generated/l10n.dart';
 
 class Doctory extends StatelessWidget {
   const Doctory({super.key});
@@ -23,11 +24,14 @@ class Doctory extends StatelessWidget {
             ),
           ),
           routerConfig: router,
-          locale: const Locale('ar'),
+          locale: const Locale('ar',''),
           supportedLocales: const [
             Locale('ar', ''),
+            Locale('en', ''),
+
           ],
           localizationsDelegates: const [
+            S.delegate,
             GlobalMaterialLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,

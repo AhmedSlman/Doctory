@@ -10,11 +10,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../generated/l10n.dart';
+
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final isLTR = Localizations.localeOf(context).languageCode == 'en';
+
     return Scaffold(
         body: Container(
       decoration: const BoxDecoration(
@@ -35,19 +39,19 @@ class LoginView extends StatelessWidget {
             Image.asset(AppAssets.logo),
             SizedBox(height: MediaQuery.of(context).size.height * 0.03),
             Align(
-              alignment: Alignment.centerRight,
+              alignment: isLTR ?Alignment.centerLeft : Alignment.centerRight,
               child: Text(
-                AppStrings.login,
+                  S.of(context).login,
                 style: AppStyles.s18.copyWith(fontWeight: FontWeight.w400),
               ),
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.03),
-            const AuthTextFormFieldWidget(
-              hintText: AppStrings.email,
+             AuthTextFormFieldWidget(
+              hintText: S.of(context).email,
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.03),
-            const AuthTextFormFieldWidget(
-              hintText: AppStrings.password,
+             AuthTextFormFieldWidget(
+              hintText: S.of(context).password,
             ),
             Align(
               alignment: Alignment.centerRight,
@@ -55,18 +59,18 @@ class LoginView extends StatelessWidget {
                 onPressed: () {
                   context.go(RouterNames.forgetPassword);
                 },
-                child: const Text(AppStrings.forgotPassword),
+                child:  Text(S.of(context).forgotPassword,),
               ),
             ),
             CustomButton(
-              text: AppStrings.login,
+              text: S.of(context).login,
               width: MediaQuery.of(context).size.width * 0.5,
               height: MediaQuery.of(context).size.height * 0.07,
               onPressed: () {},
             ),
             TextButton(
               child: Text(
-                AppStrings.createAccount,
+                S.of(context).createAccount,
                 style: AppStyles.s16,
               ),
               onPressed: () {
