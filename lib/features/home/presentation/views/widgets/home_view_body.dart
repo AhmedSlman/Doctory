@@ -21,7 +21,7 @@ class HomeViewBody extends StatelessWidget {
         children: [
           const CustomHomeAppBar(),
             Text(
-            AppStrings.categories,
+              S.of(context).categories,
             style: AppStyles.sBlack15,
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.01),
@@ -33,7 +33,7 @@ class HomeViewBody extends StatelessWidget {
             style: AppStyles.sBlack15,
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-           Expanded(child: CustomGridView(items: gridViewItems, buttonText: AppStrings.bookNow,onPressed: (){
+           Expanded(child: CustomGridView(items: gridViewItems, buttonText:  S.of(context).bookNow,onPressed: (){
              showDialog(
                context: context,
                builder: (BuildContext context) {

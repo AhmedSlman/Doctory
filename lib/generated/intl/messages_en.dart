@@ -27,6 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "booking": MessageLookupByLibrary.simpleMessage("Booking"),
         "bookingTime": MessageLookupByLibrary.simpleMessage("Booking Times"),
         "call": MessageLookupByLibrary.simpleMessage("Call"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cancelBooking": MessageLookupByLibrary.simpleMessage("Cancel Booking"),
         "categories": MessageLookupByLibrary.simpleMessage("Categories"),
         "changePassword":
@@ -49,10 +50,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot Password?"),
         "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
-        "homePage": MessageLookupByLibrary.simpleMessage("Home Page"),
+        "fullPatientName":
+            MessageLookupByLibrary.simpleMessage("Full Patient Name"),
+        "homePage": MessageLookupByLibrary.simpleMessage("Home"),
         "infoAboutReservation": MessageLookupByLibrary.simpleMessage(
             "Information about Reservation"),
-        "letsStart": MessageLookupByLibrary.simpleMessage("Let\'s Start"),
+        "letsStart": MessageLookupByLibrary.simpleMessage("Lets Start"),
         "logOut": MessageLookupByLibrary.simpleMessage("Log Out"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
@@ -72,13 +75,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Report a Problem"),
         "reservationTime":
             MessageLookupByLibrary.simpleMessage("Reservation Times"),
+        "save": MessageLookupByLibrary.simpleMessage("Save"),
         "selectAnOption": MessageLookupByLibrary.simpleMessage("Select Gender"),
+        "selectDate": MessageLookupByLibrary.simpleMessage("Select Date"),
+        "selectTime": MessageLookupByLibrary.simpleMessage("Select Time"),
         "send": MessageLookupByLibrary.simpleMessage("Send"),
         "sendProblem": MessageLookupByLibrary.simpleMessage("Report a Problem"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "uploadPhoto": MessageLookupByLibrary.simpleMessage("Upload Photo"),
         "waitingTime": MessageLookupByLibrary.simpleMessage("Waiting Time"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome To"),
+        "whatIsYourProblem":
+            MessageLookupByLibrary.simpleMessage("What is your problem?"),
         "yourRating": MessageLookupByLibrary.simpleMessage("Your Rating")
       };
 }

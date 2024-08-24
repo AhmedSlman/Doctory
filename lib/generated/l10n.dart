@@ -70,10 +70,10 @@ class S {
     );
   }
 
-  /// `Let's Start`
+  /// `Lets Start`
   String get letsStart {
     return Intl.message(
-      'Let\'s Start',
+      'Lets Start',
       name: 'letsStart',
       desc: '',
       args: [],
@@ -230,10 +230,10 @@ class S {
     );
   }
 
-  /// `Home Page`
+  /// `Home`
   String get homePage {
     return Intl.message(
-      'Home Page',
+      'Home',
       name: 'homePage',
       desc: '',
       args: [],
@@ -505,6 +505,66 @@ class S {
     return Intl.message(
       'Upload Photo',
       name: 'uploadPhoto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Full Patient Name`
+  String get fullPatientName {
+    return Intl.message(
+      'Full Patient Name',
+      name: 'fullPatientName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Date`
+  String get selectDate {
+    return Intl.message(
+      'Select Date',
+      name: 'selectDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Time`
+  String get selectTime {
+    return Intl.message(
+      'Select Time',
+      name: 'selectTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What is your problem?`
+  String get whatIsYourProblem {
+    return Intl.message(
+      'What is your problem?',
+      name: 'whatIsYourProblem',
       desc: '',
       args: [],
     );

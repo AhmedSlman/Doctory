@@ -3,6 +3,8 @@ import 'package:doctory/core/utils/app_strings.dart';
 import 'package:doctory/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../../generated/l10n.dart';
+
 class UploadImageButton extends StatelessWidget {
   const UploadImageButton({super.key, required this.onTap});
   final VoidCallback onTap;
@@ -23,7 +25,7 @@ class UploadImageButton extends StatelessWidget {
           children: [
             IconButton(onPressed: (){}, icon:const Icon(Icons.photo_camera_outlined,color: AppColors.primaryColor,)),
             Text(
-              AppStrings.uploadPhoto,
+              S.of(context).uploadPhoto,
               style:AppStyles.s10.copyWith(color: AppColors.primaryColor,),
             )
           ],

@@ -27,6 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "booking": MessageLookupByLibrary.simpleMessage("الحجز"),
         "bookingTime": MessageLookupByLibrary.simpleMessage("مواعيد الحجوزات "),
         "call": MessageLookupByLibrary.simpleMessage("الاتصال"),
+        "cancel": MessageLookupByLibrary.simpleMessage("الغاء"),
         "cancelBooking": MessageLookupByLibrary.simpleMessage("الغاءالحجز"),
         "categories": MessageLookupByLibrary.simpleMessage("الاقسام"),
         "changePassword":
@@ -48,6 +49,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("نسيت كلمة المرور؟"),
         "fullName": MessageLookupByLibrary.simpleMessage("الاسم الكامل"),
+        "fullPatientName":
+            MessageLookupByLibrary.simpleMessage("اسم المريض بالكامل"),
         "homePage": MessageLookupByLibrary.simpleMessage("الرئيسيه"),
         "infoAboutReservation":
             MessageLookupByLibrary.simpleMessage("معلومات عن الحجز"),
@@ -72,13 +75,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("الابلاغ عن مشكلة"),
         "reservationTime":
             MessageLookupByLibrary.simpleMessage("مواعيد الحجوزات"),
+        "save": MessageLookupByLibrary.simpleMessage("حفظ"),
         "selectAnOption": MessageLookupByLibrary.simpleMessage("اختار النوع"),
+        "selectDate": MessageLookupByLibrary.simpleMessage("اختر اليوم"),
+        "selectTime": MessageLookupByLibrary.simpleMessage("اختر وقت الكشف"),
         "send": MessageLookupByLibrary.simpleMessage("ارسال"),
         "sendProblem": MessageLookupByLibrary.simpleMessage("الابلاغ عن مشكله"),
         "settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),
         "uploadPhoto": MessageLookupByLibrary.simpleMessage("ارفاق صوره"),
         "waitingTime": MessageLookupByLibrary.simpleMessage("وقت الانتظار"),
         "welcome": MessageLookupByLibrary.simpleMessage("اهلا بك في"),
+        "whatIsYourProblem":
+            MessageLookupByLibrary.simpleMessage("ما هي مشكلتك؟"),
         "yourRating": MessageLookupByLibrary.simpleMessage("تقييمك")
       };
 }

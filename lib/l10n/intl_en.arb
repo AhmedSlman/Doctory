@@ -1,7 +1,7 @@
 {
       "appName": "Doctory",
       "welcome": "Welcome To",
-      "letsStart": "Let's Start",
+      "letsStart": "Lets Start",
       "phone": "Phone Number",
       "login": "Login",
       "email": "Email",
@@ -17,7 +17,7 @@
       "bookNow": "Book Now",
       "cancelBooking": "Cancel Booking",
       "booking": "Booking",
-      "homePage": "Home Page",
+      "homePage": "Home",
       "more": "More",
       "pharmacies": "Pharmacies",
       "call": "Call",
@@ -44,5 +44,12 @@
       "examinationPrice": "Examination Price",
       "waitingTime": "Waiting Time",
       "customersOpinions": "Customer Opinions",
-      "uploadPhoto": "Upload Photo"
+      "uploadPhoto": "Upload Photo",
+      "fullPatientName": "Full Patient Name",
+      "selectDate": "Select Date",
+      "selectTime": "Select Time",
+      "save": "Save",
+      "cancel": "Cancel",
+      "whatIsYourProblem": "What is your problem?"
+
 }

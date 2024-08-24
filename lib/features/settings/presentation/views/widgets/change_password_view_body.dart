@@ -4,6 +4,7 @@ import 'package:doctory/features/settings/presentation/views/widgets/save_change
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/app_strings.dart';
+import '../../../../../generated/l10n.dart';
 
 class ChangePasswordViewBody extends StatelessWidget {
   const ChangePasswordViewBody({super.key});
@@ -20,18 +21,18 @@ class ChangePasswordViewBody extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomAppBar(title: AppStrings.changePassword,showBackButton: true,),
+           CustomAppBar(title: S.of(context).changePassword,showBackButton: true,),
           SizedBox(height: screenHeight * 0.03),
-          const CustomTextField(
-            hintText: AppStrings.currentPassword,
+           CustomTextField(
+            hintText: S.of(context).currentPassword,
           ),
           SizedBox(height: screenHeight * 0.02),
-          const CustomTextField(
-            hintText: AppStrings.changePassword,
+           CustomTextField(
+            hintText: S.of(context).changePassword,
           ),
           SizedBox(height: screenHeight * 0.02),
-          const CustomTextField(
-            hintText: AppStrings.confirmNewPassword,
+           CustomTextField(
+            hintText: S.of(context).confirmNewPassword,
           ),
           SizedBox(height: screenHeight * 0.05),
           const SaveChangesButton(),

@@ -1,6 +1,7 @@
-import 'package:doctory/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:doctory/core/utils/app_styles.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 class CustomAppBar extends StatelessWidget {
   final String? title;
@@ -8,29 +9,34 @@ class CustomAppBar extends StatelessWidget {
 
   const CustomAppBar({
     super.key,
-     this.title,
+    this.title,
     this.showBackButton = false,
   });
 
   @override
   Widget build(BuildContext context) {
+    // Check the current locale
+    final isRtl = Localizations.localeOf(context).languageCode == 'ar';
+
     return Padding(
       padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.03),
       child: Stack(
         children: [
           if (showBackButton)
             Positioned(
-              right: 0,
+              // Position the back button based on locale
+              left: isRtl ? null : 0,
+              right: isRtl ? 0 : null,
               bottom: 1,
               top: 2,
               child: IconButton(
                 icon: const Icon(Icons.arrow_back_ios_new),
-                onPressed: () => GoRouter.of(context).pop()
+                onPressed: () => GoRouter.of(context).pop(),
               ),
             ),
           Center(
             child: Text(
-              title ??'',
+              title ?? '',
               style: AppStyles.sTitle,
               textAlign: TextAlign.center,
             ),

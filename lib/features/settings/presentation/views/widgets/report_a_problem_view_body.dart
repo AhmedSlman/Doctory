@@ -3,6 +3,7 @@ import 'package:doctory/features/settings/presentation/views/widgets/upload_imag
 import 'package:flutter/material.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/widgets/custom_button.dart';
+import '../../../../../generated/l10n.dart';
 import 'report_problem_textfield.dart';
 
 class ReportAProblemViewBody extends StatelessWidget {
@@ -17,11 +18,11 @@ class ReportAProblemViewBody extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const CustomAppBar(title: AppStrings.reportAProblem,showBackButton: true,),
+             CustomAppBar(title:S.of(context).reportAProblem,showBackButton: true,),
             SizedBox(
               height:MediaQuery.of(context).size.height * 0.05) ,
-            const ReportTextField(
-              hintText: 'ما هي مشكلتك؟',
+             ReportTextField(
+              hintText: S.of(context).whatIsYourProblem,
             ),SizedBox(
                 height:MediaQuery.of(context).size.height * 0.05) ,
             UploadImageButton(onTap: () {  },),
@@ -30,7 +31,7 @@ class ReportAProblemViewBody extends StatelessWidget {
             CustomButton(
               width:double.infinity ,
               height: MediaQuery.of(context).size.height * 0.06,
-              text: AppStrings.send,
+              text: S.of(context).send,
               onPressed: () {  },
             ),
 

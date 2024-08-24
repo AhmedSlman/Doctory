@@ -10,6 +10,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_styles.dart';
 import '../../../../../core/widgets/custom_rating_bar.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../../booking/presentation/views/widgets/doctors_list_view.dart';
 import '../show_dialogs/rating_dialog.dart';
 
@@ -21,13 +22,14 @@ class BookingTimeViewBody extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(
           horizontal: MediaQuery.of(context).size.width * 0.025),
-      child: const Column(
+      child:  Column(
         children: [
           CustomAppBar(
-            title: AppStrings.reservationTime,
+            title: S.of(context).reservationTime,
+
             showBackButton: true,
           ),
-          Expanded(child: ReservationList())
+          const Expanded(child: ReservationList())
         ],
       ),
     );
@@ -153,7 +155,7 @@ class ReservationListViewItem extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
                     ),
                     child: Text(
-                      AppStrings.rating,
+                     S.of(context).rating,
                       style: AppStyles.sTextButton.copyWith(
                         fontWeight: FontWeight.bold,
                         fontSize: screenWidth * 0.03,

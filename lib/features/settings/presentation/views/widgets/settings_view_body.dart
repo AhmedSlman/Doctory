@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/widgets/custom_app_bar.dart';
+import '../../../../../generated/l10n.dart';
 
 class SettingsViewBody extends StatelessWidget {
   const SettingsViewBody({super.key});
@@ -20,26 +21,26 @@ class SettingsViewBody extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             const CustomAppBar(title:AppStrings.settings),
-             SettingsContainer(title: AppStrings.personalInformation,
+              CustomAppBar(title:S.of(context).settings,),
+             SettingsContainer(title: S.of(context).personalInformation,
               onTap: () => GoRouter.of(context).push(RouterNames.personalInfoView),),
             const SizedBox(
               height: 18,
             ),
-             SettingsContainer(title: AppStrings.changePassword,
+             SettingsContainer(title: S.of(context).changePassword,
               onTap: () =>GoRouter.of(context).push(RouterNames.changePasswordView),),
             const SizedBox(
               height: 18,
             ),
-             SettingsContainer(title: AppStrings.bookingTime,
+             SettingsContainer(title:S.of(context).bookingTime,
                onTap: () =>GoRouter.of(context).push(RouterNames.bookingTime),),
             const SizedBox(
               height: 18,
             ),
-             SettingsContainer(title: AppStrings.sendProblem,
+             SettingsContainer(title: S.of(context).sendProblem,
                onTap: () =>GoRouter.of(context).push(RouterNames.reportProblemView),),
         
-            TextButton(onPressed: (){}, child:Text(AppStrings.logOut,
+            TextButton(onPressed: (){}, child:Text(S.of(context).logOut,
               style: AppStyles.sBlack15.copyWith(
                   color: AppColors.redColor
               ),))

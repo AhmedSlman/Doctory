@@ -1,7 +1,7 @@
 import 'package:doctory/core/routes/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart'; // Import ScreenUtil
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/utils/app_colors.dart';
 import 'generated/l10n.dart';

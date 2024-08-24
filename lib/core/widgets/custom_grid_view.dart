@@ -101,7 +101,8 @@ class CustomGridView extends StatelessWidget {
               ),
             ),
             Positioned(
-              left: width * 0.025,
+              left: Directionality.of(context) == TextDirection.rtl ? width * 0.025 : null,
+              right: Directionality.of(context) == TextDirection.ltr ? width * 0.025 : null,
               bottom: height * 0.03,
               child: SizedBox(
                 width: 60.w,

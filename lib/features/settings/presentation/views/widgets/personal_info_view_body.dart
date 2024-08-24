@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/app_styles.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
+import '../../../../../generated/l10n.dart';
 
 class PersonalInfoViewBody extends StatelessWidget {
   const PersonalInfoViewBody({super.key});
@@ -16,7 +17,7 @@ class PersonalInfoViewBody extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const CustomAppBar(title: AppStrings.personalInformation, showBackButton: true),
+           CustomAppBar(title: S.of(context).personalInformation, showBackButton: true),
           const SizedBox(height: 40),
           const CustomTextField(
             hintText: 'احمد محمد علي',

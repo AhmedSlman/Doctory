@@ -66,16 +66,13 @@ class ReportTextField extends StatelessWidget {
       style: textStyle ?? defaultTextStyle,
       maxLines: maxLines ?? 5,
       minLines: minLines ?? 3,
-      textAlignVertical: TextAlignVertical.bottom,
+      textAlignVertical: TextAlignVertical.top,
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,
         hintStyle: AppStyles.sSubTitleGrey,
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
-        contentPadding: contentPadding ?? EdgeInsets.symmetric(
-            vertical: MediaQuery.of(context).size.height * 0.09,
-            horizontal: 8), // Use default padding if none is provided
         filled: true,
         fillColor: AppColors.whiteColor,
         border: OutlineInputBorder(

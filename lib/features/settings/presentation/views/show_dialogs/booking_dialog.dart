@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/app_styles.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
 import '../../../../../core/widgets/date_picker.dart';
 import 'package:doctory/features/settings/presentation/views/widgets/save_changes_button.dart';
+
+import '../../../../../generated/l10n.dart';
 
 class BookingDialog extends StatelessWidget {
   const BookingDialog({super.key});
@@ -20,7 +23,7 @@ class BookingDialog extends StatelessWidget {
         constraints: BoxConstraints(
           maxHeight: MediaQuery.of(context).size.height * 1.5,
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        padding:  EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -28,43 +31,43 @@ class BookingDialog extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                   Text(AppStrings.booking, style: AppStyles.sBlack15),
+                   Text(S.of(context).booking, style: AppStyles.sBlack15),
                   TextButton(
                     onPressed: () {
                     },
                     child: Text(
-                      AppStrings.cancelBooking,
+                        S.of(context).cancelBooking,
                       style: AppStyles.sBlack12.copyWith(color: AppColors.redColor),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 5),
-              const CustomTextField(
-                hintText: 'اسم المريض بالكامل',
+               SizedBox(height: 5.h),
+               CustomTextField(
+                hintText:  S.of(context).fullPatientName,
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.01,
               ),
-              const CustomTextField(
-                hintText: 'رقم الهاتف',
+               CustomTextField(
+                hintText: S.of(context).phone,
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.01,
               ),
-              const CustomTextField(
-                hintText: 'البريد الالكتروني',
+               CustomTextField(
+                hintText: S.of(context).email,
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.01,
               ),
-              const SizedBox(height: 8),
+               SizedBox(height: 3.h),
               const CustomDatePicker(),
-              const SizedBox(height: 8),
+               SizedBox(height: 8.h),
               const CustomTimePicker(),
-              const SizedBox(height: 8),
+               SizedBox(height: 8.h),
               const SaveChangesButton(),
-              const SizedBox(height: 12),
+               SizedBox(height: 12.h),
             ],
           ),
         ),

@@ -44,6 +44,13 @@
       "examinationPrice": "سعر الكشف",
       "waitingTime": "وقت الانتظار",
       "customersOpinions": "اراء العملاء",
-      "uploadPhoto": "ارفاق صوره"
+      "uploadPhoto": "ارفاق صوره",
+      "fullPatientName": "اسم المريض بالكامل",
+      "selectDate": "اختر اليوم",
+      "selectTime": "اختر وقت الكشف",
+      "save": "حفظ",
+      "cancel": "الغاء",
+      "whatIsYourProblem": "ما هي مشكلتك؟"
+
 }
 

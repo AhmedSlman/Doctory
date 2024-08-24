@@ -36,7 +36,7 @@ abstract class AppStyles {
 
   );
 
-  static TextStyle sPrimaryColor14 = TextStyle(
+  static TextStyle sPrimaryColor14 =  TextStyle(
     fontSize: 14.sp,
     fontFamily: "Cairo",
     fontWeight: FontWeight.normal,

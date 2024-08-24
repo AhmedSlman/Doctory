@@ -2,6 +2,7 @@ import 'package:doctory/core/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/app_colors.dart';
+import '../../../../generated/l10n.dart';
 import '../view_models/bottom_nav_bar_cubit/home_cubit.dart';
 
 class BottomNavBarView extends StatelessWidget {
@@ -26,30 +27,30 @@ class BottomNavBarView extends StatelessWidget {
               onTap: (index) {
                 cubit.changeBottom(index);
               },
-              items: const [
+              items:  [
                 BottomNavigationBarItem(
-                  icon: ImageIcon(
+                  icon: const ImageIcon(
                     AssetImage('assets/images/home.png'),
                   ),
-                  label: AppStrings.homePage,
+                  label: S.of(context).homePage,
                 ),
                 BottomNavigationBarItem(
-                  icon: ImageIcon(
+                  icon: const ImageIcon(
                     AssetImage('assets/images/medicine.png'),
                   ),
-                  label: AppStrings.pharmacies,
+                  label: S.of(context).pharmacies,
                 ),
                 BottomNavigationBarItem(
-                  icon: ImageIcon(
+                  icon: const ImageIcon(
                     AssetImage('assets/images/calendar.png'),
                   ),
-                  label: AppStrings.booking,
+                  label: S.of(context).booking
                 ),
                 BottomNavigationBarItem(
-                  icon: ImageIcon(
+                  icon: const ImageIcon(
                     AssetImage('assets/images/settings.png'),
                   ),
-                  label: AppStrings.settings,
+                  label: S.of(context).settings,
                 ),
               ],
             ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:doctory/core/widgets/custom_text_field.dart';
 
+import '../../generated/l10n.dart';
+
 class CustomDatePicker extends StatefulWidget {
   const CustomDatePicker({super.key});
 
@@ -35,7 +37,8 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
           controller: _dateController,
           prefixIcon: const Icon(Icons.calendar_month_outlined),
           readOnly: true,
-          hintText: 'اختر اليوم', // Example hint text
+          hintText:  S.of(context).selectDate, // Example hint text
+
         ),
       ),
     );
@@ -72,7 +75,7 @@ class _CustomTimePickerState extends State<CustomTimePicker> {
       child: AbsorbPointer( // Prevents the default keyboard from appearing
         child: CustomTextField(
           controller: _timeController,
-          hintText: 'اختر وقت الكشف', // Example hint text
+          hintText: S.of(context).selectTime, // Example hint text
           prefixIcon: const Icon(Icons.access_time),
           readOnly: true,
         ),

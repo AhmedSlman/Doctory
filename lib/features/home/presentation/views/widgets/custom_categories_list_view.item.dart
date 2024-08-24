@@ -21,6 +21,7 @@ class CustomCategoriesListViewItem extends StatelessWidget {
             ' نساء و توليد ',
             textAlign: TextAlign.center,
             style: AppStyles.sPrimaryColor14,
+            maxLines: 1,
 
           ),
         ),
