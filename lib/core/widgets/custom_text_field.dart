@@ -60,7 +60,7 @@ class CustomTextField extends StatelessWidget {
       onEditingComplete: onEditingCompleted,
       cursorColor: Colors.black,
       readOnly: readOnly,
-      style: textStyle ?? defaultTextStyle, // Use custom style if provided, otherwise use default
+      style: textStyle ?? defaultTextStyle,
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,

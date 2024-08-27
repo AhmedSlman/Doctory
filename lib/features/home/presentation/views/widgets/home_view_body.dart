@@ -29,7 +29,6 @@ class HomeViewBody extends StatelessWidget {
           SizedBox(height: MediaQuery.of(context).size.height * 0.01),
             Text(
               S.of(context).offers,
-            //AppStrings.offers,
             style: AppStyles.sBlack15,
           ),
           SizedBox(height: MediaQuery.of(context).size.height * 0.02),

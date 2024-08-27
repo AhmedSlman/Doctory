@@ -100,20 +100,20 @@ class DoctorProfileViewBody extends StatelessWidget {
                     height: 5.h,
                   ),
                   Padding(
-                    padding: EdgeInsets.all(5.0),
+                    padding: const EdgeInsets.all(5.0),
                     child: Text(
                       'الدخول بميعاد معين',
-                      style: AppStyles.sSubTitleGrey,
+                      style: AppStyles.sBlack12.copyWith(color: AppColors.greyForIcon),
                     ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                        padding: EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.all(5.0),
                         child: Text(
                           "احجز اونلاين, ادفع في العياده \n الدكتور يشترط الحجز المسبق",
-                          style: AppStyles.sSubTitleGrey,
+                          style: AppStyles.sBlack12.copyWith(color: AppColors.greyForIcon),
                         ),
                       ),
                       ElevatedButton(

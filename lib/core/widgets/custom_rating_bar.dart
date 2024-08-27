@@ -9,7 +9,7 @@ class CustomRatingBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
     return RatingBar.builder(
-      itemSize: 18.r,
+      itemSize: 16.r,
       initialRating: 3,
       minRating: 1,
       direction: Axis.horizontal,

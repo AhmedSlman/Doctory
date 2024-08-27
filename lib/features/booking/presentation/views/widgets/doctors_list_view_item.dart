@@ -16,7 +16,7 @@ class DoctorsListViewItem extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Container(
-      height: 150,
+      height: screenHeight * 0.15,
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
@@ -26,14 +26,12 @@ class DoctorsListViewItem extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius:
-                const BorderRadius.horizontal(right: Radius.circular(16)),
-            child: SizedBox(
-              height: screenHeight * 0.15,
-              width: screenWidth * 0.3,
-              child: Image.asset(
-                'assets/images/test2.png',
-                fit: BoxFit.cover,
-              ),
+            const BorderRadius.horizontal(right: Radius.circular(16)),
+            child: Image.asset(
+              'assets/images/test2.png',
+              height: screenHeight * 0.17,
+              width: screenWidth * 0.33,
+              fit: BoxFit.cover,
             ),
           ),
           Expanded(
@@ -49,9 +47,11 @@ class DoctorsListViewItem extends StatelessWidget {
                       style: AppStyles.sBlack12.copyWith(
                         fontWeight: FontWeight.bold,
                         fontSize: screenWidth * 0.04,
+
                       ),
                       overflow: TextOverflow.ellipsis, // Handle overflow
                       softWrap: false,
+
                     ),
                   ),
                   const SizedBox(height: 5),
@@ -62,6 +62,7 @@ class DoctorsListViewItem extends StatelessWidget {
                         fontSize: screenWidth * 0.035,
                       ),
                       overflow: TextOverflow.ellipsis,
+
                       softWrap: false,
                     ),
                   ),
@@ -112,7 +113,7 @@ class DoctorsListViewItem extends StatelessWidget {
                         borderRadius: BorderRadius.circular(5),
                       ),
                       padding:
-                          EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
+                      EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
                     ),
                     child: Text(
                       AppStrings.more,

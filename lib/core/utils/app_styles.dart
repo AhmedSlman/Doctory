@@ -85,7 +85,7 @@ abstract class AppStyles {
   );
 
   static TextStyle sSubTitleGrey = TextStyle(
-    fontSize: 13.sp,
+    fontSize: 12.sp,
     fontFamily: "Cairo",
     fontWeight: FontWeight.normal,
     color: AppColors.greyForIcon,
