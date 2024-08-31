@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "542634923214",
+    "project_id": "doctory-45682",
+    "storage_bucket": "doctory-45682.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:542634923214:android:f748877ebe3d6662292c9f",
+        "android_client_info": {
+          "package_name": "com.fourthpyramid.doctory"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgurerUl8Lr4Cpkz_9lr19ee5l3u8mDX0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,4 +1,6 @@
 import 'package:doctory/core/routes/router_names.dart';
+import 'package:doctory/core/services/service_locator.dart';
+import 'package:doctory/features/auth/presentation/view_models/cubit/auth_cubit.dart';
 import 'package:doctory/features/auth/presentation/views/change_password.dart';
 import 'package:doctory/features/auth/presentation/views/forget_password.dart';
 import 'package:doctory/features/auth/presentation/views/login_view.dart';
@@ -11,6 +13,7 @@ import 'package:doctory/features/settings/presentation/views/booking_time_view.d
 import 'package:doctory/features/settings/presentation/views/change_password_view.dart';
 import 'package:doctory/features/settings/presentation/views/report_a_problem_view.dart';
 import 'package:doctory/features/splash/splash_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/home/presentation/views/home_view.dart';
@@ -24,11 +27,18 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
       path: RouterNames.login,
-      builder: (context, state) => const LoginView(),
+      builder: (context, state) => BlocProvider(
+        create: (context) => getIt<AuthCubit>(),
+        child: const LoginView(),
+      ),
     ),
     GoRoute(
       path: RouterNames.signup,
-      builder: (context, state) => const SignUpView(),
+      builder: (context, state) =>
+          BlocProvider(
+            create: (context) => getIt<AuthCubit>(),
+            child: const SignUpView(),
+          ),
     ),
     GoRoute(
       path: RouterNames.forgetPassword,

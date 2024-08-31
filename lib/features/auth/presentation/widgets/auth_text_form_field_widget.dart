@@ -5,12 +5,27 @@ class AuthTextFormFieldWidget extends StatelessWidget {
   const AuthTextFormFieldWidget({
     super.key,
     required this.hintText,
+    this.controller,
+    this.obscureText = false,
+    this.suffixIcon,
+
+
   });
   final String hintText;
+  final TextEditingController? controller;
+  final bool obscureText;
+  final Widget? suffixIcon;
+
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      obscureText: obscureText,
+
+
+      controller: controller,
       decoration: InputDecoration(
+        suffixIcon:suffixIcon ,
         hintText: hintText,
         contentPadding:
             const EdgeInsets.symmetric(vertical: 15, horizontal: 20),

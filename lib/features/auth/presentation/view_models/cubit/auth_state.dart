@@ -4,6 +4,12 @@ sealed class AuthState {}
 
 final class AuthInitial extends AuthState {}
 
+class TogglePasswordState extends AuthState {
+  final bool isSecured;
+  TogglePasswordState(this.isSecured);
+
+}
+
 final class SignUpLoadingState extends AuthState {}
 
 final class SignUpSuccessState extends AuthState {

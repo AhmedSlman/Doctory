@@ -1,6 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/utils/app_colors.dart';
 import '../../../data/models/user_model.dart';
 import '../../../data/repo/auth_repo_abstract.dart';
 
@@ -11,6 +15,27 @@ class AuthCubit extends Cubit<AuthState> {
   UserModel? currentUser;
 
   AuthCubit(this.authRepository) : super(AuthInitial());
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController birthDateController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  bool isSecured = true;
+  Widget togglePass() {
+    return IconButton(
+      onPressed: () {
+        isSecured = !isSecured;
+        emit(TogglePasswordState(isSecured));
+      },
+      icon: isSecured
+          ? const Icon(Icons.visibility)
+          : const Icon(Icons.visibility_off),
+      color: AppColors.greyForIcon,
+    );
+  }
 
   Future<void> signIn(String email, String password) async {
     emit(SignInLoadingState());
@@ -31,7 +56,7 @@ class AuthCubit extends Cubit<AuthState> {
     required String password,
     required String name,
     required String phone,
-    required String address,
+    required String birthDate,
   }) async {
     emit(SignUpLoadingState());
     try {
@@ -43,7 +68,7 @@ class AuthCubit extends Cubit<AuthState> {
         name: name,
         email: email,
         phoneNumber: phone,
-        address: address,
+        birthDate: birthDate,
       );
       await authRepository.addUser(newUser);
 
@@ -64,7 +89,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> updateUserInfo(
       String name,
       String phone,
-      String address,
+      String birthDate,
       ) async {
     if (currentUser == null) {
       emit(UserInfoUpdateFailureState(errMessage: "User not signed in"));
@@ -76,7 +101,7 @@ class AuthCubit extends Cubit<AuthState> {
         name: name,
         email: currentUser!.email,
         phoneNumber: phone,
-        address: address,
+        birthDate: birthDate,
       );
       await authRepository.updateUserInfo(updatedUser);
       currentUser = updatedUser;
