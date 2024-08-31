@@ -9,6 +9,8 @@ class TogglePasswordState extends AuthState {
   TogglePasswordState(this.isSecured);
 
 }
+final class GenderSelectionChanged extends AuthState {}
+
 
 final class SignUpLoadingState extends AuthState {}
 

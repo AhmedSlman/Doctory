@@ -86,21 +86,52 @@ class SignUpView extends StatelessWidget {
               AuthTextFormFieldWidget(
                 hintText: S.of(context).dateOfBirth,
                 controller:cubit.birthDateController ,
+                onTap: () async{
+                  DateTime? pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime(1990),
+                  firstDate: DateTime(1900),
+                  lastDate: DateTime.now()
+                  );
+                  if (pickedDate != null) {
+                    String formattedDate = "${pickedDate.year}-${pickedDate.month}-${pickedDate.day}";
+                    cubit.birthDateController.text = formattedDate;
+                  }
+                },
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.01),
               AuthTextFormFieldWidget(
                 hintText: S.of(context).password,
                 controller: cubit.passwordController,
+                obscureText: context.read<AuthCubit>().isSecured,
+                suffixIcon: context.read<AuthCubit>().togglePass(),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.02),
               Row(
                 children: [
-                  Radio(value: 1, groupValue: 1, onChanged: (_) {}),
+                  Radio<Gender>(
+                    value: Gender.male,
+                    groupValue: cubit.selectedGender,
+                    onChanged: (Gender? value) {
+                      if (value != null) {
+                        cubit.selectGender(value);
+                      }
+                    },
+                  ),
                   Text(S.of(context).male),
-                  Radio(value: 0, groupValue: 1, onChanged: (_) {}),
+                  Radio<Gender>(
+                    value: Gender.female,
+                    groupValue: cubit.selectedGender,
+                    onChanged: (Gender? value) {
+                      if (value != null) {
+                        cubit.selectGender(value);
+                      }
+                    },
+                  ),
                   Text(S.of(context).female),
                 ],
               ),
+
               SizedBox(height: MediaQuery.of(context).size.height * 0.02),
               state is SignUpLoadingState
               ? const CustomCircularProgressIndicator()

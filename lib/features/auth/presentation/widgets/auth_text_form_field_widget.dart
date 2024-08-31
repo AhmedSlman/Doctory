@@ -8,6 +8,7 @@ class AuthTextFormFieldWidget extends StatelessWidget {
     this.controller,
     this.obscureText = false,
     this.suffixIcon,
+    this.onTap,
 
 
   });
@@ -15,14 +16,16 @@ class AuthTextFormFieldWidget extends StatelessWidget {
   final TextEditingController? controller;
   final bool obscureText;
   final Widget? suffixIcon;
+  final VoidCallback? onTap; // Add this field
+
 
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       obscureText: obscureText,
-
-
+      onTap: onTap,
+      readOnly: onTap != null,
       controller: controller,
       decoration: InputDecoration(
         suffixIcon:suffixIcon ,

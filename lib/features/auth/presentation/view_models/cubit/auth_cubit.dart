@@ -10,6 +10,7 @@ import '../../../data/repo/auth_repo_abstract.dart';
 
 part 'auth_state.dart';
 
+enum Gender { male, female }
 class AuthCubit extends Cubit<AuthState> {
   final AuthRepository authRepository;
   UserModel? currentUser;
@@ -35,6 +36,13 @@ class AuthCubit extends Cubit<AuthState> {
           : const Icon(Icons.visibility_off),
       color: AppColors.greyForIcon,
     );
+  }
+
+  Gender selectedGender = Gender.male;
+
+  void selectGender(Gender gender) {
+    selectedGender = gender;
+    emit(GenderSelectionChanged()); // Emit a state to trigger UI update
   }
 
   Future<void> signIn(String email, String password) async {
@@ -69,6 +77,7 @@ class AuthCubit extends Cubit<AuthState> {
         email: email,
         phoneNumber: phone,
         birthDate: birthDate,
+        gender: selectedGender == Gender.male ? 'male' : 'female', // Set gender
       );
       await authRepository.addUser(newUser);
 
@@ -102,6 +111,7 @@ class AuthCubit extends Cubit<AuthState> {
         email: currentUser!.email,
         phoneNumber: phone,
         birthDate: birthDate,
+        gender: '',
       );
       await authRepository.updateUserInfo(updatedUser);
       currentUser = updatedUser;
