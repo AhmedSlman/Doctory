@@ -1,9 +1,8 @@
-import 'package:doctory/core/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/app_colors.dart';
 import '../../../../generated/l10n.dart';
-import '../view_models/bottom_nav_bar_cubit/home_cubit.dart';
+import '../view_models/bottom_nav_bar_cubit/bottom_nav_bar_cubit.dart';
 
 class BottomNavBarView extends StatelessWidget {
   const BottomNavBarView({super.key});
@@ -11,11 +10,11 @@ class BottomNavBarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeCubit(),
-      child: BlocConsumer<HomeCubit, HomeStates>(
+      create: (context) => BottomNavBarCubit(),
+      child: BlocConsumer<BottomNavBarCubit, BottomNavBarStates>(
         listener: (context, state) {},
         builder: (context, state) {
-          final cubit = HomeCubit.get(context);
+          final cubit = BottomNavBarCubit.get(context);
 
           return Scaffold(
             body: cubit.bottomNavScreens[cubit.currentIndex],
@@ -43,10 +42,10 @@ class BottomNavBarView extends StatelessWidget {
                   label: S.of(context).pharmacies,
                 ),
                 BottomNavigationBarItem(
-                  icon: const ImageIcon(
-                    AssetImage('assets/images/calendar.png'),
-                  ),
-                  label: S.of(context).booking
+                    icon: const ImageIcon(
+                      AssetImage('assets/images/calendar.png'),
+                    ),
+                    label: S.of(context).booking
                 ),
                 BottomNavigationBarItem(
                   icon: const ImageIcon(

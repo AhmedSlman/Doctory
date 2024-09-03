@@ -4,16 +4,17 @@ sealed class AuthState {}
 
 final class AuthInitial extends AuthState {}
 
+//Password obscure
 class TogglePasswordState extends AuthState {
   final bool isSecured;
   TogglePasswordState(this.isSecured);
 
 }
+//Gender State
 final class GenderSelectionChanged extends AuthState {}
 
-
+//Sign up
 final class SignUpLoadingState extends AuthState {}
-
 final class SignUpSuccessState extends AuthState {
   final UserModel user;
 
@@ -26,18 +27,16 @@ final class SignUpFailureState extends AuthState {
   SignUpFailureState({required this.errMessage});
 }
 
+
 final class TermsAndConditionsUpdateState extends AuthState {}
 
-final class ObscurePasswordTextUpdateState extends AuthState {}
-
+//SIgnIn
 final class SignInLoadingState extends AuthState {}
-
 final class SignInSuccessState extends AuthState {
   final UserModel user;
 
   SignInSuccessState({required this.user});
 }
-
 final class SignInFailureState extends AuthState {
   final String errMessage;
 
@@ -94,4 +93,36 @@ final class AuthError extends AuthState {
   final String error;
 
   AuthError(this.error);
+}
+
+//SignOut
+final class SignOutSuccessState extends AuthState {}
+final class SignOutErrorState extends AuthState {
+  final String error;
+
+  SignOutErrorState(this.error);
+}
+
+
+
+final class OTPFailedState extends AuthState{
+  final String error;
+
+  OTPFailedState(this.error);
+}
+
+class OTPLoadingState extends AuthState {}
+
+class OTPSentState extends AuthState {
+  final String verificationId;
+  OTPSentState(this.verificationId);
+}
+
+
+
+class OTPVerifiedState extends AuthState {}
+
+class OTPTimeoutState extends AuthState {
+  final String verificationId;
+  OTPTimeoutState(this.verificationId);
 }

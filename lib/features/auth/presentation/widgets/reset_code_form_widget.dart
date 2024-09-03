@@ -17,15 +17,15 @@ class ResetCodeFormWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: List.generate(4, (index) {
+      children: List.generate(6, (index) {
         return Expanded(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 2.0),
             child: TextField(
               controller: _controllers[index],
               focusNode: _focusNodes[index],
               keyboardType: TextInputType.number,
-              obscureText: true,
+              obscureText: false,
               maxLength: 1,
               textAlign: TextAlign.center,
               decoration: InputDecoration(
@@ -47,7 +47,7 @@ class ResetCodeFormWidget extends StatelessWidget {
                 ),
               ),
               onChanged: (value) {
-                if (value.length == 1 && index < 3) {
+                if (value.length == 1 && index < 5) {
                   FocusScope.of(context).requestFocus(_focusNodes[index + 1]);
                 } else if (value.isEmpty && index > 0) {
                   FocusScope.of(context).requestFocus(_focusNodes[index - 1]);

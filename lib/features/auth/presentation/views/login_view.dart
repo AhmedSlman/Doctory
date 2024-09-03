@@ -34,6 +34,10 @@ class LoginView extends StatelessWidget {
             );
 
           } else if (state is SignInSuccessState) {
+            showToast(
+                msg: S.of(context).loggedIn,
+                color:Colors.green
+            );
             context.go(RouterNames.bottomNavBar);
           }
         },
@@ -79,7 +83,7 @@ class LoginView extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: TextButton(
                       onPressed: () {
-                        context.go(RouterNames.forgetPassword);
+                        context.go(RouterNames.enterYourPhone);
                       },
                       child: Text(S.of(context).forgotPassword),
                     ),

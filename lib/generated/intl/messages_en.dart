@@ -44,6 +44,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Doctor Services"),
         "doctorSummary": MessageLookupByLibrary.simpleMessage("Doctor Summary"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "enterYourPhone": MessageLookupByLibrary.simpleMessage(
+            "Please add your phone number \n to reset password"),
         "examinationPrice":
             MessageLookupByLibrary.simpleMessage("Examination Price"),
         "female": MessageLookupByLibrary.simpleMessage("Female"),
@@ -57,6 +59,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Information about Reservation"),
         "letsStart": MessageLookupByLibrary.simpleMessage("Lets Start"),
         "logOut": MessageLookupByLibrary.simpleMessage("Log Out"),
+        "loggedIn": MessageLookupByLibrary.simpleMessage(
+            "you\'ve successfully logged in"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
         "mobileNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),

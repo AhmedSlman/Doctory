@@ -1,8 +1,10 @@
 import 'package:bloc/bloc.dart';
+import 'package:doctory/core/routes/router_names.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 import '../../../data/models/user_model.dart';
@@ -14,7 +16,9 @@ enum Gender { male, female }
 class AuthCubit extends Cubit<AuthState> {
   final AuthRepository authRepository;
   UserModel? currentUser;
-
+  FirebaseAuth auth = FirebaseAuth.instance;
+  String countryCode = ''; // Default country code
+  String phoneNumber = '';
   AuthCubit(this.authRepository) : super(AuthInitial());
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -89,10 +93,13 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void>signOut()async {
-    await authRepository.signOut();
-
-
+  Future<void> signOut() async {
+    try {
+      await authRepository.signOut();
+      emit(SignOutSuccessState()); // Emit a state indicating that the user has signed out.
+    } catch (e) {
+      emit(SignOutErrorState(e.toString())); // Emit an error state if sign out fails.
+    }
   }
 
   Future<void> updateUserInfo(
@@ -163,6 +170,67 @@ class AuthCubit extends Cubit<AuthState> {
       emit(PasswordResetConfirmSuccessState());
     } catch (e) {
       emit(PasswordResetConfirmFailureState(errMessage: e.toString()));
+    }
+  }
+
+  Future<void> sendOtp(String phoneNumber) async {
+    emit(OTPLoadingState());
+    try {
+      await auth.verifyPhoneNumber(
+        phoneNumber: phoneNumber,
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          // Auto-retrieve or instant verification.
+          await auth.signInWithCredential(credential);
+          emit(OTPVerifiedState());
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          emit(OTPFailedState(e.message ?? 'Verification failed'));
+        },
+        codeSent: (String verificationId, int? resendToken) {
+          // Store the verification ID and resend token so you can use them later
+          emit(OTPSentState(verificationId));
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {
+          // Handle timeout
+          emit(OTPTimeoutState(verificationId));
+        },
+      );
+    } catch (e) {
+      emit(OTPFailedState(e.toString()));
+    }
+  }
+
+  Future<void> verifyOtp(String verificationId, String otp) async {
+    try {
+      PhoneAuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: verificationId,
+        smsCode: otp,
+      );
+
+      final userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+
+      if (userCredential.user != null) {
+        // Emit OTP verified state
+        emit(OTPVerifiedState());
+        print('Verify Success');
+
+      } else {
+        emit(OTPFailedState('Verification failed: No user'));
+      }
+    } on FirebaseAuthException catch (e) {
+      emit(OTPFailedState(e.message ?? 'Verification failed'));
+    } catch (e) {
+      emit(OTPFailedState('Verification failed: ${e.toString()}'));
+    }
+  }
+
+  Future<void> resetPassword(String newPassword) async {
+    try {
+      await FirebaseAuth.instance.currentUser?.updatePassword(newPassword);
+      // Notify user of success (e.g., show a message or navigate to another screen)
+    } catch (e) {
+      // Handle error
+      print('Password reset failed: ${e.toString()}');
     }
   }
 }

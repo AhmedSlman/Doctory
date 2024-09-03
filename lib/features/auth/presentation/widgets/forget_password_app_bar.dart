@@ -8,7 +8,9 @@ import 'package:go_router/go_router.dart';
 import '../../../../generated/l10n.dart';
 
 class ForgetPasswordAppBar extends StatelessWidget {
-  const ForgetPasswordAppBar({super.key});
+  const ForgetPasswordAppBar({super.key,});
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +36,10 @@ class ForgetPasswordAppBar extends StatelessWidget {
                 text: TextSpan(
                   text: S.of(context).pinCodeMessage,
                   style: DefaultTextStyle.of(context).style,
-                  children: const <TextSpan>[
+                  children:  <TextSpan>[
                     TextSpan(
-                      text: '+01326452514',
-                      style: TextStyle(
+                      text: 'phoneNumber',
+                      style: const TextStyle(
                         decoration: TextDecoration.underline,
                       ),
                     ),

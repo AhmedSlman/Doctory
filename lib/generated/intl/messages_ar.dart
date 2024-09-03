@@ -44,6 +44,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "doctorSummary":
             MessageLookupByLibrary.simpleMessage("نبذه عن الدكتور"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الالكتروني"),
+        "enterYourPhone": MessageLookupByLibrary.simpleMessage(
+            "الرجاء ادخال الهاتف \\n لتغير كلمه السر"),
         "examinationPrice": MessageLookupByLibrary.simpleMessage("سعر الكشف"),
         "female": MessageLookupByLibrary.simpleMessage("انثي"),
         "forgotPassword":
@@ -56,6 +58,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("معلومات عن الحجز"),
         "letsStart": MessageLookupByLibrary.simpleMessage("هيا لنبدأ"),
         "logOut": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
+        "loggedIn":
+            MessageLookupByLibrary.simpleMessage("لقد تم التسجيل بنجاح"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "male": MessageLookupByLibrary.simpleMessage("ذكر"),
         "mobileNumber": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),

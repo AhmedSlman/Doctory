@@ -50,7 +50,10 @@
       "selectTime": "اختر وقت الكشف",
       "save": "حفظ",
       "cancel": "الغاء",
-      "whatIsYourProblem": "ما هي مشكلتك؟"
+      "whatIsYourProblem": "ما هي مشكلتك؟",
+      "loggedIn": "لقد تم التسجيل بنجاح",
+      "enterYourPhone": "الرجاء ادخال الهاتف \\n لتغير كلمه السر"
+
 
 }
 

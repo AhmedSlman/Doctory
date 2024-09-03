@@ -5,12 +5,12 @@ import 'package:doctory/features/settings/presentation/views/settings_view.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'home_states.dart';
+part 'bottom_nav_bar_states.dart';
 
-class HomeCubit extends Cubit<HomeStates> {
-  HomeCubit() : super(HomeInitial());
+class BottomNavBarCubit extends Cubit<BottomNavBarStates> {
+  BottomNavBarCubit() : super(HomeInitial());
 
-  static HomeCubit get(context) => BlocProvider.of(context);
+  static BottomNavBarCubit get(context) => BlocProvider.of(context);
 
   int currentIndex = 0;
 

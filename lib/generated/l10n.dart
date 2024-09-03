@@ -569,6 +569,26 @@ class S {
       args: [],
     );
   }
+
+  /// `you've successfully logged in`
+  String get loggedIn {
+    return Intl.message(
+      'you\'ve successfully logged in',
+      name: 'loggedIn',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please add your phone number \n to reset password`
+  String get enterYourPhone {
+    return Intl.message(
+      'Please add your phone number \n to reset password',
+      name: 'enterYourPhone',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

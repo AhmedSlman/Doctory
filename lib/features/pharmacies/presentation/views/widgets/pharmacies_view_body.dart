@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/widgets/custom_app_bar.dart';
-import '../../../../../core/widgets/custom_grid_view.dart';
+import '../../../../home/presentation/views/widgets/home_grid_view.dart';
 import '../../../data/data_source/pharmacies_grid_data_source.dart';
 
 class PharmaciesViewBody extends StatelessWidget {
@@ -24,7 +24,7 @@ class PharmaciesViewBody extends StatelessWidget {
           const SizedBox(
             height: 25,
           ),
-          Expanded(child: CustomGridView(items:pharmaciesGridViewItems, buttonText:AppStrings.call, onPressed: () {  },)),
+         // Expanded(child: CustomGridView(items:pharmaciesGridViewItems, buttonText:AppStrings.call, onPressed: () {  },)),
         ],
       ),
     );
