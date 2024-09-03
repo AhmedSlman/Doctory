@@ -15,7 +15,7 @@ class HomeInitial extends HomeState {}
 class HomeLoading extends HomeState {}
 class HomeLoaded extends HomeState {
   final List<CategoryModel> categories;
-  final List<GridViewItemModel> offers;
+  final List<OffersModel> offers;
 
   HomeLoaded({required this.categories, required this.offers});
 }

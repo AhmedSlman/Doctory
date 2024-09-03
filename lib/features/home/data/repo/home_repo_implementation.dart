@@ -17,12 +17,12 @@ class HomeRepoImplementation implements HomeRepo {
   }
 
   @override
-  Future<List<GridViewItemModel>> getOffers() async {
+  Future<List<OffersModel>> getOffers() async {
     final QuerySnapshot<Map<String, dynamic>> snapshot = await _firestore
         .collection('offers')
         .get();
     return snapshot.docs
-        .map((doc) => GridViewItemModel.fromFirestore(doc.data(), doc.id))
+        .map((doc) => OffersModel.fromFirestore(doc.data(), doc.id))
         .toList();
   }
 

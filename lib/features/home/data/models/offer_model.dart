@@ -1,4 +1,4 @@
-class GridViewItemModel {
+class OffersModel {
   final String id;
   final String clinicName;
   final String image;
@@ -6,7 +6,7 @@ class GridViewItemModel {
   final String price;
   final String title;
 
-  GridViewItemModel({
+  OffersModel({
     required this.id,
     required this.clinicName,
     required this.image,
@@ -15,8 +15,8 @@ class GridViewItemModel {
     required this.title,
   });
 
-  factory GridViewItemModel.fromFirestore(Map<String, dynamic> data, String id) {
-    return GridViewItemModel(
+  factory OffersModel.fromFirestore(Map<String, dynamic> data, String id) {
+    return OffersModel(
       id: id,
       clinicName: data['clinicName'] ?? '',
       image: data['image'] ?? '',

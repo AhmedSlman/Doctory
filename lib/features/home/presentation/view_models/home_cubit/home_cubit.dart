@@ -17,9 +17,13 @@ class HomeCubit extends Cubit<HomeState> {
       final categories = await homeRepo.getCategories();
       final offers = await homeRepo.getOffers();
 
-      emit(HomeLoaded(categories: categories, offers: offers));
+      if (!isClosed) {
+        emit(HomeLoaded(categories: categories, offers: offers));
+      }
     } catch (e) {
-      emit(HomeError("Failed to fetch home data"));
+      if (!isClosed) {
+        emit(HomeError("Failed to fetch home data"));
+      }
     }
   }
 }

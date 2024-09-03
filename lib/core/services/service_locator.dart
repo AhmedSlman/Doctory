@@ -1,3 +1,5 @@
+import 'package:doctory/features/pharmacies/data/repo/pharmacies_repo.dart';
+import 'package:doctory/features/pharmacies/presentation/view_models/pharmacies_cubit.dart';
 import 'package:get_it/get_it.dart';
 import '../../features/auth/data/repo/auth_repo_abstract.dart';
 import '../../features/auth/data/repo/auth_repo_implementation.dart';
@@ -6,6 +8,7 @@ import '../../features/home/data/repo/home_repo.dart';
 import '../../features/home/data/repo/home_repo_implementation.dart';
 import '../../features/home/presentation/view_models/bottom_nav_bar_cubit/bottom_nav_bar_cubit.dart';
 import '../../features/home/presentation/view_models/home_cubit/home_cubit.dart';
+import '../../features/pharmacies/data/repo/pharmacies_repo_implementation.dart';
 
 final GetIt getIt = GetIt.instance;
 void setupLocator() {
@@ -15,6 +18,8 @@ void setupLocator() {
   getIt.registerLazySingleton<HomeRepo>(() => HomeRepoImplementation());
   getIt.registerFactory<HomeCubit>(() => HomeCubit(getIt<HomeRepo>()));
 
-
-
+  getIt.registerLazySingleton<PharmaciesRepo>(() => PharmaciesRepoImplementation());
+  getIt.registerFactory<PharmaciesCubit>(() => PharmaciesCubit(getIt<PharmaciesRepo>()));
 }
+
+

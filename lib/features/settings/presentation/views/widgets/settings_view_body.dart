@@ -61,6 +61,8 @@ class SettingsViewBody extends StatelessWidget {
              return TextButton(onPressed: (){
                // context.read<AuthCubit>().signOut();
                // GoRouter.of(context).pushReplacement(RouterNames.splash);
+
+
              }, child:Text(S.of(context).logOut,
               style: AppStyles.sBlack15.copyWith(
                   color: AppColors.redColor

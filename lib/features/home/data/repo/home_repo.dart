@@ -4,7 +4,7 @@ import '../models/offer_model.dart';
 
 abstract class HomeRepo {
   Future<List<CategoryModel>> getCategories();
-  Future<List<GridViewItemModel>> getOffers();
+  Future<List<OffersModel>> getOffers();
 
 
 }

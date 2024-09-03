@@ -145,7 +145,7 @@ import '../../../data/models/offer_model.dart';
 //   }
 // }
 class CustomOffersGridView extends StatelessWidget {
-  final List<GridViewItemModel> items;
+  final List<OffersModel> items;
   final String buttonText;
   final VoidCallback onPressed;
   final bool isButtonOnRight;
