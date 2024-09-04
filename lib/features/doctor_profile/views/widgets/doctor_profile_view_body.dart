@@ -16,6 +16,8 @@ class DoctorProfileViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isRtl = Localizations.localeOf(context).languageCode == 'ar';
+
     return Padding(
       padding: EdgeInsets.symmetric(
           horizontal: MediaQuery.of(context).size.width * 0.025),
@@ -44,9 +46,9 @@ class DoctorProfileViewBody extends StatelessWidget {
                   AppStyles.sBlack12.copyWith(color: AppColors.greyForIcon),
             ),
             SizedBox(height: 5.h),
-            const Align(
-              alignment: Alignment.topRight,
-              child: CustomRatingBar(),
+             Align(
+              alignment: isRtl ? Alignment.topRight : Alignment.topLeft,
+              child: const CustomRatingBar(),
             ),
             SizedBox(
               height: 15.h,

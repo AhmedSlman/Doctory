@@ -580,6 +580,36 @@ class S {
     );
   }
 
+  /// `this field cant be empty`
+  String get emptyFieldsMessage {
+    return Intl.message(
+      'this field cant be empty',
+      name: 'emptyFieldsMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Changes Success`
+  String get saveEditSuccess {
+    return Intl.message(
+      'Changes Success',
+      name: 'saveEditSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Changes Failed`
+  String get saveEditError {
+    return Intl.message(
+      'Changes Failed',
+      name: 'saveEditError',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Please add your phone number \n to reset password`
   String get enterYourPhone {
     return Intl.message(

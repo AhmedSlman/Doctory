@@ -1,11 +1,6 @@
-import 'package:bloc/bloc.dart';
-import 'package:doctory/core/routes/router_names.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-
 import '../../../../../core/utils/app_colors.dart';
 import '../../../data/models/user_model.dart';
 import '../../../data/repo/auth_repo_abstract.dart';
@@ -54,7 +49,6 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       final userCredential = await authRepository.signIn(email, password);
       final user = await authRepository.getUserInfo(userCredential.id);
-      ///no changee
       emit(SignInSuccessState(user: user));
     } on FirebaseAuthException catch (e) {
       _sigInHandelException(e);

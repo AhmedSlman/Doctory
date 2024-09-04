@@ -52,6 +52,9 @@
       "cancel": "الغاء",
       "whatIsYourProblem": "ما هي مشكلتك؟",
       "loggedIn": "لقد تم التسجيل بنجاح",
+      "emptyFieldsMessage": "لا يمكن ان يكون هذا الحقل فارغ",
+      "saveEditSuccess": "تم الحفظ بنجاح",
+      "saveEditError": "لم يتم الحفظ",
       "enterYourPhone": "الرجاء ادخال الهاتف \\n لتغير كلمه السر"
 
 

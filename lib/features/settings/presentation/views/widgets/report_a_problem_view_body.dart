@@ -1,7 +1,6 @@
 import 'package:doctory/core/widgets/custom_app_bar.dart';
 import 'package:doctory/features/settings/presentation/views/widgets/upload_image_button.dart';
 import 'package:flutter/material.dart';
-import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../generated/l10n.dart';
 import 'report_problem_textfield.dart';

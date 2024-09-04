@@ -107,8 +107,12 @@ class CustomPharmaciesGridView extends StatelessWidget {
                     ],
                   ),
                   Positioned(
-                    left: isButtonOnRight ? null : MediaQuery.of(context).size.width * 0.02,
-                    right: isButtonOnRight ? MediaQuery.of(context).size.width * 0.02 : null,
+                    left: Directionality.of(context) == TextDirection.rtl
+                        ? MediaQuery.of(context).size.width * 0.02
+                        : null,
+                    right: Directionality.of(context) == TextDirection.ltr
+                        ? MediaQuery.of(context).size.width * 0.02
+                        : null,
                     bottom: (containerHeight - imageHeight - 25.h) / 2,
                     child: SizedBox(
                       width: 60.w,

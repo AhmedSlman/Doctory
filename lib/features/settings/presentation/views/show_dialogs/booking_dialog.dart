@@ -66,7 +66,7 @@ class BookingDialog extends StatelessWidget {
                SizedBox(height: 8.h),
               const CustomTimePicker(),
                SizedBox(height: 8.h),
-              const SaveChangesButton(),
+               SaveChangesButton(saveOnPressed: () {  }, cancelOnPressed: () {  },),
                SizedBox(height: 12.h),
             ],
           ),

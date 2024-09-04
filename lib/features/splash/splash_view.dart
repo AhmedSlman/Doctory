@@ -1,16 +1,44 @@
 import 'package:doctory/core/routes/router_names.dart';
 import 'package:doctory/core/utils/app_assets.dart';
 import 'package:doctory/core/utils/app_colors.dart';
-import 'package:doctory/core/utils/app_strings.dart';
 import 'package:doctory/core/utils/app_styles.dart';
 import 'package:doctory/core/widgets/custom_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../generated/l10n.dart';
 
-class SplashView extends StatelessWidget {
+
+
+class SplashView extends StatefulWidget {
   const SplashView({super.key});
+
+  @override
+  State<SplashView> createState() => _SplashViewState();
+}
+
+class _SplashViewState extends State<SplashView> {
+  @override
+  void initState() {
+    super.initState();
+    _checkLoginStatusAndNavigate();
+  }
+
+  Future<bool> isUserLoggedIn() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    return user != null;
+  }
+  Future<void> _checkLoginStatusAndNavigate() async {
+    bool loggedIn = await isUserLoggedIn();
+    if (loggedIn) {
+      context.go(RouterNames.bottomNavBar);
+    } else {
+      context.go(RouterNames.login);
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {

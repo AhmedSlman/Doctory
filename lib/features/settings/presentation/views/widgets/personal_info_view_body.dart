@@ -1,68 +1,153 @@
+import 'package:doctory/core/utils/app_colors.dart';
 import 'package:doctory/core/widgets/custom_app_bar.dart';
+import 'package:doctory/core/widgets/custom_circular_progress_indicator.dart';
+import 'package:doctory/core/widgets/custom_toast.dart';
+import 'package:doctory/core/widgets/date_picker.dart';
 import 'package:doctory/features/settings/presentation/views/widgets/save_changes_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/app_styles.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
 import '../../../../../generated/l10n.dart';
+import '../../../../auth/data/models/user_model.dart';
+import '../../view_models/cubit/settings_cubit.dart';
+
 
 class PersonalInfoViewBody extends StatelessWidget {
   const PersonalInfoViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final settingsCubit = BlocProvider.of<SettingsCubit>(context);
+    final userId = FirebaseAuth.instance.currentUser!.uid;
+    settingsCubit.getUserData(userId);
+
+
     return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: MediaQuery.of(context).size.width * 0.025),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-           CustomAppBar(title: S.of(context).personalInformation, showBackButton: true),
-          const SizedBox(height: 40),
-          const CustomTextField(
-            hintText: 'احمد محمد علي',
-          ),
-          const SizedBox(height: 15),
-          const CustomTextField(
-            hintText: '012012551512',
-          ),
-          const SizedBox(height: 15),
-          const CustomTextField(
-            hintText: 'ahmedmohamedali@gmail.com',
-          ),
-          const SizedBox(height: 15),
-          Row(
-            children: [
-              const Expanded(
-                flex: 2,
-                child: DateTextField(),
-              ),
-              const SizedBox(width: 15), // Adjust spacing between fields
-              Expanded(
-                flex: 1, // Adjust the flex if needed
-                child: DropdownTextField(
-                  options: const [
-                    AppStrings.male,
-                    AppStrings.female,
+      padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.025),
+      child: BlocConsumer<SettingsCubit, SettingsState>(
+        listener: (context, state) {
+          if (state is SaveUserDataSuccess) {
+            showToast(
+              msg: S.of(context).saveEditSuccess,
+              color: Colors.green,
+            );
+            settingsCubit.getUserData(userId);
+          } else if (state is SaveUserDataError) {
+            showToast(
+              msg: S.of(context).saveEditError,
+              color: AppColors.redColor,
+            );
+          }
+        },
+        builder: (context, state) {
+          if (state is GetUserDataLoading) {
+            return const CustomCircularProgressIndicator();
+          } else if (state is GetUserDataSuccess) {
+            final user = state.userModel;
+
+            final nameController = TextEditingController(text: user.name);
+            final phoneController = TextEditingController(text: user.phoneNumber);
+            final emailController = TextEditingController(text: user.email);
+            final birthDateController = TextEditingController(text: user.birthDate);
+            String selectedGender = user.gender;
+
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CustomAppBar(title: S.of(context).personalInformation, showBackButton: true),
+                const SizedBox(height: 40),
+                CustomTextField(
+                  controller: nameController,
+                  hintText: S.of(context).fullName,
+                ),
+                const SizedBox(height: 15),
+                CustomTextField(
+                  controller: phoneController,
+                  hintText: S.of(context).phone,
+                ),
+                const SizedBox(height: 15),
+                CustomTextField(
+                  controller: emailController,
+                  hintText: S.of(context).email,
+                ),
+                const SizedBox(height: 15),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomDatePicker(
+                        controller: birthDateController,
+                        hintText: S.of(context).dateOfBirth,
+                      ),
+                    ),
+                    SizedBox(width: 12.w),
+                    Expanded(
+                      child: DropdownTextField(
+                        options: const [
+                          AppStrings.male,
+                          AppStrings.female,
+                        ],
+                        hintText: user.gender,
+                        selectedValue: selectedGender,
+                        textStyle: AppStyles.sSubTitleGrey,
+                        onChanged: (value) {
+                          selectedGender = value!;
+                        },
+                      ),
+                    ),
                   ],
-                  hintText: 'ذكر',
-                  textStyle: AppStyles.sSubTitleGrey,
-                  onChanged: (value) {
-                    print('Selected value: $value');
+                ),
+                const SizedBox(height: 30),
+                SaveChangesButton(
+                  cancelOnPressed: () {
+                    GoRouter.of(context).pop();
+                  },
+                  saveOnPressed: () {
+                    if (_validateFields(nameController, phoneController, emailController, birthDateController)) {
+                      final updatedUser = UserModel(
+                        name: nameController.text,
+                        phoneNumber: phoneController.text,
+                        email: emailController.text,
+                        birthDate: birthDateController.text,
+                        gender: selectedGender,
+                        id: userId,
+                      );
+                      settingsCubit.saveUserData(updatedUser);
+                    } else {
+                      showToast(
+                        msg: S.of(context).emptyFieldsMessage,
+                        color: AppColors.redColor,
+                      );
+                    }
                   },
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 30),
-          const SaveChangesButton(),
-        ],
+              ],
+            );
+          } else if (state is GetUserDataError) {
+            return const Center(child: Text('Check Your internet connection'));
+          }
+          return Container();
+        },
       ),
     );
   }
+
+  bool _validateFields(
+      TextEditingController nameController,
+      TextEditingController phoneController,
+      TextEditingController emailController,
+      TextEditingController birthDateController,
+      ) {
+    return nameController.text.isNotEmpty &&
+        phoneController.text.isNotEmpty &&
+        emailController.text.isNotEmpty &&
+        birthDateController.text.isNotEmpty;
+  }
 }
-
-
 
 
 

@@ -18,6 +18,7 @@ class SettingsViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Padding(
       padding: EdgeInsets.symmetric(
           horizontal: MediaQuery.of(context).size.width * 0.025),
@@ -43,26 +44,23 @@ class SettingsViewBody extends StatelessWidget {
             ),
              SettingsContainer(title: S.of(context).sendProblem,
                onTap: () =>GoRouter.of(context).push(RouterNames.reportProblemView),),
-        
+
             BlocProvider(
              create: (context) => getIt<AuthCubit>(),
              child: BlocConsumer<AuthCubit, AuthState>(
               listener: (context, state) {
-                // if (state is SignOutSuccessState) {
-                //   GoRouter.of(context).go(RouterNames.splash);
-                // } else if (state is SignOutErrorState) {
-                //   showToast(msg:state.error,
-                //       color: AppColors.redColor
-                //   );
-                // }
+                if (state is SignOutSuccessState) {
+                  GoRouter.of(context).go(RouterNames.splash);
+                } else if (state is SignOutErrorState) {
+                  showToast(msg:state.error,
+                      color: AppColors.redColor
+                  );
+                }
              },
              builder: (context, state) {
 
              return TextButton(onPressed: (){
-               // context.read<AuthCubit>().signOut();
-               // GoRouter.of(context).pushReplacement(RouterNames.splash);
-
-
+                context.read<AuthCubit>().signOut();
              }, child:Text(S.of(context).logOut,
               style: AppStyles.sBlack15.copyWith(
                   color: AppColors.redColor

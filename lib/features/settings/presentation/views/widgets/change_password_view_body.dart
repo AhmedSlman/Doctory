@@ -35,7 +35,7 @@ class ChangePasswordViewBody extends StatelessWidget {
             hintText: S.of(context).confirmNewPassword,
           ),
           SizedBox(height: screenHeight * 0.05),
-          const SaveChangesButton(),
+          SaveChangesButton(cancelOnPressed: () {  }, saveOnPressed: () {  },),
         ],
       ),
     );

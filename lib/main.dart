@@ -20,7 +20,7 @@ void main() async{
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  SecureStorage secureStorage = SecureStorage();
+  //SecureStorage secureStorage = SecureStorage();
   setupLocator();
 
   runApp(

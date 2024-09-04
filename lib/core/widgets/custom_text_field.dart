@@ -2,6 +2,7 @@
 import 'package:doctory/core/utils/app_strings.dart';
 import 'package:doctory/core/utils/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../utils/app_colors.dart';
 
@@ -21,6 +22,7 @@ class CustomTextField extends StatelessWidget {
   final VoidCallback? onTap;
   final TextStyle? textStyle;
   final TextAlign? textAlign;
+  final String? initialValue;
   const CustomTextField({
     super.key,
     this.controller,
@@ -37,7 +39,8 @@ class CustomTextField extends StatelessWidget {
     this.readOnly = false,
     this.onTap,
     this.textStyle,
-    this.textAlign, // Initialize text style
+    this.textAlign,
+    this.initialValue, // Initialize text style
   });
 
   @override
@@ -49,6 +52,7 @@ class CustomTextField extends StatelessWidget {
     );
 
     return TextFormField(
+      initialValue:initialValue ,
       onTap: onTap,
       onFieldSubmitted: onFieldSubmitted,
       controller: controller,
@@ -88,14 +92,32 @@ class CustomTextField extends StatelessWidget {
 }
 
 class DateTextField extends StatefulWidget {
-  const DateTextField({super.key});
+  final TextEditingController? controller;
+  final ValueChanged<String>? onChanged;
+  final String? hintText;
+
+  const DateTextField({
+    super.key,
+    this.controller,
+    this.onChanged,
+    this.hintText,
+  });
 
   @override
   State<DateTextField> createState() => _DateTextFieldState();
 }
 
 class _DateTextFieldState extends State<DateTextField> {
-  final TextEditingController _controller = TextEditingController();
+  late final TextEditingController _controller;
+  late final ValueChanged<String>? _onChanged;
+
+  @override
+  void initState() {
+    super.initState();
+    // Use provided controller or create a new one if null
+    _controller = widget.controller ?? TextEditingController();
+    _onChanged = widget.onChanged;
+  }
 
   Future<void> _selectBirthDate(BuildContext context) async {
     final DateTime today = DateTime.now();
@@ -108,7 +130,10 @@ class _DateTextFieldState extends State<DateTextField> {
 
     if (selectedDate != null && selectedDate.isBefore(today)) {
       setState(() {
-        _controller.text = '${selectedDate.toLocal()}'.split(' ')[0];
+        _controller.text = DateFormat('yyyy-MM-dd').format(selectedDate); // Format date as needed
+        if (_onChanged != null) {
+          _onChanged(_controller.text);
+        }
       });
     }
   }
@@ -116,28 +141,32 @@ class _DateTextFieldState extends State<DateTextField> {
   @override
   Widget build(BuildContext context) {
     return CustomTextField(
+      hintText: widget.hintText,
+      onChanged: widget.onChanged,
       textStyle: AppStyles.sSubTitleGrey,
-
       controller: _controller,
       readOnly: true, // Prevent manual text entry
       onTap: () => _selectBirthDate(context), // Show date picker on tap
-      suffixIcon: const Icon(Icons.arrow_drop_down_outlined,color: AppColors.primaryColor,
+      suffixIcon: const Icon(
+        Icons.arrow_drop_down_outlined,
+        color: AppColors.primaryColor,
       ),
     );
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    if (widget.controller == null) {
+      _controller.dispose();
+    }
     super.dispose();
   }
 }
 
 
 
-
 class DropdownTextField extends StatefulWidget {
-  final List<String> options; // List of dropdown options
+  final List<String> options;
   final String? hintText;
   final TextEditingController? controller;
   final TextStyle? textStyle;
@@ -164,21 +193,38 @@ class _DropdownTextFieldState extends State<DropdownTextField> {
   @override
   void initState() {
     super.initState();
-    _selectedValue = widget.selectedValue ?? widget.options.first;
+    _selectedValue = widget.selectedValue ?? widget.hintText ?? widget.options.first;
     if (widget.controller != null) {
       widget.controller!.text = _selectedValue;
     }
   }
 
   @override
+  void didUpdateWidget(covariant DropdownTextField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.selectedValue != oldWidget.selectedValue) {
+      setState(() {
+        _selectedValue = widget.selectedValue ?? widget.hintText ?? widget.options.first;
+        if (widget.controller != null) {
+          widget.controller!.text = _selectedValue;
+        }
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return CustomTextField(
-      controller: widget.controller,
-      textStyle: widget.textStyle,
-      hintText: widget.hintText ?? AppStrings.selectAnOption,
-      readOnly: true, // Prevent manual text entry
+    return GestureDetector(
       onTap: _showDropdownMenu,
-      suffixIcon: const Icon(Icons.arrow_drop_down_outlined, color: AppColors.primaryColor),
+      child: AbsorbPointer(
+        child: CustomTextField(
+          controller: widget.controller,
+          textStyle: widget.textStyle,
+          hintText: widget.hintText ?? AppStrings.selectAnOption,
+          suffixIcon: const Icon(Icons.arrow_drop_down_outlined, color: AppColors.primaryColor),
+          readOnly: true, // Ensure the text field is read-only
+        ),
+      ),
     );
   }
 
@@ -213,3 +259,4 @@ class _DropdownTextFieldState extends State<DropdownTextField> {
     }
   }
 }
+

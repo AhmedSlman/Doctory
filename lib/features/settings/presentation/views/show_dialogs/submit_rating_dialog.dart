@@ -27,7 +27,7 @@ class SubmitRatingDialog extends StatelessWidget {
             SizedBox(height: 10),
             RatingBox(),
             SizedBox(height: 20),
-            SaveChangesButton(),
+            SaveChangesButton(cancelOnPressed: () {  }, saveOnPressed: () {  },),
           ],
         ),
       ),

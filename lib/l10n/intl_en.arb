@@ -52,6 +52,9 @@
       "cancel": "Cancel",
       "whatIsYourProblem": "What is your problem?",
       "loggedIn": "you've successfully logged in",
+      "emptyFieldsMessage": "this field cant be empty",
+      "saveEditSuccess": "Changes Success",
+      "saveEditError": "Changes Failed",
       "enterYourPhone": "Please add your phone number \n to reset password"
 
 

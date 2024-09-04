@@ -4,26 +4,48 @@ import 'package:doctory/core/widgets/custom_text_field.dart';
 import '../../generated/l10n.dart';
 
 class CustomDatePicker extends StatefulWidget {
-  const CustomDatePicker({super.key});
+  final TextEditingController? controller;
+  final ValueChanged<String>? onChanged;
+  final String? hintText;
+
+  const CustomDatePicker({
+    super.key,
+    this.controller,
+    this.onChanged,
+    this.hintText,
+  });
 
   @override
   State<CustomDatePicker> createState() => _CustomDatePickerState();
 }
 
 class _CustomDatePickerState extends State<CustomDatePicker> {
-  final TextEditingController _dateController = TextEditingController();
+  late final TextEditingController _dateController;
+  late final ValueChanged<String>? _onChanged;
+
+  @override
+  void initState() {
+    super.initState();
+    _dateController = widget.controller ?? TextEditingController();
+    _onChanged = widget.onChanged;
+  }
 
   Future<void> selectDate() async {
+    DateTime today = DateTime.now();
     DateTime? selectedDate = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
+      initialDate: today,
       firstDate: DateTime(2000),
       lastDate: DateTime(2100),
     );
 
     if (selectedDate != null) {
+      final formattedDate = "${selectedDate.year}-${selectedDate.month}-${selectedDate.day}";
       setState(() {
-        _dateController.text = "${selectedDate.year}-${selectedDate.month}-${selectedDate.day}";
+        _dateController.text = formattedDate;
+        if (_onChanged != null) {
+          _onChanged!(formattedDate);
+        }
       });
     }
   }
@@ -37,11 +59,18 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
           controller: _dateController,
           prefixIcon: const Icon(Icons.calendar_month_outlined),
           readOnly: true,
-          hintText:  S.of(context).selectDate, // Example hint text
-
+          hintText: widget.hintText,
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    if (widget.controller == null) {
+      _dateController.dispose();
+    }
+    super.dispose();
   }
 }
 

@@ -24,7 +24,7 @@ class Doctory extends StatelessWidget {
             ),
           ),
           routerConfig: router,
-          locale: const Locale('en',''),
+          locale: const Locale('ar',''),
           supportedLocales: const [
             Locale('ar', ''),
             Locale('en', ''),
