@@ -44,6 +44,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Doctor Services"),
         "doctorSummary": MessageLookupByLibrary.simpleMessage("Doctor Summary"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "emptyFieldsMessage":
+            MessageLookupByLibrary.simpleMessage("this field cant be empty"),
         "enterYourPhone": MessageLookupByLibrary.simpleMessage(
             "Please add your phone number \n to reset password"),
         "examinationPrice":
@@ -80,6 +82,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "reservationTime":
             MessageLookupByLibrary.simpleMessage("Reservation Times"),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
+        "saveEditError": MessageLookupByLibrary.simpleMessage("Changes Failed"),
+        "saveEditSuccess":
+            MessageLookupByLibrary.simpleMessage("Changes Success"),
         "selectAnOption": MessageLookupByLibrary.simpleMessage("Select Gender"),
         "selectDate": MessageLookupByLibrary.simpleMessage("Select Date"),
         "selectTime": MessageLookupByLibrary.simpleMessage("Select Time"),

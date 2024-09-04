@@ -44,6 +44,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "doctorSummary":
             MessageLookupByLibrary.simpleMessage("نبذه عن الدكتور"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الالكتروني"),
+        "emptyFieldsMessage": MessageLookupByLibrary.simpleMessage(
+            "لا يمكن ان يكون هذا الحقل فارغ"),
         "enterYourPhone": MessageLookupByLibrary.simpleMessage(
             "الرجاء ادخال الهاتف \\n لتغير كلمه السر"),
         "examinationPrice": MessageLookupByLibrary.simpleMessage("سعر الكشف"),
@@ -80,6 +82,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "reservationTime":
             MessageLookupByLibrary.simpleMessage("مواعيد الحجوزات"),
         "save": MessageLookupByLibrary.simpleMessage("حفظ"),
+        "saveEditError": MessageLookupByLibrary.simpleMessage("لم يتم الحفظ"),
+        "saveEditSuccess":
+            MessageLookupByLibrary.simpleMessage("تم الحفظ بنجاح"),
         "selectAnOption": MessageLookupByLibrary.simpleMessage("اختار النوع"),
         "selectDate": MessageLookupByLibrary.simpleMessage("اختر اليوم"),
         "selectTime": MessageLookupByLibrary.simpleMessage("اختر وقت الكشف"),
