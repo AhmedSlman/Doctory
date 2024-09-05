@@ -20,10 +20,10 @@ class UploadImageButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           color: AppColors.whiteColor
         ),
-        child: Column(
+        child:  Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            IconButton(onPressed: (){}, icon:const Icon(Icons.photo_camera_outlined,color: AppColors.primaryColor,)),
+            const Icon(Icons.photo_camera_outlined,color: AppColors.primaryColor),
             Text(
               S.of(context).uploadPhoto,
               style:AppStyles.s10.copyWith(color: AppColors.primaryColor,),

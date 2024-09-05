@@ -29,7 +29,7 @@ class HomeViewBody extends StatelessWidget {
             child: BlocBuilder<HomeCubit, HomeState>(
               builder: (context, state) {
                 if (state is HomeLoading) {
-                  return const Center(child: CustomCircularProgressIndicator());
+                  return const CustomCircularProgressIndicator();
                 } else if (state is HomeLoaded) {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

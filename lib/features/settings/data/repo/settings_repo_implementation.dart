@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctory/features/settings/data/repo/settings_repo.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../auth/data/models/user_model.dart';
 import '../models/report_problem_model.dart';
@@ -23,12 +24,33 @@ class SettingsRepoImplementation implements SettingsRepo {
     try {
       await _firestore.collection('problem_reports').add({
         'problemText': reportProblem.problemText,
-        'imageUrl': reportProblem.imageUrl,
+        'imageUrl': reportProblem.image,
         'timestamp': FieldValue.serverTimestamp(),
       });
     } catch (e) {
       throw Exception('Failed to submit report');
     }
   }
+
+
+  @override
+  Future<void> updatePassword(String oldPassword, String newPassword) async {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      final credentials = EmailAuthProvider.credential(
+        email: user.email!,
+        password: oldPassword,
+      );
+      try {
+        await user.reauthenticateWithCredential(credentials);
+        await user.updatePassword(newPassword);
+      } catch (e) {
+        throw Exception('Failed to update password');
+      }
+    } else {
+      throw Exception('No user logged in');
+    }
+  }
 }
+
 

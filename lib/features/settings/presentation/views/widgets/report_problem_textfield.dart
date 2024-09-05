@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_styles.dart';
 
@@ -56,7 +54,12 @@ class ReportTextField extends StatelessWidget {
       onTap: onTap,
       onFieldSubmitted: onFieldSubmitted,
       controller: controller,
-      validator: validator,
+      validator: validator ?? (value) {
+        if (value == null || value.isEmpty) {
+          return 'This field cannot be empty';
+        }
+        return null;
+      },
       keyboardType: keyboardType,
       obscureText: obsecure,
       onChanged: onChanged,

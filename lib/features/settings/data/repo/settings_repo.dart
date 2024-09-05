@@ -5,6 +5,7 @@ abstract class SettingsRepo {
   Future<UserModel> getUserData(String userId);
   Future<void> updateUserData(UserModel user);
   Future<void> submitReport(ReportProblemModel reportProblem);
+  Future<void> updatePassword(String oldPassword, String newPassword);
 
 
 }

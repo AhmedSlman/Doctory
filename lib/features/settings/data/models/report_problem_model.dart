@@ -2,13 +2,13 @@ import 'package:equatable/equatable.dart';
 
 class ReportProblemModel extends Equatable {
   final String problemText;
-  final String? imageUrl;
+  final String? image;
 
   const ReportProblemModel({
     required this.problemText,
-    this.imageUrl,
+    this.image,
   });
 
   @override
-  List<Object?> get props => [problemText, imageUrl];
+  List<Object?> get props => [problemText, image];
 }

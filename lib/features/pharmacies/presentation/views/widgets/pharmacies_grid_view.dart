@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -17,8 +18,6 @@ class CustomPharmaciesGridView extends StatelessWidget {
     required this.buttonText,
     this.isButtonOnRight = true,
   });
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -65,9 +64,11 @@ class CustomPharmaciesGridView extends StatelessWidget {
                             topRight: Radius.circular(16),
                             topLeft: Radius.circular(16),
                           ),
-                          child: Image.network(
-                            item.image,
+                          child: CachedNetworkImage(
+                            imageUrl: item.image,
                             fit: BoxFit.cover,
+                            placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                            errorWidget: (context, url, error) => const Icon(Icons.error),
                           ),
                         ),
                       ),
@@ -118,7 +119,7 @@ class CustomPharmaciesGridView extends StatelessWidget {
                       width: 60.w,
                       height: 25.h, // Fixed height
                       child: ElevatedButton(
-                        onPressed: () =>  makePhoneCall(item.phoneNumber), // Handle phone call
+                        onPressed: () => makePhoneCall(item.phoneNumber), // Handle phone call
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primaryColor,
                           shape: RoundedRectangleBorder(
