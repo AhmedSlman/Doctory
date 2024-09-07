@@ -2,6 +2,7 @@ import 'package:doctory/core/routes/router_names.dart';
 import 'package:doctory/core/services/service_locator.dart';
 import 'package:doctory/features/auth/presentation/view_models/cubit/auth_cubit.dart';
 import 'package:doctory/features/auth/presentation/views/change_password.dart';
+import 'package:doctory/features/auth/presentation/views/enter_your_email.dart';
 import 'package:doctory/features/auth/presentation/views/enter_your_phone.dart';
 import 'package:doctory/features/auth/presentation/views/forget_password.dart';
 import 'package:doctory/features/auth/presentation/views/login_view.dart';
@@ -56,11 +57,11 @@ final GoRouter router = GoRouter(
           ),
     ),
     GoRoute(
-      path: RouterNames.enterYourPhone,
+      path: RouterNames.enterYourEmail,
       builder: (context, state) =>
           BlocProvider(
             create: (context) => getIt<AuthCubit>(),
-            child: const EnterYourPhoneView(),
+            child: const EnterYourEmailView(),
           ),
     ),
     GoRoute(

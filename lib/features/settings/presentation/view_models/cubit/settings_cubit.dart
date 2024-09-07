@@ -47,33 +47,9 @@ class SettingsCubit extends Cubit<SettingsState> {
     }
   }
 
-  // Future<void> pickImageFromGallery() async {
-  //   try {
-  //     final PermissionStatus photoStatus = await Permission.photos.status;
-  //
-  //     if (photoStatus.isDenied) {
-  //       await Permission.photos.request();
-  //     }
-  //
-  //     if (await Permission.photos.isGranted) {
-  //       final pickedFile = await _imagePicker.pickImage(source: ImageSource.gallery);
-  //
-  //       if (pickedFile != null) {
-  //         reportProblemModel = ReportProblemModel(
-  //           problemText: reportProblemModel?.problemText ?? "",
-  //           image: pickedFile.path,  // Set the selected image path
-  //         );
-  //         emit(ReportImagePickedSuccess(pickedFile.path));
-  //       } else {
-  //         emit(ReportImagePickError('No image selected'));
-  //       }
-  //     } else {
-  //       emit(ReportImagePickError('Permissions not granted'));
-  //     }
-  //   } catch (e) {
-  //     emit(ReportImagePickError('Failed to pick image: $e'));
-  //   }
-  // }
+  void selectGender(String gender) {
+    emit(GenderSelectionState(gender));
+  }
 
   Future<void> getImage() async {
     final ImagePicker picker = ImagePicker();

@@ -31,7 +31,6 @@ class VerificationPage extends StatelessWidget {
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is OTPSentState) {
-            // Set the verificationId when OTP is sent
             verificationId = state.verificationId;
           } else if (state is OTPVerifiedState) {
             context.go(RouterNames.changePassword);

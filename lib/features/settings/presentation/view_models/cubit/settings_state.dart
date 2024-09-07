@@ -7,6 +7,15 @@ abstract class SettingsState extends Equatable {
 }
 final class SettingsInitial extends SettingsState {}
 
+class GenderSelectionState extends SettingsState {
+  final String selectedGender;
+
+  GenderSelectionState(this.selectedGender);
+
+  @override
+  List<Object> get props => [selectedGender];
+}
+
 //Get User Data
 final class GetUserDataLoading extends SettingsState {}
 final class GetUserDataSuccess extends SettingsState {

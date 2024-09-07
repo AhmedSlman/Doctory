@@ -83,7 +83,7 @@ class LoginView extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: TextButton(
                       onPressed: () {
-                        context.go(RouterNames.enterYourPhone);
+                        context.go(RouterNames.enterYourEmail);
                       },
                       child: Text(S.of(context).forgotPassword),
                     ),

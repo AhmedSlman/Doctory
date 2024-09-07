@@ -44,10 +44,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "doctorSummary":
             MessageLookupByLibrary.simpleMessage("نبذه عن الدكتور"),
         "email": MessageLookupByLibrary.simpleMessage("البريد الالكتروني"),
+        "emailSent": MessageLookupByLibrary.simpleMessage(
+            "تم ارسال رساله الي حسابك لتغير كلمه المرور"),
         "emptyFieldsMessage": MessageLookupByLibrary.simpleMessage(
             "لا يمكن ان يكون هذا الحقل فارغ"),
+        "enterYourEmail": MessageLookupByLibrary.simpleMessage(
+            "الرجاء ادخال حسابك لتغير كلمه السر"),
         "enterYourPhone": MessageLookupByLibrary.simpleMessage(
-            "الرجاء ادخال الهاتف \\n لتغير كلمه السر"),
+            "الرجاء ادخال الهاتف \n لتغير كلمه السر"),
         "examinationPrice": MessageLookupByLibrary.simpleMessage("سعر الكشف"),
         "female": MessageLookupByLibrary.simpleMessage("انثي"),
         "forgotPassword":

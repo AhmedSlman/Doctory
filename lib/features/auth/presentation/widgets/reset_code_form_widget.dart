@@ -1,5 +1,4 @@
 import 'package:doctory/core/utils/app_colors.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ResetCodeFormWidget extends StatelessWidget {

@@ -613,8 +613,28 @@ class S {
   /// `Please add your phone number \n to reset password`
   String get enterYourPhone {
     return Intl.message(
-      'Please add your phone number \n to reset password',
+      'Please add your phone number \\n to reset password',
       name: 'enterYourPhone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please add your email \n to reset password`
+  String get enterYourEmail {
+    return Intl.message(
+      'Please add your email \n to reset password',
+      name: 'enterYourEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A message has been sent to your account to change the password.`
+  String get emailSent {
+    return Intl.message(
+      'A message has been sent to your account to change the password.',
+      name: 'emailSent',
       desc: '',
       args: [],
     );

@@ -12,8 +12,8 @@ class AuthCubit extends Cubit<AuthState> {
   final AuthRepository authRepository;
   UserModel? currentUser;
   FirebaseAuth auth = FirebaseAuth.instance;
-  String countryCode = ''; // Default country code
-  String phoneNumber = '';
+  // String countryCode = ''; // Default country code
+  // String phoneNumber = '';
   AuthCubit(this.authRepository) : super(AuthInitial());
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -90,7 +90,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> signOut() async {
     try {
       await authRepository.signOut();
-      emit(SignOutSuccessState()); // Emit a state indicating that the user has signed out.
+      emit(SignOutSuccessState());
     } catch (e) {
       emit(SignOutErrorState(e.toString())); // Emit an error state if sign out fails.
     }
@@ -112,7 +112,7 @@ class AuthCubit extends Cubit<AuthState> {
         email: currentUser!.email,
         phoneNumber: phone,
         birthDate: birthDate,
-        gender: '',
+        gender: currentUser!.gender,
       );
       await authRepository.updateUserInfo(updatedUser);
       currentUser = updatedUser;
@@ -227,4 +227,5 @@ class AuthCubit extends Cubit<AuthState> {
       print('Password reset failed: ${e.toString()}');
     }
   }
+
 }

@@ -44,10 +44,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Doctor Services"),
         "doctorSummary": MessageLookupByLibrary.simpleMessage("Doctor Summary"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "emailSent": MessageLookupByLibrary.simpleMessage(
+            "A message has been sent to your account to change the password."),
         "emptyFieldsMessage":
             MessageLookupByLibrary.simpleMessage("this field cant be empty"),
+        "enterYourEmail": MessageLookupByLibrary.simpleMessage(
+            "Please add your email \n to reset password"),
         "enterYourPhone": MessageLookupByLibrary.simpleMessage(
-            "Please add your phone number \n to reset password"),
+            "Please add your phone number \\n to reset password"),
         "examinationPrice":
             MessageLookupByLibrary.simpleMessage("Examination Price"),
         "female": MessageLookupByLibrary.simpleMessage("Female"),

@@ -55,7 +55,9 @@
       "emptyFieldsMessage": "this field cant be empty",
       "saveEditSuccess": "Changes Success",
       "saveEditError": "Changes Failed",
-      "enterYourPhone": "Please add your phone number \n to reset password"
+      "enterYourPhone": "Please add your phone number \\n to reset password",
+      "enterYourEmail": "Please add your email \n to reset password",
+      "emailSent": "A message has been sent to your account to change the password."
 
 
 }
