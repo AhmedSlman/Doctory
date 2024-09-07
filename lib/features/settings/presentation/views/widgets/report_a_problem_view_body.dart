@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:doctory/core/widgets/custom_app_bar.dart';
 import 'package:doctory/core/widgets/custom_circular_progress_indicator.dart';
 import 'package:doctory/core/widgets/custom_toast.dart';
@@ -10,6 +12,7 @@ import '../../../../../generated/l10n.dart';
 import '../../../data/models/report_problem_model.dart';
 import '../../view_models/cubit/settings_cubit.dart';
 import 'report_problem_textfield.dart';
+
 
 
 class ReportAProblemViewBody extends StatelessWidget {
@@ -47,9 +50,63 @@ class ReportAProblemViewBody extends StatelessWidget {
               SizedBox(height: MediaQuery.of(context).size.height * 0.05),
 
               UploadImageButton(
-                onTap: () => settingsCubit.pickImageFromGallery(),
+                onTap: () => settingsCubit.getImage(),
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.04),
+
+              BlocBuilder<SettingsCubit, SettingsState>(
+                builder: (context, state) {
+                  if (state is ReportImagePickedSuccess) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width*0.21,
+                          height: MediaQuery.of(context).size.height*0.1,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color: AppColors.greyColor, // Placeholder color
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Image.file(
+                              File(state.imagePath),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: MediaQuery.of(context).size.width * 0.02),
+                        GestureDetector(
+                          onTap: () {
+                            settingsCubit.file = null;
+                            settingsCubit.clearImage(); // Reset state
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width*0.21,
+                            height: MediaQuery.of(context).size.height*0.1,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              color: AppColors.whiteColor,
+                            ),
+                            child: const Center(
+                              child: Icon(
+                                Icons.delete,
+                                color: AppColors.primaryColor,
+                                size: 30,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  }
+                  return Container();
+                },
+              ),
+
+             SizedBox(height: MediaQuery.of(context).size.height * 0.04),
+
+
 
               BlocConsumer<SettingsCubit, SettingsState>(
                 listener: (context, state) {
@@ -74,7 +131,7 @@ class ReportAProblemViewBody extends StatelessWidget {
                       if (settingsCubit.formKey.currentState!.validate()) {
                         final reportProblemModel = ReportProblemModel(
                           problemText: settingsCubit.problemText.text,
-                          image: settingsCubit.reportProblemModel?.image,
+                          image: settingsCubit.file?.path,
                         );
                         settingsCubit.submitReport(reportProblemModel);
                       }
