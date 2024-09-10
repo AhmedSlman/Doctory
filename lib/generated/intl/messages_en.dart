@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "appName": MessageLookupByLibrary.simpleMessage("Doctory"),
         "bookNow": MessageLookupByLibrary.simpleMessage("Book Now"),
+        "booked": MessageLookupByLibrary.simpleMessage("Booked"),
         "booking": MessageLookupByLibrary.simpleMessage("Booking"),
         "bookingTime": MessageLookupByLibrary.simpleMessage("Booking Times"),
         "call": MessageLookupByLibrary.simpleMessage("Call"),
@@ -96,6 +97,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendProblem": MessageLookupByLibrary.simpleMessage("Report a Problem"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "uploadPhoto": MessageLookupByLibrary.simpleMessage("Upload Photo"),
+        "validatorMsg":
+            MessageLookupByLibrary.simpleMessage(" this field cannot be empty"),
         "waitingTime": MessageLookupByLibrary.simpleMessage("Waiting Time"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome To"),
         "whatIsYourProblem":

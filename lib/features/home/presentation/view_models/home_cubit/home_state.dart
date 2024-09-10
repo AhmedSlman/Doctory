@@ -29,3 +29,15 @@ class HomeError extends HomeState {
   List<Object> get props => [message];
 }
 
+
+// Booking States
+class BookingLoading extends HomeState {}
+class BookingSuccess extends HomeState {}
+class BookingError extends HomeState {
+  final String message;
+
+  BookingError(this.message);
+
+  @override
+  List<Object> get props => [message];
+}

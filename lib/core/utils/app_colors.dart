@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
+
 abstract class AppColors {
   static const primaryColor = Color(0xFF8ED2FF);
   static const scaffoldColor = Color(0xFFDDF1FF);
@@ -13,6 +15,7 @@ abstract class AppColors {
   static const gradientColor2 = Color(0xFFDDF1FF);
   static const bottomNavColor = Color(0xFFF3F3F3);
   static const greyColor = Color(0xFFF3F3F3);
+  static const greenColor = Colors.green;
 
 
 

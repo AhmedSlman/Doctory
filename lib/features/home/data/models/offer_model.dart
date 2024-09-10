@@ -5,6 +5,7 @@ class OffersModel {
   final String oldPrice;
   final String price;
   final String title;
+  final bool isBooked;
 
   OffersModel({
     required this.id,
@@ -13,9 +14,10 @@ class OffersModel {
     required this.oldPrice,
     required this.price,
     required this.title,
+    this.isBooked = false,
   });
 
-  factory OffersModel.fromFirestore(Map<String, dynamic> data, String id) {
+  factory OffersModel.fromFirestore(Map<String, dynamic> data, String id, {bool isBooked = false}) {
     return OffersModel(
       id: id,
       clinicName: data['clinicName'] ?? '',
@@ -23,9 +25,21 @@ class OffersModel {
       oldPrice: data['oldPrice'] ?? '',
       price: data['price'] ?? '',
       title: data['title'] ?? '',
+      isBooked: isBooked,
     );
   }
 
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'clinicName': clinicName,
+      'image': image,
+      'oldPrice': oldPrice,
+      'price': price,
+      'title': title,
+      'isBooked': isBooked, // Add isBooked to the map
 
+    };
+  }
 
 }

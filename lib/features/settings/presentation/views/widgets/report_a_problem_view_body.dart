@@ -42,7 +42,7 @@ class ReportAProblemViewBody extends StatelessWidget {
                 controller: settingsCubit.problemText,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'This field cannot be empty';
+                    return S.of(context).validatorMsg;
                   }
                   return null;
                 },

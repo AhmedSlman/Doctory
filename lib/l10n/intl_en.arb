@@ -17,6 +17,7 @@
       "bookNow": "Book Now",
       "cancelBooking": "Cancel Booking",
       "booking": "Booking",
+      "booked": "Booked",
       "homePage": "Home",
       "more": "More",
       "pharmacies": "Pharmacies",
@@ -57,7 +58,9 @@
       "saveEditError": "Changes Failed",
       "enterYourPhone": "Please add your phone number \\n to reset password",
       "enterYourEmail": "Please add your email \n to reset password",
-      "emailSent": "A message has been sent to your account to change the password."
+      "emailSent": "A message has been sent to your account to change the password.",
+      "validatorMsg": " this field cannot be empty"
+
 
 
 }

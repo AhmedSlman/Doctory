@@ -14,9 +14,11 @@ import 'package:doctory/features/settings/presentation/views/booking_time_view.d
 import 'package:doctory/features/settings/presentation/views/change_password_view.dart';
 import 'package:doctory/features/settings/presentation/views/report_a_problem_view.dart';
 import 'package:doctory/features/splash/splash_view.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../features/booking/data/models/doctor_model.dart';
 import '../../features/home/presentation/view_models/home_cubit/home_cubit.dart';
 import '../../features/home/presentation/views/home_view.dart';
 import '../../features/settings/presentation/views/personal_info_view.dart';
@@ -95,7 +97,27 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
       path: RouterNames.doctorProfileInfo,
-      builder: (context, state) => const DoctorProfileInfoView(),
+      builder: (context, state) {
+        final doctor = state.extra as DoctorModel?;
+        if (doctor == null) {
+          return const Scaffold(
+            body: Center(child: Text('No doctor data available')),
+          );
+        }
+        return DoctorProfileInfoView(doctor: doctor);
+      },
     ),
+
   ],
 );
+
+/*
+
+GoRoute(
+      path: RouterNames.doctorProfileInfo,
+      builder: (context, state) {
+        final DoctorModel doctor = state.extra as DoctorModel;
+        return DoctorProfileViewBody(doctor: doctor);
+      },
+    ),
+ */

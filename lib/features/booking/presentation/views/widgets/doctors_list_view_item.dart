@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doctory/core/routes/router_names.dart';
+import 'package:doctory/core/widgets/custom_circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -7,11 +9,14 @@ import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/app_styles.dart';
 import '../../../../../core/widgets/custom_rating_bar.dart';
+import '../../../data/models/doctor_model.dart';
 
 
 
 class DoctorsListViewItem extends StatelessWidget {
-  const DoctorsListViewItem({super.key});
+  final DoctorModel doctor;
+
+  const DoctorsListViewItem({super.key, required this.doctor});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +25,7 @@ class DoctorsListViewItem extends StatelessWidget {
     final isRTL = Directionality.of(context) == TextDirection.rtl;
 
     return Container(
-      height: 140.h, // Container height
+      height: 140.h,
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
@@ -33,12 +38,14 @@ class DoctorsListViewItem extends StatelessWidget {
                 ? const BorderRadius.horizontal(right: Radius.circular(16))
                 : const BorderRadius.horizontal(left: Radius.circular(16)),
             child: SizedBox(
-              height: double.infinity, // Take full height of the container
-              width: screenWidth * 0.33, // Occupy one-third of the container's width
-              child: Image.asset(
-                'assets/images/test2.png',
+              height: double.infinity,
+              width: screenWidth * 0.33,
+              child: CachedNetworkImage(
+                imageUrl: doctor.image,
                 fit: BoxFit.cover,
-              ),
+                placeholder: (context, url) => const CustomCircularProgressIndicator(),
+                errorWidget: (context, url, error) => const Icon(Icons.error_outline)
+              )
             ),
           ),
           Expanded(
@@ -50,7 +57,7 @@ class DoctorsListViewItem extends StatelessWidget {
                 children: [
                   Flexible(
                     child: Text(
-                      'دكتور احمد علي',
+                      doctor.name,
                       style: AppStyles.sBlack12.copyWith(
                         fontWeight: FontWeight.bold,
                         fontSize: screenWidth * 0.04,
@@ -62,7 +69,7 @@ class DoctorsListViewItem extends StatelessWidget {
                   const SizedBox(height: 5),
                   Flexible(
                     child: Text(
-                      'دكتور عظام',
+                      doctor.doctorSpec,
                       style: AppStyles.sSubTitleGrey.copyWith(
                         fontSize: screenWidth * 0.035,
                       ),
@@ -73,7 +80,7 @@ class DoctorsListViewItem extends StatelessWidget {
                   const SizedBox(height: 3),
                   Flexible(
                     child: Text(
-                      'المنصورة',
+                      doctor.address,
                       style: AppStyles.sSubTitleGrey.copyWith(
                         fontSize: screenWidth * 0.035,
                       ),
@@ -84,7 +91,7 @@ class DoctorsListViewItem extends StatelessWidget {
                   const SizedBox(height: 3),
                   Flexible(
                     child: Text(
-                      '150 جنيه',
+                      '${doctor.price.toString()} جنيه',
                       style: AppStyles.sSubTitleGrey.copyWith(
                         fontSize: screenWidth * 0.035,
                       ),
@@ -102,14 +109,14 @@ class DoctorsListViewItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const CustomRatingBar(),
+                CustomRatingBar(rating: doctor.rating),
                 const SizedBox(height: 20),
                 SizedBox(
                   width: screenWidth * 0.2,
                   height: screenHeight * 0.04,
                   child: ElevatedButton(
                     onPressed: () {
-                      GoRouter.of(context).push(RouterNames.doctorProfileInfo);
+                      GoRouter.of(context).push(RouterNames.doctorProfileInfo,extra: doctor);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primaryColor,

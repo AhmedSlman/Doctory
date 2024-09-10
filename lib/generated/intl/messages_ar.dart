@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "appName": MessageLookupByLibrary.simpleMessage("Doctory"),
         "bookNow": MessageLookupByLibrary.simpleMessage("احجز الآن"),
+        "booked": MessageLookupByLibrary.simpleMessage("تم الحجز"),
         "booking": MessageLookupByLibrary.simpleMessage("الحجز"),
         "bookingTime": MessageLookupByLibrary.simpleMessage("مواعيد الحجوزات "),
         "call": MessageLookupByLibrary.simpleMessage("الاتصال"),
@@ -96,6 +97,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendProblem": MessageLookupByLibrary.simpleMessage("الابلاغ عن مشكله"),
         "settings": MessageLookupByLibrary.simpleMessage("الاعدادات"),
         "uploadPhoto": MessageLookupByLibrary.simpleMessage("ارفاق صوره"),
+        "validatorMsg": MessageLookupByLibrary.simpleMessage(
+            " هذا الحقل لا يمكن ان يكون فارغ"),
         "waitingTime": MessageLookupByLibrary.simpleMessage("وقت الانتظار"),
         "welcome": MessageLookupByLibrary.simpleMessage("اهلا بك في"),
         "whatIsYourProblem":

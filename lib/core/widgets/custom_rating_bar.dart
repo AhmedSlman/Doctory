@@ -1,27 +1,26 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+
+
 class CustomRatingBar extends StatelessWidget {
-  const CustomRatingBar({super.key});
+  final double? rating;
+
+  const CustomRatingBar({super.key, this.rating});
 
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
-    return RatingBar.builder(
+    return RatingBarIndicator(
+      rating: rating ?? 0.0,
       itemSize: 16.r,
-      initialRating: 3,
-      minRating: 1,
       direction: Axis.horizontal,
-      allowHalfRating: true,
       itemCount: 5,
       itemBuilder: (context, _) => const Icon(
         Icons.star,
         color: Colors.amber,
       ),
-      onRatingUpdate: (rating) {
-        print(rating);
-      },
     );
   }
 }

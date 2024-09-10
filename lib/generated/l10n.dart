@@ -230,6 +230,16 @@ class S {
     );
   }
 
+  /// `Booked`
+  String get booked {
+    return Intl.message(
+      'Booked',
+      name: 'booked',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Home`
   String get homePage {
     return Intl.message(
@@ -635,6 +645,16 @@ class S {
     return Intl.message(
       'A message has been sent to your account to change the password.',
       name: 'emailSent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// ` this field cannot be empty`
+  String get validatorMsg {
+    return Intl.message(
+      ' this field cannot be empty',
+      name: 'validatorMsg',
       desc: '',
       args: [],
     );

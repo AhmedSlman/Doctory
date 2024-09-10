@@ -2,6 +2,7 @@ import 'package:doctory/core/utils/app_styles.dart';
 import 'package:doctory/core/widgets/custom_circular_progress_indicator.dart';
 import 'package:doctory/features/settings/presentation/views/show_dialogs/booking_dialog.dart';
 import 'package:flutter/material.dart';
+import '../../../../../core/services/service_locator.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../data/models/offer_model.dart';
 import '../../view_models/home_cubit/home_cubit.dart';
@@ -57,15 +58,19 @@ class HomeViewBody extends StatelessWidget {
                             id: offer.id,
                           )).toList(),
                           buttonText: S.of(context).bookNow,
-                          onPressed: () {
+                          onPressed: (offer) {
                             showDialog(
                               context: context,
                               builder: (BuildContext context) {
-                                return const BookingDialog();
+                                return BlocProvider(
+                                  create: (context) => getIt<HomeCubit>(),
+                                  child: BookingDialog(offer: offer),
+                                     );
                               },
                             );
                           },
-                        ),
+                        )
+
                       ),
                     ],
                   );

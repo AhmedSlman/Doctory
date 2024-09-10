@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:doctory/features/booking/data/models/doctor_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -6,7 +7,8 @@ import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_styles.dart';
 
 class DoctorProfilePictureAndName extends StatelessWidget {
-  const DoctorProfilePictureAndName({super.key});
+   const DoctorProfilePictureAndName({super.key,required this.doctor});
+  final DoctorModel doctor;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +16,7 @@ class DoctorProfilePictureAndName extends StatelessWidget {
       children: [
         CachedNetworkImage(
           imageUrl:
-          'https://th.bing.com/th/id/OIP.IGNf7GuQaCqz_RPq5wCkPgHaLH?rs=1&pid=ImgDetMain',
+          doctor.image,
           imageBuilder: (context, imageProvider) => Container(
             width: 130,
             height: 130,
@@ -32,7 +34,7 @@ class DoctorProfilePictureAndName extends StatelessWidget {
         SizedBox(
           height: 5.h,
         ),
-         Text('Doctor Ahmed Ali', style: AppStyles.sTitle),
+         Text(doctor.name, style: AppStyles.sTitle),
       ],
     );
   }

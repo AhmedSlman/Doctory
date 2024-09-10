@@ -5,13 +5,15 @@ import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_styles.dart';
 
 class CustomContainerCard extends StatelessWidget {
-  const CustomContainerCard({super.key, required this.title, required this.content});
+  const CustomContainerCard({super.key, required this.title, required this.content, this.height});
   final String title;
   final Widget content;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: height,
       width: double.infinity,
       decoration: BoxDecoration(
         color: AppColors.whiteColor,
@@ -28,6 +30,7 @@ class CustomContainerCard extends StatelessWidget {
             ),
             SizedBox(height: 10.h),
             content,
+
             SizedBox(height: 20.h),
           ],
         ),

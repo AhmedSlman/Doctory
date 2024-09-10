@@ -8,11 +8,10 @@ import 'package:doctory/core/utils/app_styles.dart';
 import '../../../data/models/offer_model.dart';
 
 
-
 class CustomOffersGridView extends StatelessWidget {
   final List<OffersModel> items;
   final String buttonText;
-  final VoidCallback onPressed;
+  final void Function(OffersModel offer) onPressed;
   final bool isButtonOnRight;
 
   const CustomOffersGridView({
@@ -120,33 +119,62 @@ class CustomOffersGridView extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Positioned(
-                    left: Directionality.of(context) == TextDirection.rtl
-                        ? MediaQuery.of(context).size.width * 0.02
-                        : null,
-                    right: Directionality.of(context) == TextDirection.ltr
-                        ? MediaQuery.of(context).size.width * 0.02
-                        : null,
-                    bottom: (containerHeight - imageHeight - 25.h) / 2,
-                    child: SizedBox(
-                      width: 60.w,
-                      height: 25.h, // Fixed height
-                      child: ElevatedButton(
-                        onPressed: onPressed,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.primaryColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
+                  if (item.isBooked)
+                    Positioned(
+                      left: Directionality.of(context) == TextDirection.rtl
+                          ? MediaQuery.of(context).size.width * 0.02
+                          : null,
+                      right: Directionality.of(context) == TextDirection.ltr
+                          ? MediaQuery.of(context).size.width * 0.02
+                          : null,
+                      bottom: (containerHeight - imageHeight - 25.h) / 2,
+                      child: SizedBox(
+                        width: 60.w,
+                        height: 25.h, // Fixed height
+                        child: ElevatedButton(
+                          onPressed: null, // Disable the button if booked
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.grey, // Show a disabled color
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 0),
                           ),
-                          padding: const EdgeInsets.symmetric(horizontal: 0),
+                          child: Text(
+                            'Booked', // Button text changes to 'Booked'
+                            style: AppStyles.sTextButton,
+                          ),
                         ),
-                        child: Text(
-                          buttonText,
-                          style: AppStyles.sTextButton,
+                      ),
+                    )
+                  else
+                    Positioned(
+                      left: Directionality.of(context) == TextDirection.rtl
+                          ? MediaQuery.of(context).size.width * 0.02
+                          : null,
+                      right: Directionality.of(context) == TextDirection.ltr
+                          ? MediaQuery.of(context).size.width * 0.02
+                          : null,
+                      bottom: (containerHeight - imageHeight - 25.h) / 2,
+                      child: SizedBox(
+                        width: 60.w,
+                        height: 25.h, // Fixed height
+                        child: ElevatedButton(
+                          onPressed: () => onPressed(item),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.primaryColor,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 0),
+                          ),
+                          child: Text(
+                            buttonText,
+                            style: AppStyles.sTextButton,
+                          ),
                         ),
                       ),
                     ),
-                  ),
                 ],
               ),
             );
