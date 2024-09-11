@@ -1,8 +1,11 @@
 import 'package:doctory/core/utils/app_styles.dart';
 import 'package:doctory/core/widgets/custom_circular_progress_indicator.dart';
 import 'package:doctory/features/settings/presentation/views/show_dialogs/booking_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/services/service_locator.dart';
+import '../../../../../core/utils/app_colors.dart';
+import '../../../../../core/widgets/custom_toast.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../data/models/offer_model.dart';
 import '../../view_models/home_cubit/home_cubit.dart';
@@ -33,6 +36,7 @@ class HomeViewBody extends StatelessWidget {
                   return const CustomCircularProgressIndicator();
                 } else if (state is HomeLoaded) {
                   final offers = state.offers;
+                  final userId = FirebaseAuth.instance.currentUser!.uid;
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -54,7 +58,7 @@ class HomeViewBody extends StatelessWidget {
                       ),
                       SizedBox(height: MediaQuery.of(context).size.height * 0.02),
                       offers.isEmpty
-                          ? Center(child: Text(S.of(context).noOffers)) // No offers message
+                          ? Center(child: Text(S.of(context).noOffers))
                           : Expanded(
                         child: CustomOffersGridView(
                           items: offers.map((offer) => OffersModel(
@@ -67,16 +71,24 @@ class HomeViewBody extends StatelessWidget {
                             categoryName: offer.categoryName,
                           )).toList(),
                           buttonText: S.of(context).bookNow,
-                          onPressed: (offer) {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return BlocProvider(
-                                  create: (context) => getIt<HomeCubit>(),
-                                  child: BookingDialog(offer: offer),
-                                );
-                              },
-                            );
+                          onPressed: (offer) async {
+                            final hasBooked = await homeCubit.hasUserBookedOffer(offer.id, userId);
+                            if (hasBooked) {
+                              showToast(
+                                msg: S.of(context).alreadyBooked,
+                                color: AppColors.redColor,
+                              );
+                            } else {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return BlocProvider(
+                                    create: (context) => getIt<HomeCubit>(),
+                                    child: BookingDialog(offer: offer),
+                                  );
+                                },
+                              );
+                            }
                           },
                         ),
                       ),

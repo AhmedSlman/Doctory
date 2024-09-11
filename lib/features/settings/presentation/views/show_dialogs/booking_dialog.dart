@@ -22,19 +22,17 @@ class BookingDialog extends StatefulWidget {
   const BookingDialog({super.key, required this.offer});
 
   @override
-  _BookingDialogState createState() => _BookingDialogState();
+  BookingDialogState createState() => BookingDialogState();
 }
 
-class _BookingDialogState extends State<BookingDialog> {
+class BookingDialogState extends State<BookingDialog> {
   final TextEditingController _patientNameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final userId = FirebaseAuth.instance.currentUser!.uid;
   DateTime? _bookingDate;
   TimeOfDay? _bookingTime;
-  bool _isLoading = false;
   final _formKey = GlobalKey<FormState>();
-
 
   @override
   Widget build(BuildContext context) {
@@ -60,13 +58,9 @@ class _BookingDialogState extends State<BookingDialog> {
             }
           },
           builder: (context, state) {
-            if (state is BookingLoading) {
-              return const Center(child: CircularProgressIndicator());
-            }
-
             return SingleChildScrollView(
               child: Form(
-                key:_formKey ,
+                key: _formKey,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -80,14 +74,13 @@ class _BookingDialogState extends State<BookingDialog> {
                     CustomTextField(
                       controller: _phoneController,
                       hintText: S.of(context).phone,
-                      // validator:Validators.validatePhone,
-
+                      validator: Validators.validatePhone,
                     ),
                     SizedBox(height: 10.h),
                     CustomTextField(
                       controller: _emailController,
                       hintText: S.of(context).email,
-                      //validator:Validators.validateEmail,
+                      validator: Validators.validateEmail,
                     ),
                     SizedBox(height: 10.h),
                     CustomDatePicker(
@@ -109,7 +102,10 @@ class _BookingDialogState extends State<BookingDialog> {
                             _bookingTime != null) {
                           _submitBooking(context);
                         } else {
-                          showToast(msg: 'لم يتم ادخال جميع البيانات', color: AppColors.redColor);
+                          showToast(
+                            msg: 'لم يتم ادخال جميع البيانات',
+                            color: AppColors.redColor,
+                          );
                         }
                       },
                       cancelOnPressed: () {
@@ -145,17 +141,14 @@ class _BookingDialogState extends State<BookingDialog> {
         offersModel: widget.offer,
       );
 
-      setState(() {
-        _isLoading = true;
-      });
-
       cubit.bookOffer(booking).whenComplete(() {
-        setState(() {
-          _isLoading = false;
-        });
+        // No need to setState for loading indicator
       });
     } else {
-      showToast(msg: 'ادخل البيانات بطريقه صحيح', color: AppColors.redColor);
+      showToast(
+        msg: 'ادخل البيانات بطريقه صحيح',
+        color: AppColors.redColor,
+      );
     }
   }
 }

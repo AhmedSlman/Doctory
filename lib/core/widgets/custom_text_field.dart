@@ -23,6 +23,8 @@ class CustomTextField extends StatelessWidget {
   final TextStyle? textStyle;
   final TextAlign? textAlign;
   final String? initialValue;
+  final bool enabled; // Added property
+
   const CustomTextField({
     super.key,
     this.controller,
@@ -40,19 +42,19 @@ class CustomTextField extends StatelessWidget {
     this.onTap,
     this.textStyle,
     this.textAlign,
-    this.initialValue, // Initialize text style
+    this.initialValue,
+    this.enabled = true, // Default to true
   });
 
   @override
   Widget build(BuildContext context) {
-    // Define a default text style
     final TextStyle defaultTextStyle = AppStyles.sSubTitleGrey.copyWith(
-      fontSize: 16, // Default font size
-      color: Colors.black, // Default text color
+      fontSize: 16,
+      color: Colors.black,
     );
 
     return TextFormField(
-      initialValue:initialValue ,
+      initialValue: initialValue,
       onTap: onTap,
       onFieldSubmitted: onFieldSubmitted,
       controller: controller,
@@ -64,6 +66,7 @@ class CustomTextField extends StatelessWidget {
       onEditingComplete: onEditingCompleted,
       cursorColor: Colors.black,
       readOnly: readOnly,
+      enabled: enabled, // Apply the enabled property
       style: textStyle ?? defaultTextStyle,
       decoration: InputDecoration(
         labelText: labelText,

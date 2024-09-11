@@ -8,5 +8,7 @@ abstract class HomeRepo {
   Future<List<OffersModel>> getOffers();
   Future<void> addBooking(BookingModel booking);
   Future<List<String>> getBookedOffers(String userId);
+  Future<BookingModel?> getUserBookingForOffer(String userId, String offerId);
+
 
 }

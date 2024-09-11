@@ -12,12 +12,13 @@ class Validators {
   }
 
   static String? validatePhone(String? value) {
-    // Basic phone number validation regex (example for US phone numbers)
-    final phoneRegex = RegExp(r'^\+?[1-9]\d{1,14}$');
+    // Regex for Egyptian phone numbers
+    final phoneRegex = RegExp(r'^01[0-9]{9}$');
+
     if (value == null || value.isEmpty) {
-      return 'ادخل رقمك';
+      return 'ادخل رقمك'; // Enter your number
     } else if (!phoneRegex.hasMatch(value)) {
-      return 'ادخل حساب صحيح';
+      return 'ادخل رقم صحيح'; // Enter a valid number
     }
     return null;
   }

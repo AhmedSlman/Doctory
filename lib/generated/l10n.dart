@@ -669,6 +669,16 @@ class S {
       args: [],
     );
   }
+
+  /// `You Already booked this offer`
+  String get alreadyBooked {
+    return Intl.message(
+      'You Already booked this offer',
+      name: 'alreadyBooked',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

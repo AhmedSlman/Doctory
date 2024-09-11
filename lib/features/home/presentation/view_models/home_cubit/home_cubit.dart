@@ -6,6 +6,11 @@ import 'home_state.dart';
 
 
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../data/models/booking_model.dart';
+import '../../../data/repo/home_repo.dart';
+import 'home_state.dart';
+
 class HomeCubit extends Cubit<HomeState> {
   final HomeRepo homeRepo;
 
@@ -56,18 +61,25 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  Future<void> bookOffer(BookingModel booking) async {
-    try {
-      await homeRepo.addBooking(booking);
-      if (!isClosed) {
-        emit(BookingSuccess());
-      }
-    } catch (e) {
-      if (!isClosed) {
-        emit(BookingError("Failed to book offer"));
-      }
-    }
+  Future<bool> hasUserBookedOffer(String offerId, String userId) async {
+    final booking = await homeRepo.getUserBookingForOffer(userId, offerId);
+    return booking != null;
   }
 
+  Future<void> bookOffer(BookingModel booking) async {
+    final existingBooking = await homeRepo.getUserBookingForOffer(booking.userId, booking.offerId);
 
+    if (existingBooking != null) {
+      emit(BookingError('You have already booked this offer.'));
+      return;
+    }
+
+    try {
+      emit(BookingLoading());
+      await homeRepo.addBooking(booking);
+      emit(BookingSuccess());
+    } catch (e) {
+      emit(BookingError('Failed to book the offer.'));
+    }
+  }
 }

@@ -36,4 +36,18 @@ class HomeRepoImplementation implements HomeRepo {
 
     return snapshot.docs.map((doc) => doc['offerId'] as String).toList();
   }
+
+  @override
+  Future<BookingModel?> getUserBookingForOffer(String userId, String offerId) async {
+    final snapshot = await _firestore.collection('bookings')
+        .where('userId', isEqualTo: userId)
+        .where('offerId', isEqualTo: offerId)
+        .limit(1) // We only need one result to check if booking exists
+        .get();
+
+    if (snapshot.docs.isNotEmpty) {
+      return BookingModel.fromFirestore(snapshot.docs.first.data());
+    }
+    return null; // No booking found for this offer
+  }
 }

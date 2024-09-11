@@ -22,6 +22,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "alreadyBooked": MessageLookupByLibrary.simpleMessage(
+            "You Already booked this offer"),
         "appName": MessageLookupByLibrary.simpleMessage("Doctory"),
         "bookNow": MessageLookupByLibrary.simpleMessage("Book Now"),
         "booked": MessageLookupByLibrary.simpleMessage("Booked"),
