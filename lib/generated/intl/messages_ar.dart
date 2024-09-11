@@ -73,6 +73,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "more": MessageLookupByLibrary.simpleMessage("المزيد"),
         "newPassword":
             MessageLookupByLibrary.simpleMessage("كلمه المرور الجديده"),
+        "noOffers": MessageLookupByLibrary.simpleMessage(" لا يوجد عروض"),
         "offers": MessageLookupByLibrary.simpleMessage("العروض"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "personalInformation":

@@ -73,6 +73,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "mobileNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
         "more": MessageLookupByLibrary.simpleMessage("More"),
         "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
+        "noOffers": MessageLookupByLibrary.simpleMessage(" No offers "),
         "offers": MessageLookupByLibrary.simpleMessage("Offers"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "personalInformation":

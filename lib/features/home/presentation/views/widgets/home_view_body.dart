@@ -32,6 +32,7 @@ class HomeViewBody extends StatelessWidget {
                 if (state is HomeLoading) {
                   return const CustomCircularProgressIndicator();
                 } else if (state is HomeLoaded) {
+                  final offers = state.offers;
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -40,22 +41,30 @@ class HomeViewBody extends StatelessWidget {
                         style: AppStyles.sBlack15,
                       ),
                       SizedBox(height: MediaQuery.of(context).size.height * 0.01),
-                      CategoriesListView(categories: state.categories),
+                      CategoriesListView(
+                        categories: state.categories,
+                        onCategorySelected: (categoryName) {
+                          homeCubit.filterOffersByCategory(categoryName);
+                        },
+                      ),
                       SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                       Text(
                         S.of(context).offers,
                         style: AppStyles.sBlack15,
                       ),
                       SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-                      Expanded(
+                      offers.isEmpty
+                          ? Center(child: Text(S.of(context).noOffers)) // No offers message
+                          : Expanded(
                         child: CustomOffersGridView(
-                          items: state.offers.map((offer) => OffersModel(
+                          items: offers.map((offer) => OffersModel(
                             title: offer.title,
                             image: offer.image,
                             oldPrice: offer.oldPrice,
                             price: offer.price,
                             clinicName: offer.clinicName,
                             id: offer.id,
+                            categoryName: offer.categoryName,
                           )).toList(),
                           buttonText: S.of(context).bookNow,
                           onPressed: (offer) {
@@ -65,12 +74,11 @@ class HomeViewBody extends StatelessWidget {
                                 return BlocProvider(
                                   create: (context) => getIt<HomeCubit>(),
                                   child: BookingDialog(offer: offer),
-                                     );
+                                );
                               },
                             );
                           },
-                        )
-
+                        ),
                       ),
                     ],
                   );

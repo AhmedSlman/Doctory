@@ -5,7 +5,9 @@ class OffersModel {
   final String oldPrice;
   final String price;
   final String title;
+  final String categoryName;
   final bool isBooked;
+
 
   OffersModel({
     required this.id,
@@ -14,6 +16,8 @@ class OffersModel {
     required this.oldPrice,
     required this.price,
     required this.title,
+    required this.categoryName,
+
     this.isBooked = false,
   });
 
@@ -24,6 +28,7 @@ class OffersModel {
       image: data['image'] ?? '',
       oldPrice: data['oldPrice'] ?? '',
       price: data['price'] ?? '',
+      categoryName: data['categoryName'] ?? '',
       title: data['title'] ?? '',
       isBooked: isBooked,
     );
@@ -37,6 +42,7 @@ class OffersModel {
       'oldPrice': oldPrice,
       'price': price,
       'title': title,
+      'categoryName': categoryName, // Ensure it's being added to the map
       'isBooked': isBooked, // Add isBooked to the map
 
     };

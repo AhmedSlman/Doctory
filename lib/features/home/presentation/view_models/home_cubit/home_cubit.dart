@@ -28,6 +28,34 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
+  Future<void> filterOffersByCategory(String categoryName) async {
+    try {
+      emit(HomeLoading());
+
+      final categories = await homeRepo.getCategories();
+      final allOffers = await homeRepo.getOffers();
+
+      print('Selected Category: $categoryName');
+      print('All Offers: $allOffers');
+
+      final filteredOffers = allOffers.where((offer) {
+        print('Checking Offer: ${offer.categoryName}');
+        return offer.categoryName == categoryName;
+      }).toList();
+
+      print("Filtered Offers: $filteredOffers");
+
+      if (!isClosed) {
+        emit(HomeLoaded(categories: categories, offers: filteredOffers));
+      }
+    } catch (e) {
+      print('Error filtering offers: $e');
+      if (!isClosed) {
+        emit(HomeError("Failed to filter offers"));
+      }
+    }
+  }
+
   Future<void> bookOffer(BookingModel booking) async {
     try {
       await homeRepo.addBooking(booking);
@@ -40,4 +68,6 @@ class HomeCubit extends Cubit<HomeState> {
       }
     }
   }
+
+
 }
