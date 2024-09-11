@@ -16,6 +16,8 @@ abstract class AppColors {
   static const bottomNavColor = Color(0xFFF3F3F3);
   static const greyColor = Color(0xFFF3F3F3);
   static const greenColor = Colors.green;
+  static const shimmerBaseColor = Colors.grey;
+
 
 
 

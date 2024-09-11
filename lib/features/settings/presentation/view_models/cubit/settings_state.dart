@@ -86,3 +86,23 @@ class ChangePasswordError extends SettingsState {
   @override
   List<Object> get props => [message];
 }
+
+class GetBookedOffersLoading extends SettingsState {}
+
+class GetBookedOffersSuccess extends SettingsState {
+  final List<BookingModel> bookedOffers;
+
+  GetBookedOffersSuccess(this.bookedOffers);
+
+  @override
+  List<Object> get props => [bookedOffers];
+}
+
+class GetBookedOffersError extends SettingsState {
+  final String error;
+
+  GetBookedOffersError(this.error);
+
+  @override
+  List<Object> get props => [error];
+}

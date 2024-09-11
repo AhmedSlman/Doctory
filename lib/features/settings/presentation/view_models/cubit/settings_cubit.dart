@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../auth/data/models/user_model.dart';
+import '../../../../home/data/models/booking_model.dart';
+import '../../../../home/data/models/offer_model.dart';
 import '../../../data/models/report_problem_model.dart';
 import '../../../data/repo/settings_repo.dart';
 
@@ -14,14 +16,15 @@ part 'settings_state.dart';
 class SettingsCubit extends Cubit<SettingsState> {
   final SettingsRepo settingsRepo;
   UserModel? currentUser;
+
   //final ImagePicker _imagePicker = ImagePicker();
   File? file;
-  TextEditingController problemText=TextEditingController();
+  TextEditingController problemText = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
 
-
   ReportProblemModel? reportProblemModel;
+
   SettingsCubit(this.settingsRepo) : super(SettingsInitial());
 
 
@@ -65,6 +68,7 @@ class SettingsCubit extends Cubit<SettingsState> {
       emit(ReportImagePickError(e.toString()));
     }
   }
+
   void clearImage() {
     file = null;
     emit(SettingsInitial());
@@ -99,8 +103,20 @@ class SettingsCubit extends Cubit<SettingsState> {
       emit(ChangePasswordError(e.toString()));
     }
   }
+
+  Future<void> getBookedOffers(String userId) async {
+    try {
+      emit(GetBookedOffersLoading());
+
+      final bookedOffers = await settingsRepo.getBookedOffers(userId);
+
+      emit(GetBookedOffersSuccess(bookedOffers));
+    } catch (e) {
+      emit(GetBookedOffersError('Failed to load booked offers'));
+    }
+  }
+
+
+
 }
-
-
-
 

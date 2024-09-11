@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:doctory/features/home/data/models/booking_model.dart';
 import 'package:doctory/features/settings/data/repo/settings_repo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../auth/data/models/user_model.dart';
+import '../../../home/data/models/offer_model.dart';
 import '../models/report_problem_model.dart';
 
 class SettingsRepoImplementation implements SettingsRepo {
@@ -51,6 +53,16 @@ class SettingsRepoImplementation implements SettingsRepo {
       throw Exception('No user logged in');
     }
   }
+
+  @override
+  Future<List<BookingModel>> getBookedOffers(String userId) async {
+    final snapshot = await _firestore.collection('bookings')
+        .where('userId', isEqualTo: userId)
+        .get();
+
+    return snapshot.docs.map((doc) => BookingModel.fromFirestore(doc.data())).toList();
+  }
+
 }
 
 
