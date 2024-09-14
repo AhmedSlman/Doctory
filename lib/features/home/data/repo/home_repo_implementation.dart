@@ -29,12 +29,14 @@ class HomeRepoImplementation implements HomeRepo {
   }
 
   @override
-  Future<List<String>> getBookedOffers(String userId) async {
+  Future<List<BookingModel>> getBookedOffers(String userId) async {
     final snapshot = await _firestore.collection('bookings')
         .where('userId', isEqualTo: userId)
         .get();
 
-    return snapshot.docs.map((doc) => doc['offerId'] as String).toList();
+    return snapshot.docs
+        .map((doc) => BookingModel.fromFirestore(doc.data()))
+        .toList();
   }
 
   @override

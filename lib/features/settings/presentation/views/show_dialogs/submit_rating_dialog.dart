@@ -24,9 +24,9 @@ class SubmitRatingDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(AppStrings.yourRating, style: AppStyles.sBlack15),
-            SizedBox(height: 10),
-            RatingBox(),
-            SizedBox(height: 20),
+            const SizedBox(height: 10),
+            const RatingBox(),
+            const SizedBox(height: 20),
             SaveChangesButton(cancelOnPressed: () {  }, saveOnPressed: () {  },),
           ],
         ),

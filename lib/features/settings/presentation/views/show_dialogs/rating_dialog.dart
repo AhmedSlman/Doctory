@@ -1,10 +1,10 @@
+import 'package:doctory/core/widgets/custom_dragable_ratingbar.dart';
 import 'package:doctory/features/settings/presentation/views/show_dialogs/submit_rating_dialog.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/app_styles.dart';
 import '../../../../../core/widgets/custom_button.dart';
-import '../../../../../core/widgets/custom_rating_bar.dart';
 import '../../../../../core/widgets/custom_text_field.dart';
 import '../widgets/report_problem_textfield.dart';
 
@@ -28,7 +28,7 @@ class RatingScreenDialog extends StatelessWidget {
           children: [
              Text(AppStrings.rating, style: AppStyles.sBlack15),
             const SizedBox(height: 5),
-            const CustomRatingBar(),
+            const CustomDraggableRatingbar(),
             const SizedBox(height: 8), // Adjusted spacing
             const CustomTextField(
               hintText: 'الاسم',

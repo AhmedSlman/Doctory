@@ -1,20 +1,19 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../data/models/booking_model.dart';
+import '../../../data/models/offer_model.dart';
 import '../../../data/repo/home_repo.dart';
 import 'home_state.dart';
 
 
 
 
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../data/models/booking_model.dart';
-import '../../../data/repo/home_repo.dart';
-import 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   final HomeRepo homeRepo;
 
   HomeCubit(this.homeRepo) : super(HomeInitial());
+
 
   Future<void> getHomeData() async {
     try {
@@ -23,14 +22,36 @@ class HomeCubit extends Cubit<HomeState> {
       final categories = await homeRepo.getCategories();
       final offers = await homeRepo.getOffers();
 
+      // Load booking status
+      final userId = FirebaseAuth.instance.currentUser!.uid;
+      final bookedOffers = await homeRepo.getBookedOffers(userId);
+
+      final offersWithBookingStatus = offers.map((offer) {
+        final isBooked = bookedOffers.any((booking) => booking.offerId == offer.id);
+        return OffersModel(
+          id: offer.id,
+          clinicName: offer.clinicName,
+          image: offer.image,
+          oldPrice: offer.oldPrice,
+          price: offer.price,
+          title: offer.title,
+          categoryName: offer.categoryName,
+          isBooked: isBooked,
+        );
+      }).toList();
+
       if (!isClosed) {
-        emit(HomeLoaded(categories: categories, offers: offers));
+        emit(HomeLoaded(categories: categories, offers: offersWithBookingStatus));
       }
     } catch (e) {
       if (!isClosed) {
         emit(HomeError("Failed to fetch home data"));
       }
     }
+  }
+  Future<List<BookingModel>> _getBookedOffersForUser(String userId) async {
+    final bookings = await homeRepo.getBookedOffers(userId);
+    return bookings;
   }
 
   Future<void> filterOffersByCategory(String categoryName) async {
@@ -40,21 +61,31 @@ class HomeCubit extends Cubit<HomeState> {
       final categories = await homeRepo.getCategories();
       final allOffers = await homeRepo.getOffers();
 
-      print('Selected Category: $categoryName');
-      print('All Offers: $allOffers');
-
       final filteredOffers = allOffers.where((offer) {
-        print('Checking Offer: ${offer.categoryName}');
         return offer.categoryName == categoryName;
       }).toList();
 
-      print("Filtered Offers: $filteredOffers");
+      final userId = FirebaseAuth.instance.currentUser!.uid;
+      final bookedOffers = await _getBookedOffersForUser(userId);
+
+      final filteredOffersWithBookingStatus = filteredOffers.map((offer) {
+        final isBooked = bookedOffers.any((booking) => booking.offerId == offer.id);
+        return OffersModel(
+          id: offer.id,
+          clinicName: offer.clinicName,
+          image: offer.image,
+          oldPrice: offer.oldPrice,
+          price: offer.price,
+          title: offer.title,
+          categoryName: offer.categoryName,
+          isBooked:isBooked
+        );
+      }).toList();
 
       if (!isClosed) {
-        emit(HomeLoaded(categories: categories, offers: filteredOffers));
+        emit(HomeLoaded(categories: categories, offers: filteredOffersWithBookingStatus));
       }
     } catch (e) {
-      print('Error filtering offers: $e');
       if (!isClosed) {
         emit(HomeError("Failed to filter offers"));
       }
@@ -82,4 +113,5 @@ class HomeCubit extends Cubit<HomeState> {
       emit(BookingError('Failed to book the offer.'));
     }
   }
+
 }

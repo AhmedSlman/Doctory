@@ -18,7 +18,7 @@ class OffersModel {
     required this.title,
     required this.categoryName,
 
-    this.isBooked = false,
+    this.isBooked = true,
   });
 
   factory OffersModel.fromFirestore(Map<String, dynamic> data, String id, {bool isBooked = false}) {

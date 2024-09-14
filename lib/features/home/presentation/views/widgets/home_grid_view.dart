@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:doctory/core/utils/app_colors.dart';
 import 'package:doctory/core/utils/app_styles.dart';
-
+import 'package:skeletonizer/skeletonizer.dart';
+import '../../../../../generated/l10n.dart';
 import '../../../data/models/offer_model.dart';
 
 
@@ -58,7 +59,6 @@ class CustomOffersGridView extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Image container taking half the height
                       SizedBox(
                         height: imageHeight,
                         width: double.infinity,
@@ -70,12 +70,16 @@ class CustomOffersGridView extends StatelessWidget {
                           child: CachedNetworkImage(
                             imageUrl: item.image,
                             fit: BoxFit.cover,
-                            placeholder: (context, url) => const CustomCircularProgressIndicator(),
+                            placeholder: (context, url) => Skeletonizer(
+                              child: CachedNetworkImage(
+                                imageUrl: item.image,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                             errorWidget: (context, url, error) => const Icon(Icons.error),
                           ),
                         ),
                       ),
-                      // Column taking the remaining half of the height
                       Expanded(
                         child: Padding(
                           padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.02),
@@ -119,62 +123,33 @@ class CustomOffersGridView extends StatelessWidget {
                       ),
                     ],
                   ),
-                  if (item.isBooked)
-                    Positioned(
-                      left: Directionality.of(context) == TextDirection.rtl
-                          ? MediaQuery.of(context).size.width * 0.02
-                          : null,
-                      right: Directionality.of(context) == TextDirection.ltr
-                          ? MediaQuery.of(context).size.width * 0.02
-                          : null,
-                      bottom: (containerHeight - imageHeight - 25.h) / 2,
-                      child: SizedBox(
-                        width: 60.w,
-                        height: 25.h, // Fixed height
-                        child: ElevatedButton(
-                          onPressed: null, // Disable the button if booked
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.grey, // Show a disabled color
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            padding: const EdgeInsets.symmetric(horizontal: 0),
+                  Positioned(
+                    left: Directionality.of(context) == TextDirection.rtl
+                        ? MediaQuery.of(context).size.width * 0.02
+                        : null,
+                    right: Directionality.of(context) == TextDirection.ltr
+                        ? MediaQuery.of(context).size.width * 0.02
+                        : null,
+                    bottom: (containerHeight - imageHeight - 25.h) / 2,
+                    child: SizedBox(
+                      width: 60.w,
+                      height: 25.h, // Fixed height
+                      child: ElevatedButton(
+                        onPressed: item.isBooked ? null : () => onPressed(item),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: item.isBooked ? Colors.grey : AppColors.primaryColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
                           ),
-                          child: Text(
-                            'Booked', // Button text changes to 'Booked'
-                            style: AppStyles.sTextButton,
-                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 0),
                         ),
-                      ),
-                    )
-                  else
-                    Positioned(
-                      left: Directionality.of(context) == TextDirection.rtl
-                          ? MediaQuery.of(context).size.width * 0.02
-                          : null,
-                      right: Directionality.of(context) == TextDirection.ltr
-                          ? MediaQuery.of(context).size.width * 0.02
-                          : null,
-                      bottom: (containerHeight - imageHeight - 25.h) / 2,
-                      child: SizedBox(
-                        width: 60.w,
-                        height: 25.h, // Fixed height
-                        child: ElevatedButton(
-                          onPressed: () => onPressed(item),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.primaryColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-                            padding: const EdgeInsets.symmetric(horizontal: 0),
-                          ),
-                          child: Text(
-                            buttonText,
-                            style: AppStyles.sTextButton,
-                          ),
+                        child: Text(
+                          item.isBooked ? S.of(context).booked : buttonText,
+                          style: AppStyles.sTextButton,
                         ),
                       ),
                     ),
+                  ),
                 ],
               ),
             );

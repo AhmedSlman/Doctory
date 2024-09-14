@@ -16,9 +16,15 @@ class CustomHomeAppBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(AppAssets.logo,
-            height:40 ,
-            width: 120,
+          AnimatedCrossFade(
+            duration: const Duration(seconds: 2),
+            firstChild: const SizedBox(),
+            crossFadeState: CrossFadeState.showSecond,
+            secondChild: Image.asset(AppAssets.logo,
+              height:40 ,
+              width: 120,
+            ),
+
           ),
         ],
       ),

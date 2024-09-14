@@ -21,11 +21,27 @@ class BookingViewBody extends StatelessWidget {
         ),
         Row(
           children: [
-            const DropDownButtonMenu(),
+            const DropDownButtonMenu(
+              items: [
+              'جنوب سينا',
+              'منصوره',
+              'دمياط الجديده ',
+              'الاسكندريه',
+            ],
+              hintText: 'المدينه',
+            ),
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.025,
             ),
-            const DropDownButtonMenu2(),
+            const DropDownButtonMenu(
+              items: [
+                'عظام',
+                'اسنان',
+                'انف و اذن ',
+                'علاج طبيعي',
+              ],
+              hintText: 'التخصص',
+            ),
             const Spacer(),
             const LocationButton()
           ],

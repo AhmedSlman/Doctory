@@ -4,6 +4,7 @@ import 'package:doctory/core/widgets/custom_circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_strings.dart';
@@ -43,8 +44,13 @@ class DoctorsListViewItem extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl: doctor.image,
                 fit: BoxFit.cover,
-                placeholder: (context, url) => const CustomCircularProgressIndicator(),
-                errorWidget: (context, url, error) => const Icon(Icons.error_outline)
+                  placeholder: (context, url) => Skeletonizer(
+                    child: CachedNetworkImage(
+                      imageUrl: doctor.image,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  errorWidget: (context, url, error) => const Icon(Icons.error_outline)
               )
             ),
           ),

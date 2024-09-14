@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:url_launcher/url_launcher.dart';  // Import url_launcher
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_styles.dart';
@@ -55,7 +56,6 @@ class CustomPharmaciesGridView extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Image container taking half the height
                       SizedBox(
                         height: imageHeight,
                         width: double.infinity,
@@ -67,7 +67,12 @@ class CustomPharmaciesGridView extends StatelessWidget {
                           child: CachedNetworkImage(
                             imageUrl: item.image,
                             fit: BoxFit.cover,
-                            placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                            placeholder: (context, url) => Skeletonizer(
+                              child: CachedNetworkImage(
+                                imageUrl: item.image,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                             errorWidget: (context, url, error) => const Icon(Icons.error),
                           ),
                         ),

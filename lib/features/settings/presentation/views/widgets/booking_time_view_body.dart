@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_styles.dart';
@@ -125,8 +126,12 @@ class ReservationListViewItem extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl: bookingModel.offersModel.image,
                 fit: BoxFit.cover,
-                placeholder: (context, url) => const CustomCircularProgressIndicator(),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
+                placeholder: (context, url) => Skeletonizer(
+                  child: CachedNetworkImage(
+                    imageUrl: bookingModel.offersModel.image,
+                    fit: BoxFit.cover,
+                  ),
+                ), errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
           ),

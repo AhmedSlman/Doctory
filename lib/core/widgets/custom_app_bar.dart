@@ -34,11 +34,16 @@ class CustomAppBar extends StatelessWidget {
                 onPressed: () => GoRouter.of(context).pop(),
               ),
             ),
-          Center(
-            child: Text(
-              title ?? '',
-              style: AppStyles.sTitle,
-              textAlign: TextAlign.center,
+          AnimatedCrossFade(
+            duration: const Duration(seconds: 2),
+            firstChild: const SizedBox(),
+            crossFadeState: CrossFadeState.showSecond,
+            secondChild: Center(
+              child: Text(
+                title ?? '',
+                style: AppStyles.sTitle,
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
         ],
