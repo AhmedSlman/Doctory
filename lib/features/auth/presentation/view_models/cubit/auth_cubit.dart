@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../core/utils/app_colors.dart';
 import '../../../data/models/user_model.dart';
 import '../../../data/repo/auth_repo_abstract.dart';
@@ -8,6 +9,7 @@ import '../../../data/repo/auth_repo_abstract.dart';
 part 'auth_state.dart';
 
 enum Gender { male, female }
+
 class AuthCubit extends Cubit<AuthState> {
   final AuthRepository authRepository;
   UserModel? currentUser;
@@ -92,15 +94,16 @@ class AuthCubit extends Cubit<AuthState> {
       await authRepository.signOut();
       emit(SignOutSuccessState());
     } catch (e) {
-      emit(SignOutErrorState(e.toString())); // Emit an error state if sign out fails.
+      emit(SignOutErrorState(
+          e.toString())); // Emit an error state if sign out fails.
     }
   }
 
   Future<void> updateUserInfo(
-      String name,
-      String phone,
-      String birthDate,
-      ) async {
+    String name,
+    String phone,
+    String birthDate,
+  ) async {
     if (currentUser == null) {
       emit(UserInfoUpdateFailureState(errMessage: "User not signed in"));
       return;
@@ -201,13 +204,13 @@ class AuthCubit extends Cubit<AuthState> {
         smsCode: otp,
       );
 
-      final userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+      final userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
 
       if (userCredential.user != null) {
         // Emit OTP verified state
         emit(OTPVerifiedState());
         print('Verify Success');
-
       } else {
         emit(OTPFailedState('Verification failed: No user'));
       }
@@ -227,5 +230,4 @@ class AuthCubit extends Cubit<AuthState> {
       print('Password reset failed: ${e.toString()}');
     }
   }
-
 }

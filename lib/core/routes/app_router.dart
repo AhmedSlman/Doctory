@@ -3,7 +3,6 @@ import 'package:doctory/core/services/service_locator.dart';
 import 'package:doctory/features/auth/presentation/view_models/cubit/auth_cubit.dart';
 import 'package:doctory/features/auth/presentation/views/change_password.dart';
 import 'package:doctory/features/auth/presentation/views/enter_your_email.dart';
-import 'package:doctory/features/auth/presentation/views/enter_your_phone.dart';
 import 'package:doctory/features/auth/presentation/views/forget_password.dart';
 import 'package:doctory/features/auth/presentation/views/login_view.dart';
 import 'package:doctory/features/auth/presentation/views/sign_up_view.dart';
@@ -19,7 +18,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/booking/data/models/doctor_model.dart';
-import '../../features/home/presentation/view_models/home_cubit/home_cubit.dart';
 import '../../features/home/presentation/views/home_view.dart';
 import '../../features/settings/presentation/views/personal_info_view.dart';
 
@@ -31,40 +29,35 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
       path: RouterNames.login,
-      builder: (context, state) =>
-          BlocProvider(
-            create: (context) => getIt<AuthCubit>(),
-            child: const LoginView(),
-          ),
+      builder: (context, state) => BlocProvider(
+        create: (context) => getIt<AuthCubit>(),
+        child: const LoginView(),
+      ),
     ),
     GoRoute(
       path: RouterNames.signup,
-      builder: (context, state) =>
-          BlocProvider(
-            create: (context) => getIt<AuthCubit>(),
-            child: const SignUpView(),
-          ),
+      builder: (context, state) => BlocProvider(
+        create: (context) => getIt<AuthCubit>(),
+        child: const SignUpView(),
+      ),
     ),
     GoRoute(
       path: RouterNames.home,
-      builder: (context, state) =>
-          const HomeView(),
+      builder: (context, state) => const HomeView(),
     ),
     GoRoute(
       path: RouterNames.forgetPassword,
-      builder: (context, state) =>
-          BlocProvider(
-            create: (context) => getIt<AuthCubit>(),
-            child: VerificationPage(),
-          ),
+      builder: (context, state) => BlocProvider(
+        create: (context) => getIt<AuthCubit>(),
+        child: VerificationPage(),
+      ),
     ),
     GoRoute(
       path: RouterNames.enterYourEmail,
-      builder: (context, state) =>
-          BlocProvider(
-            create: (context) => getIt<AuthCubit>(),
-            child: const EnterYourEmailView(),
-          ),
+      builder: (context, state) => BlocProvider(
+        create: (context) => getIt<AuthCubit>(),
+        child: const EnterYourEmailView(),
+      ),
     ),
     GoRoute(
       path: RouterNames.changePassword,
@@ -78,7 +71,6 @@ final GoRouter router = GoRouter(
       path: RouterNames.bottomNavBar,
       builder: (context, state) => const BottomNavBarView(),
     ),
-
     GoRoute(
       path: RouterNames.personalInfoView,
       builder: (context, state) => const PersonalInfoView(),
@@ -107,7 +99,6 @@ final GoRouter router = GoRouter(
         return DoctorProfileInfoView(doctor: doctor);
       },
     ),
-
   ],
 );
 
