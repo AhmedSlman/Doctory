@@ -1,15 +1,15 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:dartz/dartz.dart';
 import '../models/user_model.dart';
+import '../models/verify_model.dart';
 
 abstract class AuthRepository {
-  Future<UserCredential> signUp(String email, String password);
-  Future<UserModel> signIn(String email, String password);
-  Future<void> updateUserInfo(UserModel user);
-  Future<void> addUser(UserModel user);
+  Future<Either<String , UserModel>> signUp(String email, String password);
+  Future<Either<String , UserModel>> signIn(String email, String password);
 
-  Future<UserModel> getUserInfo(String userId);
 
-  Future<void> signOut();
-  Future<void> sendPasswordResetEmail(String email);
-  Future<void> confirmPasswordReset(String otp, String newPassword);
+  Future<Either<String , VerificationResponse>> verifyEmail(String email, String otp);
+
+
+
+
 }

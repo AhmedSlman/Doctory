@@ -108,7 +108,7 @@ class PersonalInfoViewBody extends StatelessWidget {
                   },
                   saveOnPressed: () {
                     if (_validateFields(nameController, phoneController, emailController, birthDateController)) {
-                      final updatedUser = UserModel(
+                      final updatedUser = UserModelStatic(
                         name: nameController.text,
                         phoneNumber: phoneController.text,
                         email: emailController.text,

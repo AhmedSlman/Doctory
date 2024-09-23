@@ -4,7 +4,7 @@ abstract class RouterNames {
   static const String signup = '/register';
   static const String home = '/home';
   static const String forgetPassword = '/profile';
- // static const String enterYourPhone = '/enterYourPhone';
+ static const String verifyEmail = '/verifyEmail';
   static const String enterYourEmail = '/enterYourEmail';
   static const String changePassword = '/changePassword';
   static const String booking = '/booking';

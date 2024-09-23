@@ -11,13 +11,13 @@ class SettingsRepoImplementation implements SettingsRepo {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
-  Future<UserModel> getUserData(String userId) async {
+  Future<UserModelStatic> getUserData(String userId) async {
     final doc = await _firestore.collection('users').doc(userId).get();
-    return UserModel.fromJson(doc.data()!);
+    return UserModelStatic.fromJson(doc.data()!);
   }
 
   @override
-  Future<void> updateUserData(UserModel user) async {
+  Future<void> updateUserData(UserModelStatic user) async {
     await _firestore.collection('users').doc(user.id).update(user.toJson());
   }
 

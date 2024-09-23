@@ -1,13 +1,10 @@
 import 'package:doctory/core/routes/router_names.dart';
 import 'package:doctory/core/utils/app_assets.dart';
 import 'package:doctory/core/utils/app_colors.dart';
-import 'package:doctory/core/utils/app_strings.dart';
 import 'package:doctory/core/utils/app_styles.dart';
 import 'package:doctory/core/widgets/custom_button.dart';
 import 'package:doctory/features/auth/presentation/widgets/auth_text_form_field_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
@@ -15,6 +12,7 @@ import '../../../../core/widgets/custom_circular_progress_indicator.dart';
 import '../../../../core/widgets/custom_toast.dart';
 import '../../../../generated/l10n.dart';
 import '../view_models/cubit/auth_cubit.dart';
+import '../view_models/cubit/auth_state.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -70,14 +68,14 @@ class LoginView extends StatelessWidget {
                   SizedBox(height: MediaQuery.of(context).size.height * 0.03),
                   AuthTextFormFieldWidget(
                     hintText: S.of(context).email,
-                    controller: context.read<AuthCubit>().emailController,
+                    controller: context.read<AuthCubit>().emailAddressController,
                   ),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.03),
                   AuthTextFormFieldWidget(
                     hintText: S.of(context).password,
                     controller: context.read<AuthCubit>().passwordController,
-                    obscureText: context.read<AuthCubit>().isSecured,
-                    suffixIcon: context.read<AuthCubit>().togglePass(),
+                   // obscureText: context.read<AuthCubit>().isSecured,
+                   // suffixIcon: context.read<AuthCubit>().togglePass(),
                   ),
                   Align(
                     alignment: Alignment.centerRight,
@@ -95,9 +93,9 @@ class LoginView extends StatelessWidget {
                     width: MediaQuery.of(context).size.width * 0.5,
                     height: MediaQuery.of(context).size.height * 0.07,
                     onPressed: () {
-                      final email = context.read<AuthCubit>().emailController.text;
-                      final password = context.read<AuthCubit>().passwordController.text;
-                      context.read<AuthCubit>().signIn(email, password);
+                      final email = context.read<AuthCubit>().emailAddressController!.text;
+                      final password = context.read<AuthCubit>().passwordController!.text;
+                      context.read<AuthCubit>().sigInUser(email:email, password:password);
                     },
                   ),
                   TextButton(

@@ -15,7 +15,7 @@ part 'settings_state.dart';
 
 class SettingsCubit extends Cubit<SettingsState> {
   final SettingsRepo settingsRepo;
-  UserModel? currentUser;
+  UserModelStatic? currentUser;
 
   //final ImagePicker _imagePicker = ImagePicker();
   File? file;
@@ -40,7 +40,7 @@ class SettingsCubit extends Cubit<SettingsState> {
   }
 
 
-  Future<void> saveUserData(UserModel user) async {
+  Future<void> saveUserData(UserModelStatic user) async {
     try {
       emit(SaveUserDataLoading());
       await settingsRepo.updateUserData(user);

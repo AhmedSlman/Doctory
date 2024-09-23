@@ -43,8 +43,8 @@ abstract class AppStrings {
       examinationPrice='سعر الكشف',
       waitingTime='وقت الانتظار',
       customersOpinions='اراء العملاء',
-      uploadPhoto='ارفاق صوره';
-
+      uploadPhoto='ارفاق صوره',
+       verifyEmail= "تاكيد ايميلك";
 
 
 

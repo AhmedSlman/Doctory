@@ -80,6 +80,26 @@ class S {
     );
   }
 
+  /// `Enter Number`
+  String get otpCode {
+    return Intl.message(
+      'Enter Number',
+      name: 'otpCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify You E-mail`
+  String get verifyEmail {
+    return Intl.message(
+      'Verify You E-mail',
+      name: 'verifyEmail',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Phone Number`
   String get phone {
     return Intl.message(
@@ -580,10 +600,10 @@ class S {
     );
   }
 
-  /// `you've successfully logged in`
+  /// `you ve successfully logged in`
   String get loggedIn {
     return Intl.message(
-      'you\'ve successfully logged in',
+      'you ve successfully logged in',
       name: 'loggedIn',
       desc: '',
       args: [],

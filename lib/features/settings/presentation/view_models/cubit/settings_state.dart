@@ -19,7 +19,7 @@ class GenderSelectionState extends SettingsState {
 //Get User Data
 final class GetUserDataLoading extends SettingsState {}
 final class GetUserDataSuccess extends SettingsState {
-final UserModel userModel;
+final UserModelStatic userModel;
 
   GetUserDataSuccess(this.userModel);
 }
@@ -33,7 +33,7 @@ final class GetUserDataError extends SettingsState {
 
 final class SaveUserDataLoading extends SettingsState {}
 final class SaveUserDataSuccess extends SettingsState {
-final UserModel userModel;
+final UserModelStatic userModel;
 
 SaveUserDataSuccess(this.userModel);
 }

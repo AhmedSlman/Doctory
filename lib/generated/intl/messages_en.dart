@@ -69,7 +69,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "letsStart": MessageLookupByLibrary.simpleMessage("Lets Start"),
         "logOut": MessageLookupByLibrary.simpleMessage("Log Out"),
         "loggedIn": MessageLookupByLibrary.simpleMessage(
-            "you\'ve successfully logged in"),
+            "you ve successfully logged in"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "male": MessageLookupByLibrary.simpleMessage("Male"),
         "mobileNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
@@ -77,6 +77,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "newPassword": MessageLookupByLibrary.simpleMessage("New Password"),
         "noOffers": MessageLookupByLibrary.simpleMessage(" No offers "),
         "offers": MessageLookupByLibrary.simpleMessage("Offers"),
+        "otpCode": MessageLookupByLibrary.simpleMessage("Enter Number"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "personalInformation":
             MessageLookupByLibrary.simpleMessage("Personal Information"),
@@ -102,6 +103,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "uploadPhoto": MessageLookupByLibrary.simpleMessage("Upload Photo"),
         "validatorMsg":
             MessageLookupByLibrary.simpleMessage(" this field cannot be empty"),
+        "verifyEmail":
+            MessageLookupByLibrary.simpleMessage("Verify You E-mail"),
         "waitingTime": MessageLookupByLibrary.simpleMessage("Waiting Time"),
         "welcome": MessageLookupByLibrary.simpleMessage("Welcome To"),
         "whatIsYourProblem":

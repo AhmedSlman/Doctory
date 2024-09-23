@@ -1,77 +1,54 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dartz/dartz.dart';
 import 'package:doctory/features/auth/data/models/user_model.dart';
+import 'package:doctory/features/auth/data/models/verify_model.dart';
 import 'package:doctory/features/auth/data/repo/auth_repo_abstract.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
+import '../../../../core/dataSource/api/api_consumer.dart';
+import '../../../../core/error/exceptions.dart';
 
 class AuthRepoImplementation implements AuthRepository {
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final ApiConsumer apiConsumer;
+
+  AuthRepoImplementation({required this.apiConsumer});
 
   @override
-  Future<UserCredential> signUp(String email, String password) async {
-    return await _firebaseAuth.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-  }
-
-  @override
-  Future<UserModel> signIn(String email, String password) async {
-    final UserCredential userCredential =
-        await _firebaseAuth.signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-    final user = userCredential.user;
-
-    if (user != null) {
-      return getUserInfo(user.uid);
-    } else {
-      throw Exception("Failed to sign in dfg");
-    }
-  }
-
-  @override
-  Future<void> signOut() async {
-    await _firebaseAuth.signOut();
-  }
-
-  @override
-  Future<void> updateUserInfo(UserModel user) async {
-    await _firestore.collection('users').doc(user.id).update(user.toJson());
-  }
-
-  @override
-  Future<UserModel> getUserInfo(String userId) async {
-    final doc = await _firestore.collection('users').doc(userId).get();
-    if (doc.exists) {
-      return UserModel.fromJson(doc.data()!);
-    } else {
-      throw Exception("User not found");
-    }
-  }
-
-  @override
-  Future<void> confirmPasswordReset(String otp, String newPassword) async {
+  Future<Either<String, UserModel>> signIn(
+      String email, String password) async {
     try {
-      await _firebaseAuth.confirmPasswordReset(
-          code: otp, newPassword: newPassword);
-    } catch (e) {
-      throw Exception('Failed to reset password: $e');
+      final response = await apiConsumer.post(
+        'api/login',
+        data: {'email': email, 'password': password},
+      );
+      return Right(UserModel.fromJson(response));
+    } on ServerException catch (e) {
+      return Left(e.errorModel.message);
     }
   }
 
   @override
-  Future<void> sendPasswordResetEmail(String email) async {
+  Future<Either<String, UserModel>> signUp(
+      String email, String password) async {
     try {
-      await _firebaseAuth.sendPasswordResetEmail(email: email);
-    } catch (e) {
-      throw Exception('Failed to send password reset email: $e');
+      final response = await apiConsumer.post(
+        'api/register',
+        data: {'email': email, 'password': password},
+      );
+      return Right(UserModel.fromJson(response));
+    } on ServerException catch (e) {
+      return Left(e.errorModel.message);
     }
   }
 
   @override
-  Future<void> addUser(UserModel user) async {
-    await _firestore.collection('users').doc(user.id).set(user.toJson());
+  Future<Either<String, VerificationResponse>> verifyEmail(String email, String otp) async {
+   try {
+      final response = await apiConsumer.post(
+        'api/verify-email',
+        data: {'email': email, 'verification_code': otp},
+      );
+      return Right(VerificationResponse.fromJson(response));
+    } on ServerException catch (e) {
+      return Left(e.errorModel.message);
+    }
   }
 }

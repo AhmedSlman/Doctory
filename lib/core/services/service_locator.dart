@@ -1,3 +1,6 @@
+import 'package:dio/dio.dart';
+import 'package:doctory/core/dataSource/api/api_consumer.dart';
+import 'package:doctory/core/dataSource/api/dio_consumer.dart';
 import 'package:doctory/features/booking/data/repo/doctors_repo_implementation.dart';
 import 'package:doctory/features/booking/presentation/view_models/cubit/doctors_booking_cubit.dart';
 import 'package:doctory/features/pharmacies/data/repo/pharmacies_repo.dart';
@@ -17,22 +20,30 @@ import '../../features/settings/data/repo/settings_repo_implementation.dart';
 
 final GetIt getIt = GetIt.instance;
 void setupLocator() {
-  getIt.registerLazySingleton<AuthRepository>(() => AuthRepoImplementation());
+  getIt.registerLazySingleton<Dio>(() => Dio());
+
+  
+  getIt.registerLazySingleton<ApiConsumer>(() => DioConsumer(dio: getIt<Dio>()));
+  getIt.registerLazySingleton<AuthRepository>(() => AuthRepoImplementation(
+        apiConsumer: getIt<ApiConsumer>(),
+      ));
   getIt.registerFactory<AuthCubit>(() => AuthCubit(getIt<AuthRepository>()));
 //
   getIt.registerLazySingleton<HomeRepo>(() => HomeRepoImplementation());
   getIt.registerFactory<HomeCubit>(() => HomeCubit(getIt<HomeRepo>()));
 //
-  getIt.registerLazySingleton<PharmaciesRepo>(() => PharmaciesRepoImplementation());
-  getIt.registerFactory<PharmaciesCubit>(() => PharmaciesCubit(getIt<PharmaciesRepo>()));
+  getIt.registerLazySingleton<PharmaciesRepo>(
+      () => PharmaciesRepoImplementation());
+  getIt.registerFactory<PharmaciesCubit>(
+      () => PharmaciesCubit(getIt<PharmaciesRepo>()));
 
 //
   getIt.registerLazySingleton<SettingsRepo>(() => SettingsRepoImplementation());
-  getIt.registerFactory<SettingsCubit>(() => SettingsCubit(getIt<SettingsRepo>()));
+  getIt.registerFactory<SettingsCubit>(
+      () => SettingsCubit(getIt<SettingsRepo>()));
 
   //
   getIt.registerLazySingleton<DoctorsRepo>(() => DoctorsRepoImplementation());
-  getIt.registerFactory<DoctorsBookingCubit>(() => DoctorsBookingCubit(getIt<DoctorsRepo>()));
+  getIt.registerFactory<DoctorsBookingCubit>(
+      () => DoctorsBookingCubit(getIt<DoctorsRepo>()));
 }
-
-

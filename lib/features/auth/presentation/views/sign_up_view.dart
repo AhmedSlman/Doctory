@@ -12,6 +12,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/widgets/custom_circular_progress_indicator.dart';
 import '../../../../core/widgets/custom_toast.dart';
 import '../../../../generated/l10n.dart';
+import '../view_models/cubit/auth_state.dart';
 
 class SignUpView extends StatelessWidget {
   const SignUpView({super.key});
@@ -24,14 +25,14 @@ class SignUpView extends StatelessWidget {
     return Scaffold(
       body: BlocConsumer<AuthCubit, AuthState>(
       listener: (context, state) {
-        if (state is SignUpSuccessState) {
-          showToast(msg:"تم إنشاء الحساب بنجاح!",
+        if (state is SignInSuccessState) {
+          showToast(msg:"يرجي تـاكيد الايميـل",
           color: Colors.green,
           );
           GoRouter.of(context).push(
             RouterNames.bottomNavBar,
           );
-        } else if (state is SignUpFailureState) {
+        } else if (state is SignInFailureState) {
           showToast(
               msg:state.errMessage,
               color: AppColors.redColor
@@ -80,7 +81,7 @@ class SignUpView extends StatelessWidget {
               SizedBox(height: MediaQuery.of(context).size.height * 0.01),
               AuthTextFormFieldWidget(
                 hintText: S.of(context).email,
-                controller:cubit.emailController ,
+                controller:cubit.emailAddressController ,
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.01),
               AuthTextFormFieldWidget(
@@ -133,21 +134,21 @@ class SignUpView extends StatelessWidget {
               ),
 
               SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-              state is SignUpLoadingState
+              state is SignInLoadingState
               ? const CustomCircularProgressIndicator()
               :CustomButton(
                 text: S.of(context).createAccount,
                 width: MediaQuery.of(context).size.width * 0.5,
                 height: MediaQuery.of(context).size.height * 0.07,
                 onPressed: () {
-                  cubit.signUp(
-                    email: cubit.emailController.text,
-                    password: cubit.passwordController.text,
+                  cubit.registerUser(
+                    email: cubit.emailAddressController!.text,
+                    password: cubit.passwordController!.text,
                     name: cubit.nameController.text,
-                    phone: cubit.phoneController.text,
-                    birthDate: cubit.birthDateController.text,
+                  //  phone: cubit.phoneController.text,
+                  //  birthDate: cubit.birthDateController.text,
                   );
-                  print(cubit.signUp.toString());
+                 // print(cubit.signUp.toString());
 
                 },
               ),

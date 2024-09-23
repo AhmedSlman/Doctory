@@ -4,8 +4,8 @@ import 'package:doctory/core/routes/router_names.dart';
 import 'package:doctory/core/utils/app_assets.dart';
 import 'package:doctory/core/widgets/custom_button.dart';
 import 'package:doctory/core/widgets/custom_text_field.dart';
+import 'package:doctory/features/auth/presentation/view_models/cubit/auth_state.dart';
 import 'package:doctory/features/auth/presentation/widgets/forget_password_app_bar.dart';
-import 'package:doctory/features/auth/presentation/widgets/reset_code_form_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -86,7 +86,7 @@ class VerificationPage extends StatelessWidget {
                       if (verificationId != null) {
                         print('Verification ID: $verificationId');
                         print('Entered OTP: $otp');
-                        authCubit.verifyOtp(verificationId!, otp);
+                      //  authCubit.verifyOtp(verificationId!, otp);
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(

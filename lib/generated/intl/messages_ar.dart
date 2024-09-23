@@ -77,13 +77,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("كلمه المرور الجديده"),
         "noOffers": MessageLookupByLibrary.simpleMessage(" لا يوجد عروض"),
         "offers": MessageLookupByLibrary.simpleMessage("العروض"),
+        "otpCode": MessageLookupByLibrary.simpleMessage("ادخـل الـرمـز"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "personalInformation":
             MessageLookupByLibrary.simpleMessage("المعلومات الشخصيه"),
         "pharmacies": MessageLookupByLibrary.simpleMessage("الصيدليات"),
         "phone": MessageLookupByLibrary.simpleMessage("رقم الهاتف"),
         "pinCodeMessage": MessageLookupByLibrary.simpleMessage(
-            "يرجى إدخال الرمز المرسل في رسالة نصية\\n  علي الرقم"),
+            "يرجى إدخال الرمز المرسل في رسالة نصية\\n  علي ايميلك"),
         "rating": MessageLookupByLibrary.simpleMessage("تقييم"),
         "reportAProblem":
             MessageLookupByLibrary.simpleMessage("الابلاغ عن مشكلة"),
@@ -102,6 +103,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "uploadPhoto": MessageLookupByLibrary.simpleMessage("ارفاق صوره"),
         "validatorMsg": MessageLookupByLibrary.simpleMessage(
             " هذا الحقل لا يمكن ان يكون فارغ"),
+        "verifyEmail": MessageLookupByLibrary.simpleMessage("تاكيد ايميلك"),
         "waitingTime": MessageLookupByLibrary.simpleMessage("وقت الانتظار"),
         "welcome": MessageLookupByLibrary.simpleMessage("اهلا بك في"),
         "whatIsYourProblem":

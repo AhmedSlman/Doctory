@@ -6,6 +6,7 @@ import 'package:doctory/features/auth/presentation/views/enter_your_email.dart';
 import 'package:doctory/features/auth/presentation/views/forget_password.dart';
 import 'package:doctory/features/auth/presentation/views/login_view.dart';
 import 'package:doctory/features/auth/presentation/views/sign_up_view.dart';
+import 'package:doctory/features/auth/presentation/views/verify_email_view.dart';
 import 'package:doctory/features/booking/presentation/views/booking_view.dart';
 import 'package:doctory/features/doctor_profile/views/doctor_profile_view.dart';
 import 'package:doctory/features/home/presentation/views/botton_nav_bar_view.dart';
@@ -39,6 +40,13 @@ final GoRouter router = GoRouter(
       builder: (context, state) => BlocProvider(
         create: (context) => getIt<AuthCubit>(),
         child: const SignUpView(),
+      ),
+    ),
+    GoRoute(
+      path: RouterNames.verifyEmail,
+      builder: (context, state) => BlocProvider(
+        create: (context) =>  getIt<AuthCubit>(),
+        child: const VerifyEmailView(),
       ),
     ),
     GoRoute(

@@ -40,45 +40,45 @@ class EnterYourEmailView extends StatelessWidget {
               SizedBox(height: MediaQuery.of(context).size.height * 0.05),
               Image.asset(AppAssets.resetCodeImage),
               SizedBox(height: MediaQuery.of(context).size.height * 0.07),
-              BlocConsumer<AuthCubit, AuthState>(
-                listener: (context, state) {
-                  if (state is PasswordResetEmailSuccessState) {
-                    // Show success message
-                    showToast(msg: S.of(context).emailSent,
-                        color: AppColors.primaryColor
-                    );
-
-                  } else if (state is PasswordResetEmailFailureState) {
-                    // Show error message
-                    // ScaffoldMessenger.of(context).showSnackBar(
-                    //   SnackBar(content: Text(state.errMessage)),
-                    // );
-                    showToast(msg: state.errMessage,
-                        color: AppColors.redColor
-                    );
-                  }
-                },
-                builder: (context, state) {
-                  if (state is PasswordResetEmailLoadingState) {
-                    return const CustomCircularProgressIndicator();
-                  }
-                  return CustomButton(
+              // BlocConsumer<AuthCubit, AuthState>(
+              //   listener: (context, state) {
+              //     if (state is PasswordResetEmailSuccessState) {
+              //       // Show success message
+              //       showToast(msg: S.of(context).emailSent,
+              //           color: AppColors.primaryColor
+              //       );
+              //     } else if (state is PasswordResetEmailFailureState) {
+              //       // Show error message
+              //       // ScaffoldMessenger.of(context).showSnackBar(
+              //       //   SnackBar(content: Text(state.errMessage)),
+              //       // );
+              //       showToast(msg: state.errMessage,
+              //           color: AppColors.redColor
+              //       );
+              //     }
+              //   },
+              //   builder: (context, state) {
+              //     if (state is PasswordResetEmailLoadingState) {
+              //       return const CustomCircularProgressIndicator();
+              //     }
+              //     return
+              CustomButton(
                     width: MediaQuery.of(context).size.width * 0.6,
                     height: MediaQuery.of(context).size.height * 0.07,
                     text: S.of(context).send,
                     onPressed: () {
                       final email = emailController.text.trim();
                       if (email.isNotEmpty) {
-                        cubit.sendPasswordResetEmail(email);
+                       // cubit.sendPasswordResetEmail(email);
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text(S.of(context).enterYourEmail)),
                         );
                       }
                     },
-                  );
-                },
-              ),
+                  ),
+              //   },
+              // ),
             ],
           ),
         ),
