@@ -1,54 +1,11 @@
-class UserModelStatic {
-  final String id;
-  final String name;
-  final String email;
-  final String phoneNumber;
-  final String birthDate;
-  final String gender;
-
-  UserModelStatic( {
-    required this.id,
-    required this.name,
-    required this.email,
-    required this.phoneNumber,
-    required this.birthDate,
-    required this.gender,
-  });
-  factory UserModelStatic.fromJson(Map<String, dynamic> json) {
-    return UserModelStatic(
-      id: json['id'],
-      name: json['name'],
-      email: json['email'],
-      phoneNumber: json['phoneNumber'],
-      birthDate: json['birthDate'],
-      gender: json['gender'],
-
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'email': email,
-      'phoneNumber': phoneNumber,
-      'birthDate': birthDate,
-      'gender': gender,
-
-    };
-  }
-} 
-////////////////////////////////////////////////////////////////////////////////////
-///from Api 
 class UserModel {
   String? message;
   UserData? data;
 
-  UserModel({ this.message, this.data});
+  UserModel({this.message, this.data});
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-     
       message: json['message'],
       data: json['data'] != null ? UserData.fromJson(json['data']) : null,
     );
@@ -56,7 +13,6 @@ class UserModel {
 
   Map<String, dynamic> toJson() {
     return {
-      
       'message': message,
       'data': data?.toJson(),
     };

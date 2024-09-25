@@ -3,14 +3,6 @@ import 'package:doctory/core/widgets/custom_text_field.dart';
 
 import '../../generated/l10n.dart';
 
-import 'package:flutter/material.dart';
-import 'package:doctory/core/widgets/custom_text_field.dart';
-import '../../generated/l10n.dart';
-
-import 'package:flutter/material.dart';
-import 'package:doctory/core/widgets/custom_text_field.dart';
-import '../../generated/l10n.dart';
-
 class CustomDatePicker extends StatefulWidget {
   final TextEditingController? controller;
   final ValueChanged<DateTime>? onSelected; // Updated to use DateTime
@@ -48,11 +40,12 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
     );
 
     if (selectedDate != null) {
-      final formattedDate = "${selectedDate.year}-${selectedDate.month}-${selectedDate.day}";
+      final formattedDate =
+          "${selectedDate.year}-${selectedDate.month}-${selectedDate.day}";
       setState(() {
         _dateController.text = formattedDate;
         if (_onSelected != null) {
-          _onSelected!(selectedDate); // Updated to use DateTime
+          _onSelected(selectedDate); // Updated to use DateTime
         }
       });
     }
@@ -81,7 +74,6 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
     super.dispose();
   }
 }
-
 
 class CustomTimePicker extends StatefulWidget {
   final ValueChanged<TimeOfDay>? onSelected; // Added onSelected parameter
@@ -117,7 +109,7 @@ class _CustomTimePickerState extends State<CustomTimePicker> {
       setState(() {
         _timeController.text = selectedTime.format(context);
         if (_onSelected != null) {
-          _onSelected!(selectedTime); // Updated to use TimeOfDay
+          _onSelected(selectedTime); // Updated to use TimeOfDay
         }
       });
     }

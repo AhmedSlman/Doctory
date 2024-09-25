@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:doctory/core/utils/app_styles.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 class CustomAppBar extends StatelessWidget {
   final String? title;
@@ -19,7 +18,8 @@ class CustomAppBar extends StatelessWidget {
     final isRtl = Localizations.localeOf(context).languageCode == 'ar';
 
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.03),
+      padding: EdgeInsets.symmetric(
+          vertical: MediaQuery.of(context).size.height * 0.03),
       child: Stack(
         children: [
           if (showBackButton)

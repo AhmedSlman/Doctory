@@ -9,7 +9,7 @@ import 'package:doctory/features/settings/presentation/view_models/cubit/setting
 import 'package:get_it/get_it.dart';
 import '../../features/auth/data/repo/auth_repo_abstract.dart';
 import '../../features/auth/data/repo/auth_repo_implementation.dart';
-import '../../features/auth/presentation/view_models/cubit/auth_cubit.dart';
+import '../../features/auth/presentation/cubit/auth_cubit.dart';
 import '../../features/booking/data/repo/doctors_repo.dart';
 import '../../features/home/data/repo/home_repo.dart';
 import '../../features/home/data/repo/home_repo_implementation.dart';
@@ -22,8 +22,8 @@ final GetIt getIt = GetIt.instance;
 void setupLocator() {
   getIt.registerLazySingleton<Dio>(() => Dio());
 
-  
-  getIt.registerLazySingleton<ApiConsumer>(() => DioConsumer(dio: getIt<Dio>()));
+  getIt
+      .registerLazySingleton<ApiConsumer>(() => DioConsumer(dio: getIt<Dio>()));
   getIt.registerLazySingleton<AuthRepository>(() => AuthRepoImplementation(
         apiConsumer: getIt<ApiConsumer>(),
       ));

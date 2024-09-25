@@ -5,6 +5,7 @@ abstract class SettingsState extends Equatable {
   @override
   List<Object> get props => [];
 }
+
 final class SettingsInitial extends SettingsState {}
 
 class GenderSelectionState extends SettingsState {
@@ -18,25 +19,28 @@ class GenderSelectionState extends SettingsState {
 
 //Get User Data
 final class GetUserDataLoading extends SettingsState {}
+
 final class GetUserDataSuccess extends SettingsState {
-final UserModelStatic userModel;
+  final UserModel userModel;
 
   GetUserDataSuccess(this.userModel);
 }
+
 final class GetUserDataError extends SettingsState {
   final String errorMsg;
   GetUserDataError(this.errorMsg);
 }
 
-
 //Save User Data
 
 final class SaveUserDataLoading extends SettingsState {}
-final class SaveUserDataSuccess extends SettingsState {
-final UserModelStatic userModel;
 
-SaveUserDataSuccess(this.userModel);
+final class SaveUserDataSuccess extends SettingsState {
+  final UserModel userModel;
+
+  SaveUserDataSuccess(this.userModel);
 }
+
 final class SaveUserDataError extends SettingsState {
   final String errorMsg;
   SaveUserDataError(this.errorMsg);
@@ -55,7 +59,6 @@ class ReportProblemSubmitError extends SettingsState {
 
   @override
   List<Object> get props => [errorMsg];
-
 }
 
 class ReportImagePickedSuccess extends SettingsState {
@@ -77,7 +80,9 @@ class ReportImagePickError extends SettingsState {
 //change password
 
 class ChangePasswordLoading extends SettingsState {}
+
 class ChangePasswordSuccess extends SettingsState {}
+
 class ChangePasswordError extends SettingsState {
   final String message;
 

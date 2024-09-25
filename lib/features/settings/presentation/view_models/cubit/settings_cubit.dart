@@ -15,18 +15,16 @@ part 'settings_state.dart';
 
 class SettingsCubit extends Cubit<SettingsState> {
   final SettingsRepo settingsRepo;
-  UserModelStatic? currentUser;
+  UserModel? currentUser;
 
   //final ImagePicker _imagePicker = ImagePicker();
   File? file;
   TextEditingController problemText = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
-
   ReportProblemModel? reportProblemModel;
 
   SettingsCubit(this.settingsRepo) : super(SettingsInitial());
-
 
   Future<void> getUserData(String userId) async {
     try {
@@ -39,8 +37,7 @@ class SettingsCubit extends Cubit<SettingsState> {
     }
   }
 
-
-  Future<void> saveUserData(UserModelStatic user) async {
+  Future<void> saveUserData(UserModel user) async {
     try {
       emit(SaveUserDataLoading());
       await settingsRepo.updateUserData(user);
@@ -73,7 +70,6 @@ class SettingsCubit extends Cubit<SettingsState> {
     file = null;
     emit(SettingsInitial());
   }
-
 
   Future<void> submitReport(ReportProblemModel reportProblem) async {
     try {
@@ -115,8 +111,4 @@ class SettingsCubit extends Cubit<SettingsState> {
       emit(GetBookedOffersError('Failed to load booked offers'));
     }
   }
-
-
-
 }
-

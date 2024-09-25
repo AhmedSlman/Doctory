@@ -2,7 +2,7 @@ import 'package:doctory/core/utils/app_assets.dart';
 import 'package:doctory/core/utils/app_colors.dart';
 import 'package:doctory/core/utils/app_styles.dart';
 import 'package:doctory/core/widgets/custom_text_field.dart';
-import 'package:doctory/features/auth/presentation/view_models/cubit/auth_cubit.dart';
+import 'package:doctory/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:doctory/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +11,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/routes/router_names.dart';
 import '../../../../core/widgets/custom_button.dart';
-import '../view_models/cubit/auth_state.dart';
+import '../cubit/auth_state.dart';
 
 class VerifyEmailView extends StatelessWidget {
   const VerifyEmailView({super.key});
@@ -56,10 +56,9 @@ class VerifyEmailView extends StatelessWidget {
                   if (state is OTPVerifiedState) {
                     // Show success message when OTP is verified
                     ScaffoldMessenger.of(context).showSnackBar(
-                     const SnackBar(content: Text("تم تـاكيد حسابك")),
-                     
+                      const SnackBar(content: Text("تم تـاكيد حسابك")),
                     );
-                  context.go(RouterNames.bottomNavBar);
+                    context.go(RouterNames.bottomNavBar);
                   } else if (state is OTPFailedState) {
                     // Show error message if OTP verification failed
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -78,13 +77,9 @@ class VerifyEmailView extends StatelessWidget {
                     text: S.of(context).send,
                     onPressed: () {
                       if (cubit.otpController.text.isNotEmpty) {
-                        cubit.verifyEmail(
-                         // cubit.emailController.text,
-                         // cubit.otpController.text,
-                        );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
-                         const SnackBar(content: Text("يرجي ادخال قيمه")),
+                          const SnackBar(content: Text("يرجي ادخال قيمه")),
                         );
                       }
                     },

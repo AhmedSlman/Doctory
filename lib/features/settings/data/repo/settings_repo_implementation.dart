@@ -11,15 +11,15 @@ class SettingsRepoImplementation implements SettingsRepo {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   @override
-  Future<UserModelStatic> getUserData(String userId) async {
+  Future<UserModel> getUserData(String userId) async {
     final doc = await _firestore.collection('users').doc(userId).get();
-    return UserModelStatic.fromJson(doc.data()!);
+    return UserModel.fromJson(doc.data()!);
   }
 
-  @override
-  Future<void> updateUserData(UserModelStatic user) async {
-    await _firestore.collection('users').doc(user.id).update(user.toJson());
-  }
+  // @override
+  // Future<void> updateUserData(UserModel user) async {
+  //   await _firestore.collection('users').doc(user.id as String?).update(user.toJson());
+  // }
 
   @override
   Future<void> submitReport(ReportProblemModel reportProblem) async {
@@ -33,7 +33,6 @@ class SettingsRepoImplementation implements SettingsRepo {
       throw Exception('Failed to submit report');
     }
   }
-
 
   @override
   Future<void> updatePassword(String oldPassword, String newPassword) async {
@@ -56,13 +55,19 @@ class SettingsRepoImplementation implements SettingsRepo {
 
   @override
   Future<List<BookingModel>> getBookedOffers(String userId) async {
-    final snapshot = await _firestore.collection('bookings')
+    final snapshot = await _firestore
+        .collection('bookings')
         .where('userId', isEqualTo: userId)
         .get();
 
-    return snapshot.docs.map((doc) => BookingModel.fromFirestore(doc.data())).toList();
+    return snapshot.docs
+        .map((doc) => BookingModel.fromFirestore(doc.data()))
+        .toList();
   }
 
+  @override
+  Future<void> updateUserData(UserModel user) {
+    // TODO: implement updateUserData
+    throw UnimplementedError();
+  }
 }
-
-

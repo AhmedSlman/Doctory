@@ -1,31 +1,32 @@
 import 'package:bloc/bloc.dart';
-import 'package:doctory/features/auth/presentation/view_models/cubit/auth_state.dart';
+import 'package:doctory/features/auth/presentation/cubit/auth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../../core/utils/app_colors.dart';
-import '../../../data/repo/auth_repo_abstract.dart';
+import '../../../../core/utils/app_colors.dart';
+import '../../data/repo/auth_repo_abstract.dart';
+
 enum Gender { male, female }
+
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit(this.authRepo) : super(AuthInitial());
   final AuthRepository authRepo;
 //
-  TextEditingController? emailAddressController = TextEditingController();
+  TextEditingController? emailController = TextEditingController();
   TextEditingController? passwordController = TextEditingController();
+  TextEditingController? confirmPasswordController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController birthDateController = TextEditingController();
-    final TextEditingController otpController = TextEditingController();
-
-
+  final TextEditingController otpController = TextEditingController();
 //
   GlobalKey<FormState> signUpFormKey = GlobalKey();
   GlobalKey<FormState> signInFormKey = GlobalKey();
   GlobalKey<FormState> forgotPasswordFormKey = GlobalKey();
 
   //
-
   bool isSecured = true;
+
   Widget togglePass() {
     return IconButton(
       onPressed: () {
@@ -41,37 +42,32 @@ class AuthCubit extends Cubit<AuthState> {
 
   Gender selectedGender = Gender.male;
 
-  void selectGender(Gender gender) {
+  void changeGender(Gender gender) {
     selectedGender = gender;
-    emit(GenderSelectionChanged()); // Emit a state to trigger UI update
+    emit(AuthGenderChangedState(selectedGender));
   }
 
   bool termsAndCondtionCheckBoxValue = false;
   bool? obscurePasswordTextValue = true;
   late SharedPreferences pref;
 
-  bool? _isUserLoggedIn;
-  bool get isUserLoggedIn {
-    if (_isUserLoggedIn != null) {
-      _isUserLoggedIn = pref.getBool("isUserLoggedIn") ?? false;
-    }
-    return _isUserLoggedIn!;
-  }
-
-  void setUserLoggedIn(bool isLoggedIn) async {
-    _isUserLoggedIn = isLoggedIn;
-    await pref.setBool('isUserLoggedIn', isLoggedIn);
-    emit(UserLoggedInState(isLoggedIn: isLoggedIn));
-  }
-
-  Future<void> registerUser(
-      {required String name,
-      required String email,
-      required String password,
-      //required String confirmPassword
-    }) async {
+  Future<void> registerUser({
+    required String name,
+    required String email,
+    required String phone,
+    required String password,
+    required String confirmPassword,
+    required String birthdate,
+  }) async {
     emit(RegisterLoadingState());
-    final response = await authRepo.signUp(email, password);
+    final response = await authRepo.signUp(
+      name: name,
+      phone: phone,
+      birthdate: birthdate,
+      email: email,
+      password: password,
+      confirmPassword: confirmPassword,
+    );
     response.fold(
         (errMessage) => emit(RegisterFailureState(errMessage: errMessage)),
         (regesterModel) =>
@@ -91,26 +87,4 @@ class AuthCubit extends Cubit<AuthState> {
         (errMessage) => emit(SignInFailureState(errMessage: errMessage)),
         (signInModel) => emit(SignInSuccessState()));
   }
-
-
-
-  Future<void> verifyEmail() async {
-    emit(OTPLoadingState()); // حالة التحميل
-
-    final result = await authRepo.verifyEmail(emailAddressController!.text, otpController!.text); // استدعاء الميثود من الـ repo
-
-    result.fold(
-      (errorMessage) {
-        emit(OTPFailedState(errorMessage)); // في حالة الفشل
-      },
-      (verificationResponse) {
-        if (verificationResponse.status == "You have successfully made this request") {
-          emit(OTPVerifiedState()); // في حالة النجاح وتحقق الـ OTP
-        } else {
-          emit(OTPFailedState(verificationResponse.message)); // في حالة حدوث خطأ ما
-        }
-      },
-    );
-  }
-  
 }

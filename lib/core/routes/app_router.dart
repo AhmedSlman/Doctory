@@ -1,6 +1,6 @@
 import 'package:doctory/core/routes/router_names.dart';
 import 'package:doctory/core/services/service_locator.dart';
-import 'package:doctory/features/auth/presentation/view_models/cubit/auth_cubit.dart';
+import 'package:doctory/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:doctory/features/auth/presentation/views/change_password.dart';
 import 'package:doctory/features/auth/presentation/views/enter_your_email.dart';
 import 'package:doctory/features/auth/presentation/views/forget_password.dart';
@@ -45,7 +45,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: RouterNames.verifyEmail,
       builder: (context, state) => BlocProvider(
-        create: (context) =>  getIt<AuthCubit>(),
+        create: (context) => getIt<AuthCubit>(),
         child: const VerifyEmailView(),
       ),
     ),
@@ -60,13 +60,13 @@ final GoRouter router = GoRouter(
         child: VerificationPage(),
       ),
     ),
-    GoRoute(
-      path: RouterNames.enterYourEmail,
-      builder: (context, state) => BlocProvider(
-        create: (context) => getIt<AuthCubit>(),
-        child: const EnterYourEmailView(),
-      ),
-    ),
+    // GoRoute(
+    //   path: RouterNames.enterYourEmail,
+    //   builder: (context, state) => BlocProvider(
+    //     create: (context) => getIt<AuthCubit>(),
+    //     child: const EnterYourEmailView(),
+    //   ),
+    // ),
     GoRoute(
       path: RouterNames.changePassword,
       builder: (context, state) => const ChangePassword(),

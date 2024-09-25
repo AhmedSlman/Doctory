@@ -4,7 +4,7 @@ import 'package:doctory/core/routes/router_names.dart';
 import 'package:doctory/core/utils/app_assets.dart';
 import 'package:doctory/core/widgets/custom_button.dart';
 import 'package:doctory/core/widgets/custom_text_field.dart';
-import 'package:doctory/features/auth/presentation/view_models/cubit/auth_state.dart';
+import 'package:doctory/features/auth/presentation/cubit/auth_state.dart';
 import 'package:doctory/features/auth/presentation/widgets/forget_password_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,8 +12,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../generated/l10n.dart';
-import '../view_models/cubit/auth_cubit.dart';
-
+import '../cubit/auth_cubit.dart';
 
 class VerificationPage extends StatelessWidget {
   VerificationPage({super.key});
@@ -22,7 +21,7 @@ class VerificationPage extends StatelessWidget {
   final _focusNodes = List.generate(6, (_) => FocusNode());
   String? verificationId;
 
-  TextEditingController textEditingController=TextEditingController();
+  TextEditingController textEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final authCubit = context.read<AuthCubit>();
@@ -45,7 +44,8 @@ class VerificationPage extends StatelessWidget {
         builder: (context, state) {
           if (state is OTPLoadingState) {
             return const Center(
-              child: CircularProgressIndicator(), // Show loading while sending OTP
+              child:
+                  CircularProgressIndicator(), // Show loading while sending OTP
             );
           }
 
@@ -81,16 +81,18 @@ class VerificationPage extends StatelessWidget {
                     height: MediaQuery.of(context).size.height * 0.07,
                     text: S.of(context).send,
                     onPressed: () {
-                      final otp = textEditingController.text.trim(); // Get the OTP text
+                      final otp =
+                          textEditingController.text.trim(); // Get the OTP text
 
                       if (verificationId != null) {
                         print('Verification ID: $verificationId');
                         print('Entered OTP: $otp');
-                      //  authCubit.verifyOtp(verificationId!, otp);
+                        //  authCubit.verifyOtp(verificationId!, otp);
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content: Text('Verification ID is missing. Please wait for the OTP to be sent.'),
+                            content: Text(
+                                'Verification ID is missing. Please wait for the OTP to be sent.'),
                           ),
                         );
                       }

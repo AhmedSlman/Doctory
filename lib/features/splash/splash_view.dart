@@ -9,8 +9,6 @@ import 'package:go_router/go_router.dart';
 
 import '../../generated/l10n.dart';
 
-
-
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
 
@@ -21,8 +19,8 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
-    super.initState();
-    _checkLoginStatusAndNavigate();
+    // super.initState();
+    // _checkLoginStatusAndNavigate();
   }
 
   Future<bool> isUserLoggedIn() async {
@@ -30,17 +28,18 @@ class _SplashViewState extends State<SplashView> {
     final User? user = auth.currentUser;
     return user != null;
   }
-  Future<void> _checkLoginStatusAndNavigate() async {
-    bool loggedIn = await isUserLoggedIn();
-    if (loggedIn) {
-      context.go(RouterNames.bottomNavBar);
-    } else {
-      context.go(RouterNames.login);
-    }
-  }
 
+  // Future<void> _checkLoginStatusAndNavigate() async {
+  //   context.go(RouterNames.login);
+  //   // bool loggedIn = await isUserLoggedIn();
+  //   // if (loggedIn) {
+  //   //   context.go(RouterNames.bottomNavBar);
+  //   // } else {
+  //   //   context.go(RouterNames.login);
+  //   // }
+  // }
 
-  @override
+  // @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
@@ -58,8 +57,8 @@ class _SplashViewState extends State<SplashView> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-             Text(
-               S.of(context).welcome,
+            Text(
+              S.of(context).welcome,
               style: AppStyles.s18,
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.04),
@@ -68,7 +67,7 @@ class _SplashViewState extends State<SplashView> {
             Image.asset(AppAssets.onPoardingimage),
             SizedBox(height: MediaQuery.of(context).size.height * 0.1),
             CustomButton(
-              text:S.of(context).letsStart,
+              text: S.of(context).letsStart,
               width: MediaQuery.of(context).size.width * 0.6,
               height: MediaQuery.of(context).size.height * 0.07,
               onPressed: () {

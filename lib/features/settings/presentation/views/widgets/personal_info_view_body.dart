@@ -16,7 +16,6 @@ import '../../../../../generated/l10n.dart';
 import '../../../../auth/data/models/user_model.dart';
 import '../../view_models/cubit/settings_cubit.dart';
 
-
 class PersonalInfoViewBody extends StatelessWidget {
   const PersonalInfoViewBody({super.key});
 
@@ -26,9 +25,9 @@ class PersonalInfoViewBody extends StatelessWidget {
     final userId = FirebaseAuth.instance.currentUser!.uid;
     settingsCubit.getUserData(userId);
 
-
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.025),
+      padding: EdgeInsets.symmetric(
+          horizontal: MediaQuery.of(context).size.width * 0.025),
       child: BlocConsumer<SettingsCubit, SettingsState>(
         listener: (context, state) {
           if (state is SaveUserDataSuccess) {
@@ -50,29 +49,22 @@ class PersonalInfoViewBody extends StatelessWidget {
           } else if (state is GetUserDataSuccess) {
             final user = state.userModel;
 
-            final nameController = TextEditingController(text: user.name);
-            final phoneController = TextEditingController(text: user.phoneNumber);
-            final emailController = TextEditingController(text: user.email);
-            final birthDateController = TextEditingController(text: user.birthDate);
-            String selectedGender = user.gender;
-
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CustomAppBar(title: S.of(context).personalInformation, showBackButton: true),
+                CustomAppBar(
+                    title: S.of(context).personalInformation,
+                    showBackButton: true),
                 const SizedBox(height: 40),
                 CustomTextField(
-                  controller: nameController,
                   hintText: S.of(context).fullName,
                 ),
                 const SizedBox(height: 15),
                 CustomTextField(
-                  controller: phoneController,
                   hintText: S.of(context).phone,
                 ),
                 const SizedBox(height: 15),
                 CustomTextField(
-                  controller: emailController,
                   hintText: S.of(context).email,
                 ),
                 const SizedBox(height: 15),
@@ -80,51 +72,50 @@ class PersonalInfoViewBody extends StatelessWidget {
                   children: [
                     Expanded(
                       child: CustomDatePicker(
-                        controller: birthDateController,
                         hintText: S.of(context).dateOfBirth,
                       ),
                     ),
                     SizedBox(width: 12.w),
-                    Expanded(
+                    const Expanded(
                       child: DropdownTextField(
-                        options: const [
+                        options: [
                           AppStrings.male,
                           AppStrings.female,
                         ],
-                        hintText: user.gender,
-                        selectedValue: selectedGender,
-                        textStyle: AppStyles.sSubTitleGrey,
-                        onChanged: (value) {
-                          selectedGender = value!;
-                        },
+                        // hintText: user.isMale ? S.of(context).male : S.of(context).female,
+                        // // selectedValue: selectedGender,
+                        // textStyle: AppStyles.sSubTitleGrey,
+                        // onChanged: (value) {
+                        //   selectedGender = value!;
+                        // },
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 30),
-                SaveChangesButton(
-                  cancelOnPressed: () {
-                    GoRouter.of(context).pop();
-                  },
-                  saveOnPressed: () {
-                    if (_validateFields(nameController, phoneController, emailController, birthDateController)) {
-                      final updatedUser = UserModelStatic(
-                        name: nameController.text,
-                        phoneNumber: phoneController.text,
-                        email: emailController.text,
-                        birthDate: birthDateController.text,
-                        gender: selectedGender,
-                        id: userId,
-                      );
-                      settingsCubit.saveUserData(updatedUser);
-                    } else {
-                      showToast(
-                        msg: S.of(context).emptyFieldsMessage,
-                        color: AppColors.redColor,
-                      );
-                    }
-                  },
-                ),
+                // SaveChangesButton(
+                //   cancelOnPressed: () {
+                //     GoRouter.of(context).pop();
+                //   },
+                //   saveOnPressed: () {
+                //     // if (_validateFields(nameController, phoneController, emailController, birthDateController)) {
+                //     //   final updatedUser = UserModel(
+                //     //     name: nameController.text,
+                //     //     phoneNumber: phoneController.text,
+                //     //     email: emailController.text,
+                //     //     birthDate: birthDateController.text,
+                //     //     gender: selectedGender,
+                //     //     id: userId,
+                //     //   );
+                //       settingsCubit.saveUserData(updatedUser);
+                //     } else {
+                //       showToast(
+                //         msg: S.of(context).emptyFieldsMessage,
+                //         color: AppColors.redColor,
+                //       );
+                //     }
+                //   },
+                // ),
               ],
             );
           } else if (state is GetUserDataError) {
@@ -137,17 +128,14 @@ class PersonalInfoViewBody extends StatelessWidget {
   }
 
   bool _validateFields(
-      TextEditingController nameController,
-      TextEditingController phoneController,
-      TextEditingController emailController,
-      TextEditingController birthDateController,
-      ) {
+    TextEditingController nameController,
+    TextEditingController phoneController,
+    TextEditingController emailController,
+    TextEditingController birthDateController,
+  ) {
     return nameController.text.isNotEmpty &&
         phoneController.text.isNotEmpty &&
         emailController.text.isNotEmpty &&
         birthDateController.text.isNotEmpty;
   }
 }
-
-
-

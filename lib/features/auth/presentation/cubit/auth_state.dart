@@ -1,3 +1,4 @@
+import 'package:doctory/features/auth/presentation/cubit/auth_cubit.dart';
 
 class AuthState {}
 
@@ -33,21 +34,17 @@ final class UserLoggedInState extends AuthState {
   UserLoggedInState({required this.isLoggedIn});
 }
 
-
 //Password obscure
 class TogglePasswordState extends AuthState {
   final bool isSecured;
   TogglePasswordState(this.isSecured);
-
 }
+
 //Gender State
 final class GenderSelectionChanged extends AuthState {}
 
-
-
-
 // otp
-final class OTPFailedState extends AuthState{
+final class OTPFailedState extends AuthState {
   final String error;
 
   OTPFailedState(this.error);
@@ -60,11 +57,15 @@ class OTPSentState extends AuthState {
   OTPSentState(this.verificationId);
 }
 
-
-
 class OTPVerifiedState extends AuthState {}
 
 class OTPTimeoutState extends AuthState {
   final String verificationId;
   OTPTimeoutState(this.verificationId);
+}
+
+class AuthGenderChangedState extends AuthState {
+  final Gender selectedGender;
+
+  AuthGenderChangedState(this.selectedGender);
 }

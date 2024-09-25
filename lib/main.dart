@@ -18,10 +18,8 @@ void main() async {
       statusBarBrightness: Brightness.light,
     ),
   );
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  FireBaseNotifications().initNotifications();
+
+  // FireBaseNotifications().initNotifications();
   setupLocator();
 
   runApp(
