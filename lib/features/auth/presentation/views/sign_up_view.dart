@@ -69,11 +69,11 @@ class SignUpView extends StatelessWidget {
                     onPressed: () {
                       authCubit.signUp(
                         name: authCubit.nameController.text,
-                        email: authCubit.emailController!.text,
-                        password: authCubit.passwordController!.text,
+                        email: authCubit.emailController.text,
+                        password: authCubit.passwordController.text,
                         phone: authCubit.phoneController.text,
                         passwordConfirmation:
-                            authCubit.confirmPasswordController!.text,
+                            authCubit.confirmPasswordController.text,
                         isMale: true,
                         birthdate: DateTime.now(),
                       );

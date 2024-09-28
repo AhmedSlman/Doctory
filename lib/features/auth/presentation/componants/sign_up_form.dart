@@ -34,17 +34,18 @@ class SignUpFormSection extends StatelessWidget {
         AuthTextFormFieldWidget(
           hintText: S.of(context).dateOfBirth,
           controller: authCubit.birthDateController,
+          suffixIcon: const Icon(Icons.calendar_month, color: Colors.grey),
           onTap: () async {
             DateTime? pickedDate = await showDatePicker(
               context: context,
               initialDate: DateTime.now(),
-              firstDate: DateTime(1900),
+              firstDate: DateTime(1990),
               lastDate: DateTime.now(),
             );
 
             if (pickedDate != null) {
               authCubit.birthDateController.text =
-                  DateFormat('yyyy-MM-dd').format(pickedDate); // تنسيق التاريخ
+                  DateFormat('yyyy-MM-dd').format(pickedDate);
             }
           },
         ),
@@ -52,28 +53,39 @@ class SignUpFormSection extends StatelessWidget {
         AuthTextFormFieldWidget(
           hintText: S.of(context).password,
           controller: authCubit.passwordController,
-          obscureText: authCubit.isSecured,
-          suffixIcon: _buildTogglePasswordIcon(authCubit),
+          obscureText: authCubit.obscurePasswordTextValue,
+          suffixIcon: SuffixIconWidget(authCubit: authCubit),
         ),
         SizedBox(height: 10.h),
         AuthTextFormFieldWidget(
           hintText: S.of(context).confirmNewPassword,
           controller: authCubit.confirmPasswordController,
-          obscureText: authCubit.isSecured,
-          suffixIcon: _buildTogglePasswordIcon(authCubit),
+          obscureText: authCubit.obscurePasswordTextValue,
+          suffixIcon: SuffixIconWidget(authCubit: authCubit),
         ),
       ],
     );
   }
+}
 
-  Widget _buildTogglePasswordIcon(AuthCubit authCubit) {
+class SuffixIconWidget extends StatelessWidget {
+  const SuffixIconWidget({
+    super.key,
+    required this.authCubit,
+  });
+
+  final AuthCubit authCubit;
+
+  @override
+  Widget build(BuildContext context) {
     return IconButton(
       onPressed: () {
-        authCubit.togglePasswordVisibility();
+        authCubit.obscurePasswordText();
       },
       icon: Icon(
-        authCubit.isSecured ? Icons.visibility : Icons.visibility_off,
-        color: Colors.grey,
+        authCubit.obscurePasswordTextValue == true
+            ? Icons.visibility_off_outlined
+            : Icons.visibility_outlined,
       ),
     );
   }

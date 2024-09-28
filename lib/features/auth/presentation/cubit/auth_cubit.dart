@@ -22,11 +22,15 @@ class AuthCubit extends Cubit<AuthState> {
   final TextEditingController otpController = TextEditingController();
   final GlobalKey<FormState> signUpFormKey = GlobalKey();
   final GlobalKey<FormState> signInFormKey = GlobalKey();
+  bool obscurePasswordTextValue = true;
 
-  bool isSecured = true;
-  void togglePasswordVisibility() {
-    isSecured = !isSecured;
-    emit(TogglePasswordState(isSecured));
+  void obscurePasswordText() {
+    if (obscurePasswordTextValue == true) {
+      obscurePasswordTextValue = false;
+    } else {
+      obscurePasswordTextValue = true;
+    }
+    emit(ObscurePasswordTextUpdateState());
   }
 
   Gender selectedGender = Gender.male;

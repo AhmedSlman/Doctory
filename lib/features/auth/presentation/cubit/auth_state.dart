@@ -52,3 +52,5 @@ class AuthGenderChangedState extends AuthState {
   final Gender gender;
   AuthGenderChangedState(this.gender);
 }
+
+final class ObscurePasswordTextUpdateState extends AuthState {}
