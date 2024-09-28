@@ -43,12 +43,16 @@ final GoRouter router = GoRouter(
       ),
     ),
     GoRoute(
-      path: RouterNames.verifyEmail,
-      builder: (context, state) => BlocProvider(
-        create: (context) => getIt<AuthCubit>(),
-        child: const VerifyEmailView(),
-      ),
-    ),
+        path: RouterNames.verifyEmail,
+        builder: (context, state) {
+          final email = state.extra as String;
+          return BlocProvider(
+            create: (context) => getIt<AuthCubit>(),
+            child: VerifyEmailView(
+              email: email,
+            ),
+          );
+        }),
     GoRoute(
       path: RouterNames.home,
       builder: (context, state) => const HomeView(),

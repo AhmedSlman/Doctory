@@ -1,72 +1,54 @@
 import 'package:doctory/features/auth/data/models/user_model.dart';
 import 'package:doctory/features/auth/presentation/cubit/auth_cubit.dart';
 
-class AuthState {}
+abstract class AuthState {}
 
-final class AuthInitial extends AuthState {}
+class AuthInitial extends AuthState {}
 
-final class RegisterLoadingState extends AuthState {}
+// Register states
+class RegisterLoadingState extends AuthState {}
 
-final class RegisterSuccessState extends AuthState {
+class RegisterSuccessState extends AuthState {
   final UserModel userModel;
-
   RegisterSuccessState({required this.userModel});
 }
 
-final class RegisterFailureState extends AuthState {
+class RegisterFailureState extends AuthState {
   final String errMessage;
-
   RegisterFailureState({required this.errMessage});
 }
 
-final class SignInLoadingState extends AuthState {}
+// Sign-in states
+class SignInLoadingState extends AuthState {}
 
-final class SignInSuccessState extends AuthState {}
+class SignInSuccessState extends AuthState {}
 
-final class SignInFailureState extends AuthState {
+class SignInFailureState extends AuthState {
   final String errMessage;
-
   SignInFailureState({required this.errMessage});
 }
 
-final class UserLoggedInState extends AuthState {
-  final bool isLoggedIn;
+// Email verification states
+class VerifyEmailLoadingState extends AuthState {}
 
-  UserLoggedInState({required this.isLoggedIn});
+class VerifyEmailSuccessState extends AuthState {
+  final dynamic verificationResponse;
+  VerifyEmailSuccessState({required this.verificationResponse});
 }
 
-//Password obscure
+class VerifyEmailFailureState extends AuthState {
+  final String errMessage;
+  VerifyEmailFailureState({required this.errMessage});
+}
+
+// Toggle password visibility state
 class TogglePasswordState extends AuthState {
   final bool isSecured;
   TogglePasswordState(this.isSecured);
 }
 
-//Gender State
-final class GenderSelectionChanged extends AuthState {}
-
-// otp
-final class OTPFailedState extends AuthState {
-  final String error;
-
-  OTPFailedState(this.error);
-}
-
-class OTPLoadingState extends AuthState {}
-
-class OTPSentState extends AuthState {
-  final String verificationId;
-  OTPSentState(this.verificationId);
-}
-
-class OTPVerifiedState extends AuthState {}
-
-class OTPTimeoutState extends AuthState {
-  final String verificationId;
-  OTPTimeoutState(this.verificationId);
-}
-
+// Gender selection state
 class AuthGenderChangedState extends AuthState {
-  final Gender selectedGender;
-
-  AuthGenderChangedState(this.selectedGender);
+  final Gender gender;
+  AuthGenderChangedState(this.gender);
 }

@@ -96,7 +96,7 @@ class LoginView extends StatelessWidget {
                                 .text;
                             context
                                 .read<AuthCubit>()
-                                .sigInUser(email: email, password: password);
+                                .signIn(email: email, password: password);
                           },
                         ),
                   TextButton(

@@ -77,7 +77,8 @@ class SignUpView extends StatelessWidget {
                         isMale: true,
                         birthdate: DateTime.now(),
                       );
-                      context.go(RouterNames.bottomNavBar);
+                      context.go(RouterNames.verifyEmail,
+                          extra: authCubit.emailController.text);
                     },
                   ),
                 SizedBox(height: 20.h),

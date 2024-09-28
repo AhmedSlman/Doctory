@@ -14,11 +14,12 @@ import '../../../../core/widgets/custom_button.dart';
 import '../cubit/auth_state.dart';
 
 class VerifyEmailView extends StatelessWidget {
-  const VerifyEmailView({super.key});
-
+  const VerifyEmailView({super.key, required this.email});
+  final String email;
   @override
   Widget build(BuildContext context) {
     var cubit = BlocProvider.of<AuthCubit>(context);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -27,42 +28,30 @@ class VerifyEmailView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(height: 100.h),
-              Text(
-                S.of(context).verifyEmail,
-                style: AppStyles.s18.copyWith(color: AppColors.blackForText),
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              Text(
-                S.of(context).pinCodeMessage,
-              ),
-
+              Text(S.of(context).pinCodeMessage),
               SizedBox(height: 20.h),
               CustomTextField(
-                controller: cubit.otpController, 
+                controller: cubit.otpController,
                 hintText: S.of(context).otpCode,
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.05),
               Image.asset(AppAssets.resetCodeImage),
               SizedBox(height: MediaQuery.of(context).size.height * 0.07),
-
-              // BlocConsumer to handle the different states
               BlocConsumer<AuthCubit, AuthState>(
                 listener: (context, state) {
-                  if (state is OTPVerifiedState) {
+                  if (state is VerifyEmailSuccessState) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text("تم تـاكيد حسابك")),
                     );
                     context.go(RouterNames.bottomNavBar);
-                  } else if (state is OTPFailedState) {
+                  } else if (state is VerifyEmailFailureState) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(state.error)),
+                      SnackBar(content: Text(state.errMessage)),
                     );
                   }
                 },
                 builder: (context, state) {
-                  if (state is OTPLoadingState) {
+                  if (state is VerifyEmailLoadingState) {
                     return const CircularProgressIndicator();
                   }
                   return CustomButton(
@@ -71,6 +60,10 @@ class VerifyEmailView extends StatelessWidget {
                     text: S.of(context).send,
                     onPressed: () {
                       if (cubit.otpController.text.isNotEmpty) {
+                        cubit.verifyEmail(
+                          email: email,
+                          otp: cubit.otpController.text.trim(),
+                        );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text("يرجي ادخال قيمه")),
@@ -79,7 +72,7 @@ class VerifyEmailView extends StatelessWidget {
                     },
                   );
                 },
-              ),
+              )
             ],
           ),
         ),

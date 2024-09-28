@@ -1,55 +1,39 @@
-import 'package:bloc/bloc.dart';
-import 'package:doctory/features/auth/presentation/cubit/auth_state.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../../../core/utils/app_colors.dart';
+import 'package:doctory/features/auth/presentation/cubit/auth_state.dart';
 import '../../data/repo/auth_repo_abstract.dart';
+import '../../../../core/utils/app_colors.dart';
 
 enum Gender { male, female }
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit(this.authRepo) : super(AuthInitial());
   final AuthRepository authRepo;
-//
-  TextEditingController? emailController = TextEditingController();
-  TextEditingController? passwordController = TextEditingController();
-  TextEditingController? confirmPasswordController = TextEditingController();
+
+  AuthCubit(this.authRepo) : super(AuthInitial());
+
   final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   final TextEditingController birthDateController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   final TextEditingController otpController = TextEditingController();
-//
-  GlobalKey<FormState> signUpFormKey = GlobalKey();
-  GlobalKey<FormState> signInFormKey = GlobalKey();
-  GlobalKey<FormState> forgotPasswordFormKey = GlobalKey();
+  final GlobalKey<FormState> signUpFormKey = GlobalKey();
+  final GlobalKey<FormState> signInFormKey = GlobalKey();
 
-  //
   bool isSecured = true;
-
-  Widget togglePass() {
-    return IconButton(
-      onPressed: () {
-        isSecured = !isSecured;
-        emit(TogglePasswordState(isSecured));
-      },
-      icon: isSecured
-          ? const Icon(Icons.visibility)
-          : const Icon(Icons.visibility_off),
-      color: AppColors.greyForIcon,
-    );
+  void togglePasswordVisibility() {
+    isSecured = !isSecured;
+    emit(TogglePasswordState(isSecured));
   }
 
   Gender selectedGender = Gender.male;
-
   void changeGender(Gender gender) {
     selectedGender = gender;
     emit(AuthGenderChangedState(selectedGender));
   }
-
-  bool termsAndCondtionCheckBoxValue = false;
-  bool? obscurePasswordTextValue = true;
-  late SharedPreferences pref;
 
   Future<void> signUp({
     required String email,
@@ -73,26 +57,32 @@ class AuthCubit extends Cubit<AuthState> {
     );
 
     result.fold(
-      (error) {
-        emit(RegisterFailureState(errMessage: error));
-      },
-      (user) {
-        emit(RegisterSuccessState(userModel: user));
-      },
+      (error) => emit(RegisterFailureState(errMessage: error)),
+      (user) => emit(RegisterSuccessState(userModel: user)),
     );
   }
 
-  Future<void> sigInUser({
+  Future<void> signIn({
     required String email,
     required String password,
   }) async {
     emit(SignInLoadingState());
-    final response = await authRepo.signIn(
-      email,
-      password,
-    );
+    final response = await authRepo.signIn(email, password);
     response.fold(
-        (errMessage) => emit(SignInFailureState(errMessage: errMessage)),
-        (signInModel) => emit(SignInSuccessState()));
+      (error) => emit(SignInFailureState(errMessage: error)),
+      (user) => emit(SignInSuccessState()),
+    );
+  }
+
+  Future<void> verifyEmail({
+    required String email,
+    required String otp,
+  }) async {
+    emit(VerifyEmailLoadingState());
+    final response = await authRepo.verifyEmail(email, otp);
+    response.fold(
+      (error) => emit(VerifyEmailFailureState(errMessage: error)),
+      (result) => emit(VerifyEmailSuccessState(verificationResponse: result)),
+    );
   }
 }

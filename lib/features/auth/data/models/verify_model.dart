@@ -1,16 +1,22 @@
 class VerificationResponse {
-  final String status;
   final String message;
+  // final Map<String, dynamic> data;
 
   VerificationResponse({
-    required this.status,
     required this.message,
+    // required this.data,
   });
 
   factory VerificationResponse.fromJson(Map<String, dynamic> json) {
     return VerificationResponse(
-      status: json['status'] as String,
-      message: json['data']['message'] as String, 
+      message: json['message'] as String,
+      // data: json['data'] as Map<String, dynamic>,
     );
+  }
+  Map<String, dynamic> toJson() {
+    return {
+      'message': message,
+      // 'data': data,
+    };
   }
 }

@@ -29,25 +29,25 @@ class VerificationPage extends StatelessWidget {
     return Scaffold(
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
-          if (state is OTPSentState) {
-            verificationId = state.verificationId;
-          } else if (state is OTPVerifiedState) {
-            context.go(RouterNames.changePassword);
-          } else if (state is OTPFailedState) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.error), // Display the specific error
-              ),
-            );
-          }
+          // if (state is OTPSentState) {
+          //   verificationId = state.verificationId;
+          // } else if (state is OTPVerifiedState) {
+          //   context.go(RouterNames.changePassword);
+          // } else if (state is OTPFailedState) {
+          //   ScaffoldMessenger.of(context).showSnackBar(
+          //     SnackBar(
+          //       content: Text(state.error), // Display the specific error
+          //     ),
+          //   );
+          // }
         },
         builder: (context, state) {
-          if (state is OTPLoadingState) {
-            return const Center(
-              child:
-                  CircularProgressIndicator(), // Show loading while sending OTP
-            );
-          }
+          // if (state is OTPLoadingState) {
+          //   return const Center(
+          //     child:
+          //         CircularProgressIndicator(), // Show loading while sending OTP
+          //   );
+          // }
 
           return SingleChildScrollView(
             child: Padding(

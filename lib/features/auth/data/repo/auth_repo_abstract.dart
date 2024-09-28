@@ -17,5 +17,7 @@ abstract class AuthRepository {
     String password,
   );
   Future<Either<String, VerificationResponse>> verifyEmail(
-      String email, String otp);
+    String email,
+    String otp,
+  );
 }

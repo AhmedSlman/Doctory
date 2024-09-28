@@ -69,14 +69,23 @@ class AuthRepoImplementation implements AuthRepository {
 
   @override
   Future<Either<String, VerificationResponse>> verifyEmail(
-      String email, String otp) async {
+    String email,
+    String otp,
+  ) async {
+    var data = {
+      'email': email,
+      'verification_code': otp,
+    };
+    var headers = {
+      'Accept': 'application/vnd.api+json',
+      'Content-Type': 'application/vnd.api+json',
+    };
     try {
       final response = await apiConsumer.post(
         'verify-email',
-        data: {
-          'email': email,
-          'verification_code': otp,
-        },
+        data: data,
+        headers: headers,
+        isFormData: true,
       );
       return Right(VerificationResponse.fromJson(response));
     } on ServerException catch (e) {
