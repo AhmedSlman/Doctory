@@ -33,82 +33,88 @@ class LoginView extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          return Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  AppColors.whiteColor,
-                  AppColors.scaffoldColor,
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(AppAssets.logo),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.03),
-                  Align(
-                    alignment:
-                        isLTR ? Alignment.centerLeft : Alignment.centerRight,
-                    child: Text(
-                      S.of(context).login,
-                      style:
-                          AppStyles.s18.copyWith(fontWeight: FontWeight.w400),
-                    ),
+          return SingleChildScrollView(
+            child: Center(
+              child: Container(
+                height: MediaQuery.sizeOf(context).height,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      AppColors.whiteColor,
+                      AppColors.scaffoldColor,
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.03),
-                  AuthTextFormFieldWidget(
-                    hintText: S.of(context).email,
-                    controller: context.read<AuthCubit>().emailController,
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.03),
-                  AuthTextFormFieldWidget(
-                    hintText: S.of(context).password,
-                    controller: context.read<AuthCubit>().passwordController,
-                    // obscureText: context.read<AuthCubit>().isSecured,
-                    // suffixIcon: context.read<AuthCubit>().togglePass(),
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () {
-                        context.go(RouterNames.enterYourEmail);
-                      },
-                      child: Text(S.of(context).forgotPassword),
-                    ),
-                  ),
-                  state is SignInLoadingState
-                      ? const CustomCircularProgressIndicator()
-                      : CustomButton(
-                          text: S.of(context).login,
-                          width: MediaQuery.of(context).size.width * 0.5,
-                          height: MediaQuery.of(context).size.height * 0.07,
-                          onPressed: () {
-                            final email =
-                                context.read<AuthCubit>().emailController!.text;
-                            final password = context
-                                .read<AuthCubit>()
-                                .passwordController!
-                                .text;
-                            context
-                                .read<AuthCubit>()
-                                .signIn(email: email, password: password);
-                          },
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30,vertical: 30),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(AppAssets.logo),
+                      SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+                      Align(
+                        alignment:
+                            isLTR ? Alignment.centerLeft : Alignment.centerRight,
+                        child: Text(
+                          S.of(context).login,
+                          style:
+                              AppStyles.s18.copyWith(fontWeight: FontWeight.w400),
                         ),
-                  TextButton(
-                    child: Text(
-                      S.of(context).createAccount,
-                      style: AppStyles.s16,
-                    ),
-                    onPressed: () {
-                      context.go(RouterNames.signup);
-                    },
+                      ),
+                      SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+                      AuthTextFormFieldWidget(
+                        hintText: S.of(context).email,
+                        controller: context.read<AuthCubit>().emailController,
+                      ),
+                      SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+                      AuthTextFormFieldWidget(
+                        hintText: S.of(context).password,
+                        controller: context.read<AuthCubit>().passwordController,
+                        // obscureText: context.read<AuthCubit>().isSecured,
+                        // suffixIcon: context.read<AuthCubit>().togglePass(),
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () {
+                            context.go(RouterNames.enterYourEmail);
+                          },
+                          child: Text(S.of(context).forgotPassword),
+                        ),
+                      ),
+                      state is SignInLoadingState
+                          ? const CustomCircularProgressIndicator()
+                          : CustomButton(
+                              text: S.of(context).login,
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              height: MediaQuery.of(context).size.height * 0.07,
+                              onPressed: () {
+                                final email =
+                                    context.read<AuthCubit>().emailController!.text;
+                                final password = context
+                                    .read<AuthCubit>()
+                                    .passwordController!
+                                    .text;
+                                context
+                                    .read<AuthCubit>()
+                                    .signIn(email: email, password: password);
+                              },
+                            ),
+                      TextButton(
+                        child: Text(
+                          S.of(context).createAccount,
+                          style: AppStyles.s16,
+                        ),
+                        onPressed: () {
+                          context.go(RouterNames.signup);
+                        },
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           );

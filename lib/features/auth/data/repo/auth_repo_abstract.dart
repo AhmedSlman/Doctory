@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:doctory/features/auth/data/models/login_response.dart';
 import '../models/user_model.dart';
 import '../models/verify_model.dart';
 
@@ -12,7 +13,7 @@ abstract class AuthRepository {
     required bool isMale,
     required DateTime birthdate,
   });
-  Future<Either<String, UserModel>> signIn(
+  Future<Either<String, LoginResponse>> signIn(
     String email,
     String password,
   );

@@ -1,4 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:doctory/core/dataSource/local/cache.dart';
+import 'package:doctory/features/auth/data/models/login_response.dart';
 import 'package:doctory/features/auth/data/models/user_model.dart';
 import 'package:doctory/features/auth/data/models/verify_model.dart';
 import 'package:doctory/features/auth/data/repo/auth_repo_abstract.dart';
@@ -11,7 +13,7 @@ class AuthRepoImplementation implements AuthRepository {
   AuthRepoImplementation({required this.apiConsumer});
 
   @override
-  Future<Either<String, UserModel>> signIn(
+  Future<Either<String, LoginResponse>> signIn(
       String email, String password) async {
     try {
       final response = await apiConsumer.post(
@@ -21,7 +23,9 @@ class AuthRepoImplementation implements AuthRepository {
           'password': password,
         },
       );
-      return Right(UserModel.fromJson(response));
+      final data = LoginResponse.fromJson(response);
+      CacheHelper.saveToken(value: data.data.token);
+      return Right(data);
     } on ServerException catch (e) {
       return Left(e.errorModel.message);
     }

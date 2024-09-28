@@ -8,6 +8,19 @@ class CacheHelper {
     sharedPreferences = await SharedPreferences.getInstance();
   }
 
+//token
+  static void saveToken({ required String value}){
+    sharedPreferences.setString('auth_token', value);
+  }
+  static String? getToken(){
+    return sharedPreferences.getString('auth_token');
+
+  }
+
+
+
+
+
 //this method to put data in local database using key
 
   String? getDataString({
