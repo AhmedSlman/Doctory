@@ -29,26 +29,39 @@ class AuthRepoImplementation implements AuthRepository {
 
   @override
   Future<Either<String, UserModel>> signUp({
+    required String email,
     required String name,
     required String phone,
-    required String birthdate,
-    required String email,
     required String password,
-    required String confirmPassword,
+    required String passwordConfirmation,
+    required bool isMale,
+    required DateTime birthdate,
   }) async {
+    var data = {
+      'email': email,
+      'name': name,
+      'phone': phone,
+      'password': password,
+      'password_confirmation': passwordConfirmation,
+      'is_male': isMale ? '1' : '0',
+      'birthdate': birthdate.toIso8601String().split('T').first,
+    };
+
+    var headers = {
+      'Accept': 'application/vnd.api+json',
+      'Content-Type': 'application/vnd.api+json',
+    };
+
     try {
       final response = await apiConsumer.post(
         'register',
-        data: {
-          'email': email,
-          'name': name,
-          'phone': phone,
-          'password': password,
-          'password_confirmation': confirmPassword,
-          'birthdate': birthdate,
-        },
+        data: data,
+        headers: headers,
+        isFormData: true,
       );
-      return Right(UserModel.fromJson(response));
+
+      var user = UserModel.fromJson(response['data']['user']);
+      return Right(user);
     } on ServerException catch (e) {
       return Left(e.errorModel.message);
     }

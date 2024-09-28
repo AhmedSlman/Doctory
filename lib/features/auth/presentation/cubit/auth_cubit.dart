@@ -51,27 +51,35 @@ class AuthCubit extends Cubit<AuthState> {
   bool? obscurePasswordTextValue = true;
   late SharedPreferences pref;
 
-  Future<void> registerUser({
-    required String name,
+  Future<void> signUp({
     required String email,
+    required String name,
     required String phone,
     required String password,
-    required String confirmPassword,
-    required String birthdate,
+    required String passwordConfirmation,
+    required bool isMale,
+    required DateTime birthdate,
   }) async {
     emit(RegisterLoadingState());
-    final response = await authRepo.signUp(
+
+    final result = await authRepo.signUp(
+      email: email,
       name: name,
       phone: phone,
-      birthdate: birthdate,
-      email: email,
       password: password,
-      confirmPassword: confirmPassword,
+      passwordConfirmation: passwordConfirmation,
+      isMale: isMale,
+      birthdate: birthdate,
     );
-    response.fold(
-        (errMessage) => emit(RegisterFailureState(errMessage: errMessage)),
-        (regesterModel) =>
-            emit(RegisterSuccessState(message: regesterModel.message!)));
+
+    result.fold(
+      (error) {
+        emit(RegisterFailureState(errMessage: error));
+      },
+      (user) {
+        emit(RegisterSuccessState(userModel: user));
+      },
+    );
   }
 
   Future<void> sigInUser({

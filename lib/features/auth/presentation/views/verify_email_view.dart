@@ -31,19 +31,16 @@ class VerifyEmailView extends StatelessWidget {
                 S.of(context).verifyEmail,
                 style: AppStyles.s18.copyWith(color: AppColors.blackForText),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0),
-                child: RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                    text: S.of(context).pinCodeMessage,
-                    style: DefaultTextStyle.of(context).style,
-                  ),
-                ),
+              SizedBox(
+                height: 20.h,
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.07),
+              Text(
+                S.of(context).pinCodeMessage,
+              ),
+
+              SizedBox(height: 20.h),
               CustomTextField(
-                controller: cubit.otpController, // Attach the controller
+                controller: cubit.otpController, 
                 hintText: S.of(context).otpCode,
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.05),
@@ -54,13 +51,11 @@ class VerifyEmailView extends StatelessWidget {
               BlocConsumer<AuthCubit, AuthState>(
                 listener: (context, state) {
                   if (state is OTPVerifiedState) {
-                    // Show success message when OTP is verified
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text("تم تـاكيد حسابك")),
                     );
                     context.go(RouterNames.bottomNavBar);
                   } else if (state is OTPFailedState) {
-                    // Show error message if OTP verification failed
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text(state.error)),
                     );
@@ -68,7 +63,6 @@ class VerifyEmailView extends StatelessWidget {
                 },
                 builder: (context, state) {
                   if (state is OTPLoadingState) {
-                    // Show loading indicator while verifying OTP
                     return const CircularProgressIndicator();
                   }
                   return CustomButton(

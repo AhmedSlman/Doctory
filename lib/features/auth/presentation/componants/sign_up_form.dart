@@ -53,6 +53,13 @@ class SignUpFormSection extends StatelessWidget {
           obscureText: authCubit.isSecured,
           suffixIcon: authCubit.togglePass(),
         ),
+        SizedBox(height: 10.h),
+        AuthTextFormFieldWidget(
+          hintText: S.of(context).confirmNewPassword,
+          controller: authCubit.confirmPasswordController,
+          obscureText: authCubit.isSecured,
+          suffixIcon: authCubit.togglePass(),
+        ),
       ],
     );
   }

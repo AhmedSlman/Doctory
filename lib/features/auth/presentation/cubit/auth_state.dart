@@ -1,3 +1,4 @@
+import 'package:doctory/features/auth/data/models/user_model.dart';
 import 'package:doctory/features/auth/presentation/cubit/auth_cubit.dart';
 
 class AuthState {}
@@ -7,9 +8,9 @@ final class AuthInitial extends AuthState {}
 final class RegisterLoadingState extends AuthState {}
 
 final class RegisterSuccessState extends AuthState {
-  final String message;
+  final UserModel userModel;
 
-  RegisterSuccessState({required this.message});
+  RegisterSuccessState({required this.userModel});
 }
 
 final class RegisterFailureState extends AuthState {

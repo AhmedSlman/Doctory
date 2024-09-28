@@ -67,15 +67,17 @@ class SignUpView extends StatelessWidget {
                     text: S.of(context).createAccount,
                     height: 30.h,
                     onPressed: () {
-                      authCubit.registerUser(
+                      authCubit.signUp(
                         name: authCubit.nameController.text,
                         email: authCubit.emailController!.text,
                         password: authCubit.passwordController!.text,
                         phone: authCubit.phoneController.text,
-                        confirmPassword:
+                        passwordConfirmation:
                             authCubit.confirmPasswordController!.text,
-                        birthdate: authCubit.birthDateController.text,
+                        isMale: true,
+                        birthdate: DateTime.now(),
                       );
+                      context.go(RouterNames.bottomNavBar);
                     },
                   ),
                 SizedBox(height: 20.h),
