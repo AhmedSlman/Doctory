@@ -54,7 +54,12 @@
 <array>
     <string>en</string>
     <string>ar_AR</string>
-    ...
+    <key>CFBundleLocalizations</key>
+<array>
+    <string>en</string>
+    <string>ar_AR</string>
+</array>
+
 </array>
 </dict>
 </plist>

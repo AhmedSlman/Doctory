@@ -127,25 +127,26 @@ class DoctorProfileViewBody extends StatelessWidget {
                           style: AppStyles.sBlack12.copyWith(color: AppColors.greyForIcon),
                         ),
                       ),
-                      // ElevatedButton(
-                      //   onPressed: () {
-                      //     showDialog(
-                      //       context: context,
-                      //       builder: (BuildContext context) {
-                      //         return const BookingDialog();
-                      //       },
-                      //     );                        },
-                      //   style: ElevatedButton.styleFrom(
-                      //     backgroundColor: AppColors.primaryColor,
-                      //     shape: RoundedRectangleBorder(
-                      //       borderRadius: BorderRadius.circular(5),
-                      //     ),
-                      //   ),
-                      //   child: Text(
-                      //     AppStrings.bookNow,
-                      //     style: AppStyles.sTextButton,
-                      //   ),
-                      // ),
+                      ElevatedButton(
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Placeholder();
+                              //return const BookingDialog();
+                            },
+                          );                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primaryColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                        ),
+                        child: Text(
+                          AppStrings.bookNow,
+                          style: AppStyles.sTextButton,
+                        ),
+                      ),
                     ],
                   )
                 ],
