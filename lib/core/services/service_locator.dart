@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:doctory/core/dataSource/api/api_consumer.dart';
 import 'package:doctory/core/dataSource/api/dio_consumer.dart';
+import 'package:doctory/core/dataSource/local/cache.dart';
 
 import 'package:doctory/features/booking/data/repo/doctors_repo_implementation.dart';
 import 'package:doctory/features/booking/presentation/view_models/cubit/doctors_booking_cubit.dart';
@@ -21,6 +22,11 @@ import '../../features/settings/data/repo/settings_repo_implementation.dart';
 
 final GetIt getIt = GetIt.instance;
 void setupLocator() {
+
+
+    getIt.registerSingleton<CacheHelpers>(CacheHelpers());
+
+
   getIt.registerLazySingleton<Dio>(() => Dio());
 
   getIt

@@ -1,15 +1,14 @@
-import 'package:doctory/core/services/firebase_notifications.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'app.dart';
+import 'core/dataSource/local/cache.dart';
 import 'core/services/service_locator.dart';
-import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([
+  
+   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
   SystemChrome.setSystemUIOverlayStyle(
@@ -21,6 +20,7 @@ void main() async {
 
   // FireBaseNotifications().initNotifications();
   setupLocator();
+   await getIt<CacheHelpers>().init();
 
   runApp(
     const Doctory(),

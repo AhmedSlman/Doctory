@@ -24,7 +24,7 @@ class AuthRepoImplementation implements AuthRepository {
         },
       );
       final data = LoginResponse.fromJson(response);
-      CacheHelper.saveToken(value: data.data.token);
+      CacheHelpers.saveToken(value: data.data.token);
       return Right(data);
     } on ServerException catch (e) {
       return Left(e.errorModel.message);
