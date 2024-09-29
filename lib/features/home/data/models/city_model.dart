@@ -1,18 +1,18 @@
-class CategoryModel {
+class CityModel {
   final int id;
   final String name;
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
-  CategoryModel({
+  CityModel({
     required this.id,
     required this.name,
     this.createdAt,
     this.updatedAt,
   });
 
-  factory CategoryModel.fromJson(Map<String, dynamic> json) {
-    return CategoryModel(
+  factory CityModel.fromJson(Map<String, dynamic> json) {
+    return CityModel(
       id: json['id'],
       name: json['name'],
       createdAt: json['created_at'] != null ? DateTime.parse(json['created_at']) : null,

@@ -33,7 +33,7 @@ class CustomOffersGridView extends StatelessWidget {
         crossAxisSpacing: MediaQuery.of(context).size.width * 0.02,
         mainAxisSpacing: MediaQuery.of(context).size.height * 0.015,
       ),
-      itemCount: items.length,
+      itemCount: 2,
       itemBuilder: (context, index) {
         final item = items[index];
         return LayoutBuilder(

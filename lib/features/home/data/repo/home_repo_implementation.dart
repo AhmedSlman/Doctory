@@ -11,7 +11,7 @@ class HomeRepoImplementation implements HomeRepo {
   Future<List<CategoryModel>> getCategories() async {
     final snapshot = await _firestore.collection('categories').get();
     return snapshot.docs
-        .map((doc) => CategoryModel.fromFirestore(doc.data()..putIfAbsent('id', () => doc.id)))
+        .map((doc) => CategoryModel.fromJson(doc.data()..putIfAbsent('id', () => doc.id)))
         .toList();
   }
 
