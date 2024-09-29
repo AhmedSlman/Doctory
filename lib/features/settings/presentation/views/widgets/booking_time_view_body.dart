@@ -152,7 +152,7 @@ class ReservationListViewItem extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    bookingModel.offersModel.specialization.name,
+                    bookingModel.offersModel.specialization!.name,
                     style: AppStyles.sSubTitleGrey.copyWith(
                       fontSize: screenWidth * 0.035,
                     ),

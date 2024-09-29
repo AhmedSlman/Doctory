@@ -149,7 +149,7 @@ class CustomOfferCard extends StatelessWidget {
                         child: SizedBox(
                           width: 92.w,
                           child: Text(
-                            offer.specialization.name,
+                            offer.specialization!.name,
                             style: AppStyles.s10,
                             maxLines: 2,
                           ),

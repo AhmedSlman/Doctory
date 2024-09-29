@@ -55,7 +55,9 @@ class HomeViewBody extends StatelessWidget {
                             height: MediaQuery.of(context).size.height * 0.01),
                         CategoriesListView(
                           categories: categories,
-                          onCategorySelected: (categoryName) {},
+                          onCategorySelected: (categoryName) {
+
+                          },
                         ),
                         SizedBox(
                             height: MediaQuery.of(context).size.height * 0.01),
@@ -73,7 +75,7 @@ class HomeViewBody extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 3,
+              flex: 2,
               child: CustomOffersGridView(
                   onPressed: (offer) async {
                     showDialog(

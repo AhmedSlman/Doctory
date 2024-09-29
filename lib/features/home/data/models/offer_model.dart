@@ -126,9 +126,8 @@ class OffersModel {
   final int? adminId;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final City city;
-  final Specialization specialization;
-
+   City? city;
+   Specialization? specialization;
   OffersModel({
     required this.id,
     required this.image,
@@ -141,8 +140,8 @@ class OffersModel {
     this.adminId,
     required this.createdAt,
     required this.updatedAt,
-    required this.city,
-    required this.specialization,
+     this.city,
+     this.specialization,
   });
 
   factory OffersModel.fromJson(Map<String, dynamic> json) {
@@ -176,8 +175,8 @@ class OffersModel {
       'admin_id': adminId,
       'created_at': createdAt.toIso8601String(),
       'updated_at': updatedAt.toIso8601String(),
-      'city': city.toJson(),
-      'specialization': specialization.toJson(),
+      'city': city!.toJson(),
+      'specialization': specialization!.toJson(),
     };
   }
 }
