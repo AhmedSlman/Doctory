@@ -5,6 +5,8 @@ import 'package:doctory/core/dataSource/local/cache.dart';
 
 import 'package:doctory/features/booking/data/repo/doctors_repo_implementation.dart';
 import 'package:doctory/features/booking/presentation/view_models/cubit/doctors_booking_cubit.dart';
+import 'package:doctory/features/home/presentation/view_models/home_cubit/category/category_cubit.dart';
+import 'package:doctory/features/home/presentation/view_models/home_cubit/offer/offer_cubit.dart';
 import 'package:doctory/features/pharmacies/data/repo/pharmacies_repo.dart';
 import 'package:doctory/features/pharmacies/presentation/view_models/pharmacies_cubit.dart';
 import 'package:doctory/features/settings/presentation/view_models/cubit/settings_cubit.dart';
@@ -36,8 +38,10 @@ void setupLocator() {
       ));
   getIt.registerFactory<AuthCubit>(() => AuthCubit(getIt<AuthRepository>()));
 //
-  getIt.registerLazySingleton<HomeRepo>(() => HomeRepoImplementation());
-  getIt.registerFactory<HomeCubit>(() => HomeCubit(getIt<HomeRepo>()));
+  getIt.registerLazySingleton<HomeRepo>(() => HomeRepoImplementation(apiConsumer:  getIt<ApiConsumer>()));
+  getIt.registerFactory<CategoriesCubit>(() => CategoriesCubit(getIt<HomeRepo>()));
+    getIt.registerFactory<OffersCubit>(() => OffersCubit(getIt<HomeRepo>()));
+
 //
   getIt.registerLazySingleton<PharmaciesRepo>(
       () => PharmaciesRepoImplementation());

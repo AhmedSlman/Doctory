@@ -152,7 +152,7 @@ class ReservationListViewItem extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    bookingModel.offersModel.categoryName,
+                    bookingModel.offersModel.specialization.name,
                     style: AppStyles.sSubTitleGrey.copyWith(
                       fontSize: screenWidth * 0.035,
                     ),
@@ -161,7 +161,7 @@ class ReservationListViewItem extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    bookingModel.offersModel.clinicName,
+                    bookingModel.offersModel.title,
                     style: AppStyles.sSubTitleGrey.copyWith(
                       fontSize: screenWidth * 0.035,
                     ),
@@ -170,7 +170,7 @@ class ReservationListViewItem extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    'سعر الكشف ${bookingModel.offersModel.price} جنيه', // Using price from the OfferModel
+                    'سعر الكشف ${bookingModel.offersModel.oldPrice} جنيه', // Using price from the OfferModel
                     style: AppStyles.sSubTitleGrey.copyWith(
                       fontSize: screenWidth * 0.035,
                     ),
