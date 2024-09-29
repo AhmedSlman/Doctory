@@ -24,10 +24,7 @@ import '../../features/settings/data/repo/settings_repo_implementation.dart';
 
 final GetIt getIt = GetIt.instance;
 void setupLocator() {
-
-
-    getIt.registerSingleton<CacheHelpers>(CacheHelpers());
-
+  getIt.registerSingleton<CacheHelpers>(CacheHelpers());
 
   getIt.registerLazySingleton<Dio>(() => Dio());
 

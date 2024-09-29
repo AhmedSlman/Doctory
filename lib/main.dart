@@ -7,8 +7,8 @@ import 'core/services/service_locator.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
-   SystemChrome.setPreferredOrientations([
+
+  SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
   SystemChrome.setSystemUIOverlayStyle(
@@ -18,9 +18,8 @@ void main() async {
     ),
   );
 
-  // FireBaseNotifications().initNotifications();
   setupLocator();
-   await getIt<CacheHelpers>().init();
+  await getIt<CacheHelpers>().init();
 
   runApp(
     const Doctory(),
