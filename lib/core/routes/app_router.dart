@@ -2,7 +2,6 @@ import 'package:doctory/core/routes/router_names.dart';
 import 'package:doctory/core/services/service_locator.dart';
 import 'package:doctory/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:doctory/features/auth/presentation/views/change_password.dart';
-import 'package:doctory/features/auth/presentation/views/enter_your_email.dart';
 import 'package:doctory/features/auth/presentation/views/forget_password.dart';
 import 'package:doctory/features/auth/presentation/views/login_view.dart';
 import 'package:doctory/features/auth/presentation/views/sign_up_view.dart';
