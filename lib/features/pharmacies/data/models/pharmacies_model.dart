@@ -1,28 +1,32 @@
-class PharmaciesModel {
-  final String id;
-  final String title;
+class PharmacyModel {
+  final int id;
+  final String name;
   final String image;
-  final String address;
-  final String phoneNumber;
+  final String phone;
+  final int? adminId;
+  final DateTime createdAt;
+  final DateTime updatedAt;
 
-  PharmaciesModel({
+  PharmacyModel({
     required this.id,
-    required this.title,
+    required this.name,
     required this.image,
-    required this.address,
-    required this.phoneNumber,
+    required this.phone,
+    this.adminId,
+    required this.createdAt,
+    required this.updatedAt,
   });
 
-  factory PharmaciesModel.fromFirestore(Map<String, dynamic> data, String id) {
-    return PharmaciesModel(
-      id: id,
-      title: data['title'] ?? '',
-      image: data['image'] ?? '',
-      address: data['address'] ?? '',
-      phoneNumber: data['phoneNumber'] ?? '',
+  // Factory method to create a PharmacyModel from JSON
+  factory PharmacyModel.fromJson(Map<String, dynamic> json) {
+    return PharmacyModel(
+      id: json['id'],
+      name: json['name'],
+      image: json['image'],
+      phone: json['phone'],
+      adminId: json['admin_id'],
+      createdAt: DateTime.parse(json['created_at']),
+      updatedAt: DateTime.parse(json['updated_at']),
     );
   }
-
-
-
 }

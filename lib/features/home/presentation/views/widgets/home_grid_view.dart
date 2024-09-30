@@ -1,32 +1,47 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:doctory/core/widgets/custom_circular_progress_indicator.dart';
-import 'package:doctory/features/home/presentation/view_models/home_cubit/offer/offer_cubit.dart';
-import 'package:doctory/features/home/presentation/view_models/home_cubit/offer/offer_state.dart';
+import 'package:doctory/features/home/presentation/view_models/home_cubit/offers_by_specialization/offers_by_specialization_cubit.dart';
+import 'package:doctory/features/home/presentation/view_models/home_cubit/offers_by_specialization/offers_by_specialization_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:doctory/core/utils/app_colors.dart';
 import 'package:doctory/core/utils/app_styles.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../data/models/offer_model.dart';
 
-
-class CustomOffersGridView extends StatelessWidget {
-  final Function(OffersModel) onPressed; // استلام الدالة التي سيتم استدعاؤها عند الضغط على العرض
+class CustomOffersGridView extends StatefulWidget {
+  final Function(OffersModel) onPressed;
+  final String categoryName;
 
   const CustomOffersGridView({
     super.key,
-    required this.onPressed, // التحقق من أن الدالة يتم تمريرها
+    required this.onPressed,
+    required this.categoryName,
   });
 
   @override
+  _CustomOffersGridViewState createState() => _CustomOffersGridViewState();
+}
+
+class _CustomOffersGridViewState extends State<CustomOffersGridView> {
+  @override
+  void didUpdateWidget(covariant CustomOffersGridView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.categoryName != widget.categoryName) {
+      context.read<OffersBySpecCubit>().fetchOffersBySpecialization(widget.categoryName);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocBuilder<OffersCubit, OffersState>(
+    return BlocConsumer<OffersBySpecCubit, OffersBySpecState>(
+      listener: (context, state) {
+        // يمكن استخدام listener هنا للتعامل مع حالات أخرى إذا لزم الأمر
+      },
       builder: (context, state) {
-        if (state is OffersLoading) {
+        if (state is OffersBySpacLoading) {
           return const Center(child: CircularProgressIndicator());
-        } else if (state is OffersSuccess) {
+        } else if (state is OffersBySpacSuccess) {
           final offers = state.offer;
           return GridView.builder(
             physics: const BouncingScrollPhysics(),
@@ -36,9 +51,9 @@ class CustomOffersGridView extends StatelessWidget {
               crossAxisSpacing: MediaQuery.of(context).size.width * 0.02,
               mainAxisSpacing: MediaQuery.of(context).size.height * 0.015,
             ),
-            itemCount: offers.length, 
+            itemCount: offers.length,
             itemBuilder: (context, index) {
-              final item = offers[index]; // عرض كل عرض في الشبكة
+              final item = offers[index];
               return LayoutBuilder(
                 builder: (context, constraints) {
                   double containerHeight = constraints.maxHeight;
@@ -48,20 +63,22 @@ class CustomOffersGridView extends StatelessWidget {
                     containerHeight: containerHeight,
                     imageHeight: imageHeight,
                     offer: item,
-                  //  onPressed: () => onPressed(item), 
+                    onPressed: (item) => widget.onPressed(item),
                   );
                 },
               );
             },
           );
-        } else if (state is OffersFailure) {
+        } else if (state is OffersBySpacFailure) {
           return Center(child: Text('Error: ${state.error}'));
         }
-        return const SizedBox.shrink(); 
+
+        return const SizedBox.shrink();
       },
     );
   }
 }
+
 
 class CustomOfferCard extends StatelessWidget {
   const CustomOfferCard({
@@ -69,13 +86,13 @@ class CustomOfferCard extends StatelessWidget {
     required this.containerHeight,
     required this.imageHeight,
     required this.offer,
-  //  required this.onPressed,
+    required this.onPressed,
   });
 
   final double containerHeight;
   final double imageHeight;
   final OffersModel  offer;
- // final void Function(OffersModel offer) onPressed;
+  final void Function(OffersModel offer) onPressed;
 
   @override
   Widget build(BuildContext context) {

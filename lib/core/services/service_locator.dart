@@ -43,7 +43,7 @@ void setupLocator() {
 
 //
   getIt.registerLazySingleton<PharmaciesRepo>(
-      () => PharmaciesRepoImplementation());
+      () => PharmaciesRepoImplementation(apiConsumer:  getIt<ApiConsumer>()));
   getIt.registerFactory<PharmaciesCubit>(
       () => PharmaciesCubit(getIt<PharmaciesRepo>()));
 

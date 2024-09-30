@@ -9,7 +9,7 @@ import '../../../../../core/utils/app_styles.dart';
 import '../../../data/models/pharmacies_model.dart';
 
 class CustomPharmaciesGridView extends StatelessWidget {
-  final List<PharmaciesModel> items;
+  final List<PharmacyModel> items;
   final String buttonText;
   final bool isButtonOnRight;
 
@@ -85,13 +85,13 @@ class CustomPharmaciesGridView extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                item.title,
+                                item.name,
                                 style: AppStyles.sBlack12.copyWith(fontWeight: FontWeight.w500),
                               ),
                               Padding(
                                 padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.width * 0.01),
                                 child: Text(
-                                  item.address,
+                                  item.phone,
                                   style: AppStyles.sBlack12.copyWith(color: AppColors.greyForIcon),
                                 ),
                               ),
@@ -100,7 +100,7 @@ class CustomPharmaciesGridView extends StatelessWidget {
                                 child: SizedBox(
                                   width: 92.w,
                                   child: Text(
-                                    item.phoneNumber,
+                                    item.phone,
                                     style: AppStyles.sBlack12.copyWith(color: AppColors.greyForIcon),
                                     maxLines: 2,
                                   ),
@@ -124,7 +124,7 @@ class CustomPharmaciesGridView extends StatelessWidget {
                       width: 60.w,
                       height: 25.h, // Fixed height
                       child: ElevatedButton(
-                        onPressed: () => makePhoneCall(item.phoneNumber), // Handle phone call
+                        onPressed: () => makePhoneCall(item.phone), // Handle phone call
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primaryColor,
                           shape: RoundedRectangleBorder(

@@ -1,6 +1,5 @@
 import 'package:doctory/core/widgets/custom_circular_progress_indicator.dart';
 import 'package:doctory/features/booking/presentation/views/widgets/location_button.dart';
-import 'package:doctory/features/pharmacies/data/models/pharmacies_model.dart';
 import 'package:doctory/features/pharmacies/presentation/view_models/pharmacies_cubit.dart';
 import 'package:doctory/features/pharmacies/presentation/view_models/pharmacies_state.dart';
 import 'package:doctory/features/pharmacies/presentation/views/widgets/pharmacies_grid_view.dart';
@@ -22,7 +21,7 @@ class PharmaciesViewBody extends StatelessWidget {
       builder: (context, state) {
         if (state is PharmaciesLoading) {
           return const CustomCircularProgressIndicator();
-        } else if (state is PharmaciesLoadedSuccess) {
+        } else if (state is PharmaciesSuccess) {
           return Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: MediaQuery.of(context).size.width * 0.025),

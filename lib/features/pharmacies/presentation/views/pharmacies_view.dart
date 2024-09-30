@@ -11,7 +11,7 @@ class PharmaciesView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<PharmaciesCubit>(),
+      create: (context) => getIt<PharmaciesCubit>()..getPharmacies(),
       child: const Scaffold(
         body: SafeArea(child: PharmaciesViewBody()),
       ),

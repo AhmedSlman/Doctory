@@ -86,7 +86,6 @@ class HomeRepoImplementation implements HomeRepo {
         for (var item in response) {
           offers.add(OffersModel.fromJson(item));
         }
-        print("offers : $offers");
         return Right(offers);
       } else {
         return Left('Error when catch data');

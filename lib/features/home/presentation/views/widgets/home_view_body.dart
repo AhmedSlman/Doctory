@@ -2,6 +2,7 @@ import 'package:doctory/core/utils/app_styles.dart';
 import 'package:doctory/core/widgets/custom_circular_progress_indicator.dart';
 import 'package:doctory/features/home/presentation/view_models/home_cubit/category/category_cubit.dart';
 import 'package:doctory/features/home/presentation/view_models/home_cubit/category/category_state.dart';
+import 'package:doctory/features/home/presentation/view_models/home_cubit/offers_by_specialization/offers_by_specialization_cubit.dart';
 import 'package:doctory/features/settings/presentation/views/show_dialogs/booking_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +15,15 @@ import 'custom_home_appbar.dart';
 import 'home_grid_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // استيراد الترجمة
-
-class HomeViewBody extends StatelessWidget {
+class HomeViewBody extends StatefulWidget {
   const HomeViewBody({super.key});
+
+  @override
+  _HomeViewBodyState createState() => _HomeViewBodyState();
+}
+
+class _HomeViewBodyState extends State<HomeViewBody> {
+  String? categoryName; 
 
   Future<void> _refreshData(BuildContext context) async {
     final categoriesCubit = BlocProvider.of<CategoriesCubit>(context);
@@ -37,7 +44,6 @@ class HomeViewBody extends StatelessWidget {
           children: [
             const CustomHomeAppBar(),
             Expanded(
-              
               child: BlocBuilder<CategoriesCubit, CategoriesState>(
                 builder: (context, state) {
                   if (state is CategoriesLoading) {
@@ -55,8 +61,12 @@ class HomeViewBody extends StatelessWidget {
                             height: MediaQuery.of(context).size.height * 0.01),
                         CategoriesListView(
                           categories: categories,
-                          onCategorySelected: (categoryName) {
-
+                          onCategorySelected: (selectedCategoryName) {
+                            // تحديث categoryName عند اختيار فئة جديدة
+                            setState(() {
+                              categoryName = selectedCategoryName;
+                              print(categoryName);
+                            });
                           },
                         ),
                         SizedBox(
@@ -65,7 +75,30 @@ class HomeViewBody extends StatelessWidget {
                           S.of(context).offers,
                           style: AppStyles.sBlack15,
                         ),
-                                            ],
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.01),
+                        Expanded(
+                          flex: 2,
+                          child: BlocProvider(
+                            create: (context) => getIt<OffersBySpecCubit>(),
+                            child: CustomOffersGridView(
+                              // تمرير categoryName المحدثة أو الافتراضية
+                              categoryName: categoryName??state.categories[0].name ,
+                              onPressed: (offer) async {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return BlocProvider(
+                                        create: (context) =>
+                                            getIt<CategoriesCubit>(),
+                                        child: BookingDialog(offer: offer),
+                                      );
+                                    });
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
                     );
                   } else if (state is CategoriesFailure) {
                     return Center(child: Text(state.error));
@@ -73,20 +106,6 @@ class HomeViewBody extends StatelessWidget {
                   return const SizedBox.shrink();
                 },
               ),
-            ),
-            Expanded(
-              flex: 2,
-              child: CustomOffersGridView(
-                  onPressed: (offer) async {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return BlocProvider(
-                            create: (context) => getIt<CategoriesCubit>(),
-                            child: BookingDialog(offer: offer),
-                          );
-                        });
-                  }),
             ),
           ],
         ),
@@ -98,17 +117,14 @@ class HomeViewBody extends StatelessWidget {
 
 // class HomeViewBody extends StatelessWidget {
 //   const HomeViewBody({super.key});
-
 //   Future<void> _refreshData(BuildContext context) async {
 //     final homeCubit = BlocProvider.of<HomeCubit>(context);
 //     homeCubit.getHomeData();
 //   }
-
 //   @override
 //   Widget build(BuildContext context) {
 //     final homeCubit = BlocProvider.of<HomeCubit>(context);
 //    // homeCubit.getHomeData();
-
 //     return RefreshIndicator(
 //       color: AppColors.primaryColor,
 //       backgroundColor: AppColors.whiteColor,
@@ -155,7 +171,6 @@ class HomeViewBody extends StatelessWidget {
 //                             onPressed: (offer) async {
 //                               final userId = FirebaseAuth.instance.currentUser!.uid;
 //                               final hasBooked = await homeCubit.hasUserBookedOffer(offer.id, userId);
-
 //                               if (hasBooked) {
 //                                 showToast(
 //                                   msg: S.of(context).alreadyBooked,

@@ -9,24 +9,14 @@ sealed class PharmaciesState extends Equatable {
   List<Object?> get props => [];
 }
 
-final class PharmaciesInitial extends PharmaciesState {
-  const PharmaciesInitial(); // Mark as const
-
-  @override
-  List<Object?> get props => [];
-}
+final class PharmaciesInitial extends PharmaciesState {}
 
 
-class PharmaciesLoading extends PharmaciesState {
-  const PharmaciesLoading(); // Mark as const
+class PharmaciesLoading extends PharmaciesState {}
+class PharmaciesSuccess extends PharmaciesState {
+  final List<PharmacyModel> pharmacies;
 
-  @override
-  List<Object?> get props => [];
-}
-class PharmaciesLoadedSuccess extends PharmaciesState {
-  final List<PharmaciesModel> pharmacies;
-
-  const PharmaciesLoadedSuccess({required this.pharmacies}); // Mark as const
+  const PharmaciesSuccess({required this.pharmacies}); 
 
   @override
   List<Object?> get props => [pharmacies];
@@ -34,7 +24,7 @@ class PharmaciesLoadedSuccess extends PharmaciesState {
 class PharmaciesError extends PharmaciesState {
   final String message;
 
-  const PharmaciesError(this.message); // Mark as const
+  const PharmaciesError(this.message); 
 
   @override
   List<Object?> get props => [message];

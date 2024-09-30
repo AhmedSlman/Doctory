@@ -4,12 +4,12 @@ import 'custom_categories_list_view.item.dart';
 
 class CategoriesListView extends StatelessWidget {
   final List<CategoryModel> categories;
-  final ValueChanged<String> onCategorySelected;
+   final ValueChanged<String> onCategorySelected;
 
   const CategoriesListView({
     super.key,
     required this.categories,
-    required this.onCategorySelected,
+     required this.onCategorySelected,
   });
 
   @override
@@ -22,7 +22,7 @@ class CategoriesListView extends StatelessWidget {
         itemBuilder: (context, index) {
           final category = categories[index];
           return GestureDetector(
-            onTap: () => onCategorySelected(category.name),
+             onTap: () => onCategorySelected(category.name),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5),
               child: CustomCategoriesListViewItem(name: category.name),
