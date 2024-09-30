@@ -1,8 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class DoctorModel {
   final String doctorId;
   final String image;
@@ -11,7 +8,7 @@ class DoctorModel {
   final String address;
   final double rating;
   final String doctorSummary;
-  final List<String> doctorServices; // This will now be a list of services
+  final List<String> doctorServices;
   final double price;
   final String waitingTime;
   final String fullAddress;
@@ -33,7 +30,6 @@ class DoctorModel {
   factory DoctorModel.fromFirestore(DocumentSnapshot doc) {
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>? ?? {};
 
-    // Convert the doctorServices map to a list of strings
     List<String> services = [];
     if (data['doctorServices'] != null) {
       data['doctorServices'].forEach((key, value) {
@@ -51,9 +47,8 @@ class DoctorModel {
       doctorSummary: data['doctorSummary'] ?? '',
       doctorServices: services,
       price: (data['price'] ?? 0.0).toDouble(),
-      waitingTime:data['waitingTime'] ?? '',
-      fullAddress:data['fullAddress'] ?? '',
+      waitingTime: data['waitingTime'] ?? '',
+      fullAddress: data['fullAddress'] ?? '',
     );
   }
 }
-

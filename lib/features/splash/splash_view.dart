@@ -1,3 +1,4 @@
+import 'package:doctory/core/dataSource/local/cache.dart';
 import 'package:doctory/core/routes/router_names.dart';
 import 'package:doctory/core/utils/app_assets.dart';
 import 'package:doctory/core/utils/app_colors.dart';
@@ -71,7 +72,11 @@ class _SplashViewState extends State<SplashView> {
               width: MediaQuery.of(context).size.width * 0.6,
               height: MediaQuery.of(context).size.height * 0.07,
               onPressed: () {
-                context.go(RouterNames.login);
+                if (CacheHelpers.getToken() != null) {
+                  context.go(RouterNames.bottomNavBar);
+                } else {
+                  context.go(RouterNames.login);
+                }
               },
             ),
           ],

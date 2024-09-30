@@ -12,12 +12,8 @@ import '../../../../../core/utils/app_styles.dart';
 import '../../../../../core/widgets/custom_rating_bar.dart';
 import '../../../data/models/doctor_model.dart';
 
-
-
 class DoctorsListViewItem extends StatelessWidget {
-  final DoctorModel doctor;
-
-  const DoctorsListViewItem({super.key, required this.doctor});
+  const DoctorsListViewItem({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,20 +35,19 @@ class DoctorsListViewItem extends StatelessWidget {
                 ? const BorderRadius.horizontal(right: Radius.circular(16))
                 : const BorderRadius.horizontal(left: Radius.circular(16)),
             child: SizedBox(
-              height: double.infinity,
-              width: screenWidth * 0.33,
-              child: CachedNetworkImage(
-                imageUrl: doctor.image,
-                fit: BoxFit.cover,
-                  placeholder: (context, url) => Skeletonizer(
-                    child: CachedNetworkImage(
-                      imageUrl: doctor.image,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  errorWidget: (context, url, error) => const Icon(Icons.error_outline)
-              )
-            ),
+                height: double.infinity,
+                width: screenWidth * 0.33,
+                child: CachedNetworkImage(
+                    imageUrl: "",
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => Skeletonizer(
+                          child: CachedNetworkImage(
+                            imageUrl: " doctor.image,",
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error_outline))),
           ),
           Expanded(
             child: Padding(
@@ -63,7 +58,7 @@ class DoctorsListViewItem extends StatelessWidget {
                 children: [
                   Flexible(
                     child: Text(
-                      doctor.name,
+                      "",
                       style: AppStyles.sBlack12.copyWith(
                         fontWeight: FontWeight.bold,
                         fontSize: screenWidth * 0.04,
@@ -75,7 +70,7 @@ class DoctorsListViewItem extends StatelessWidget {
                   const SizedBox(height: 5),
                   Flexible(
                     child: Text(
-                      doctor.doctorSpec,
+                      "",
                       style: AppStyles.sSubTitleGrey.copyWith(
                         fontSize: screenWidth * 0.035,
                       ),
@@ -86,7 +81,7 @@ class DoctorsListViewItem extends StatelessWidget {
                   const SizedBox(height: 3),
                   Flexible(
                     child: Text(
-                      doctor.address,
+                      "doctor.address",
                       style: AppStyles.sSubTitleGrey.copyWith(
                         fontSize: screenWidth * 0.035,
                       ),
@@ -97,7 +92,7 @@ class DoctorsListViewItem extends StatelessWidget {
                   const SizedBox(height: 3),
                   Flexible(
                     child: Text(
-                      '${doctor.price.toString()} جنيه',
+                      '0 جنيه',
                       style: AppStyles.sSubTitleGrey.copyWith(
                         fontSize: screenWidth * 0.035,
                       ),
@@ -115,21 +110,24 @@ class DoctorsListViewItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                CustomRatingBar(rating: doctor.rating),
+                CustomRatingBar(rating: 5.0),
                 const SizedBox(height: 20),
                 SizedBox(
                   width: screenWidth * 0.2,
                   height: screenHeight * 0.04,
                   child: ElevatedButton(
                     onPressed: () {
-                      GoRouter.of(context).push(RouterNames.doctorProfileInfo,extra: doctor);
+                      GoRouter.of(context).push(
+                        RouterNames.doctorProfileInfo,
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primaryColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(5),
                       ),
-                      padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
                     ),
                     child: Text(
                       AppStrings.more,
