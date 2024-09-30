@@ -131,7 +131,7 @@ class BookingDialogState extends State<BookingDialog> {
       final bookingTimeString = BookingModel.timeOfDayToString(_bookingTime!);
 
       final booking = BookingModel(
-        offerId: widget.offer.id,
+        offerId: widget.offer.id.toString(),
         userId: userId,
         patientName: _patientNameController.text,
         phone: _phoneController.text,
@@ -141,9 +141,9 @@ class BookingDialogState extends State<BookingDialog> {
         offersModel: widget.offer,
       );
 
-      cubit.bookOffer(booking).whenComplete(() {
+     // cubit.bookOffer(booking).whenComplete(() {
         // No need to setState for loading indicator
-      });
+     // });
     } else {
       showToast(
         msg: 'ادخل البيانات بطريقه صحيح',

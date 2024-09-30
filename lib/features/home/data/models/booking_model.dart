@@ -34,7 +34,7 @@ class BookingModel {
       'email': email,
       'bookingDate': bookingDate.toIso8601String(),
       'bookingTime': bookingTime, // Store time as "h:mm a"
-      'offersModel': offersModel.toMap(),
+      'offersModel': offersModel.toJson(),
     };
   }
 
@@ -47,9 +47,9 @@ class BookingModel {
       email: data['email'],
       bookingDate: DateTime.parse(data['bookingDate']),
       bookingTime: data['bookingTime'], // Time as "h:mm a"
-      offersModel: OffersModel.fromFirestore(
+      offersModel: OffersModel.fromJson(
         data['offersModel'] as Map<String, dynamic>,
-        data['offersModel']['id'] as String,
+       // data['offersModel']['id'] as String,
       ),
     );
   }

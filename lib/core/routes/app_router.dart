@@ -8,6 +8,7 @@ import 'package:doctory/features/auth/presentation/views/sign_up_view.dart';
 import 'package:doctory/features/auth/presentation/views/verify_email_view.dart';
 import 'package:doctory/features/booking/presentation/views/booking_view.dart';
 import 'package:doctory/features/doctor_profile/views/doctor_profile_view.dart';
+import 'package:doctory/features/home/presentation/view_models/home_cubit/category/category_cubit.dart';
 import 'package:doctory/features/home/presentation/views/botton_nav_bar_view.dart';
 import 'package:doctory/features/settings/presentation/views/booking_time_view.dart';
 import 'package:doctory/features/settings/presentation/views/change_password_view.dart';
