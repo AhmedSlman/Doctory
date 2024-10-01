@@ -11,6 +11,7 @@ import 'package:doctory/features/home/presentation/view_models/home_cubit/offers
 import 'package:doctory/features/pharmacies/data/repo/pharmacies_repo.dart';
 import 'package:doctory/features/pharmacies/presentation/view_models/pharmacies_cubit.dart';
 import 'package:doctory/features/settings/presentation/view_models/cubit/settings_cubit.dart';
+import 'package:doctory/features/settings/presentation/view_models/profile_cubit/profile_cubit.dart';
 import 'package:get_it/get_it.dart';
 import '../../features/auth/data/repo/auth_repo_abstract.dart';
 import '../../features/auth/data/repo/auth_repo_implementation.dart';
@@ -36,21 +37,24 @@ void setupLocator() {
       ));
   getIt.registerFactory<AuthCubit>(() => AuthCubit(getIt<AuthRepository>()));
 //
-  getIt.registerLazySingleton<HomeRepo>(() => HomeRepoImplementation(apiConsumer:  getIt<ApiConsumer>()));
-  getIt.registerFactory<CategoriesCubit>(() => CategoriesCubit(getIt<HomeRepo>()));
-    getIt.registerFactory<OffersCubit>(() => OffersCubit(getIt<HomeRepo>()));
-    getIt.registerFactory<OffersBySpecCubit>(() => OffersBySpecCubit(getIt<HomeRepo>()));
+  getIt.registerLazySingleton<HomeRepo>(
+      () => HomeRepoImplementation(apiConsumer: getIt<ApiConsumer>()));
+  getIt.registerFactory<CategoriesCubit>(
+      () => CategoriesCubit(getIt<HomeRepo>()));
+  getIt.registerFactory<OffersCubit>(() => OffersCubit(getIt<HomeRepo>()));
+  getIt.registerFactory<OffersBySpecCubit>(
+      () => OffersBySpecCubit(getIt<HomeRepo>()));
 
 //
   getIt.registerLazySingleton<PharmaciesRepo>(
-      () => PharmaciesRepoImplementation(apiConsumer:  getIt<ApiConsumer>()));
+      () => PharmaciesRepoImplementation(apiConsumer: getIt<ApiConsumer>()));
   getIt.registerFactory<PharmaciesCubit>(
       () => PharmaciesCubit(getIt<PharmaciesRepo>()));
 
 //
-  getIt.registerLazySingleton<SettingsRepo>(() => SettingsRepoImplementation());
-  getIt.registerFactory<SettingsCubit>(
-      () => SettingsCubit(getIt<SettingsRepo>()));
+  getIt.registerLazySingleton<SettingsRepo>(
+      () => SettingsRepoImplementation(apiConsumer: getIt<ApiConsumer>()));
+  getIt.registerFactory<ProfileCubit>(() => ProfileCubit(settingsRepo: getIt<SettingsRepo>()));
 
   //
   getIt.registerLazySingleton<DoctorsRepo>(() => DoctorsRepoImplementation());

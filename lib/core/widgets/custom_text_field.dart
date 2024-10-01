@@ -183,7 +183,7 @@ class DropdownTextField extends StatefulWidget {
     this.controller,
     this.textStyle,
     this.selectedValue,
-    this.onChanged,
+    this.onChanged, required String initialValue,
   });
 
   @override

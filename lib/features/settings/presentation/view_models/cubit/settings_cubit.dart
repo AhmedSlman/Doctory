@@ -29,9 +29,9 @@ class SettingsCubit extends Cubit<SettingsState> {
   Future<void> getUserData(String userId) async {
     try {
       emit(GetUserDataLoading());
-      final user = await settingsRepo.getUserData(userId);
-      currentUser = user;
-      emit(GetUserDataSuccess(user));
+      // final user = await settingsRepo.getUserData(userId);
+      // currentUser = user;
+      // emit(GetUserDataSuccess(user));
     } catch (e) {
       emit(GetUserDataError('Failed to load user data'));
     }
@@ -40,7 +40,7 @@ class SettingsCubit extends Cubit<SettingsState> {
   Future<void> saveUserData(UserModel user) async {
     try {
       emit(SaveUserDataLoading());
-      await settingsRepo.updateUserData(user);
+    //  await settingsRepo.updateUserData(user);
       emit(SaveUserDataSuccess(user));
     } catch (e) {
       emit(SaveUserDataError('Failed to save user data'));
@@ -74,7 +74,7 @@ class SettingsCubit extends Cubit<SettingsState> {
   Future<void> submitReport(ReportProblemModel reportProblem) async {
     try {
       emit(ReportProblemSubmitting());
-      await settingsRepo.submitReport(reportProblem);
+    //  await settingsRepo.submitReport(reportProblem);
       emit(ReportProblemSubmitted());
     } catch (e) {
       emit(ReportProblemSubmitError('Failed to submit report'));
@@ -93,7 +93,7 @@ class SettingsCubit extends Cubit<SettingsState> {
 
     try {
       emit(ChangePasswordLoading());
-      await settingsRepo.updatePassword(oldPassword, newPassword);
+      //await settingsRepo.updatePassword(oldPassword, newPassword);
       emit(ChangePasswordSuccess());
     } catch (e) {
       emit(ChangePasswordError(e.toString()));
@@ -104,9 +104,9 @@ class SettingsCubit extends Cubit<SettingsState> {
     try {
       emit(GetBookedOffersLoading());
 
-      final bookedOffers = await settingsRepo.getBookedOffers(userId);
+      //final bookedOffers = await settingsRepo.getBookedOffers(userId);
 
-      emit(GetBookedOffersSuccess(bookedOffers));
+      //emit(GetBookedOffersSuccess(bookedOffers));
     } catch (e) {
       emit(GetBookedOffersError('Failed to load booked offers'));
     }

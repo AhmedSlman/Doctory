@@ -1,73 +1,52 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:doctory/features/home/data/models/booking_model.dart';
+import 'package:dartz/dartz.dart';
+import 'package:doctory/core/dataSource/api/api_consumer.dart';
+import 'package:doctory/core/dataSource/local/cache.dart';
+import 'package:doctory/features/settings/data/models/profile_model.dart';
 import 'package:doctory/features/settings/data/repo/settings_repo.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
-import '../../../auth/data/models/user_model.dart';
-import '../../../home/data/models/offer_model.dart';
-import '../models/report_problem_model.dart';
-
 class SettingsRepoImplementation implements SettingsRepo {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+      final ApiConsumer apiConsumer;
+
+  SettingsRepoImplementation({required this.apiConsumer});
+
+  
 
   @override
-  Future<UserModel> getUserData(String userId) async {
-    final doc = await _firestore.collection('users').doc(userId).get();
-    return UserModel.fromJson(doc.data()!);
-  }
-
-  // @override
-  // Future<void> updateUserData(UserModel user) async {
-  //   await _firestore.collection('users').doc(user.id as String?).update(user.toJson());
-  // }
-
-  @override
-  Future<void> submitReport(ReportProblemModel reportProblem) async {
+   Future<Either<String,Profile>> getUserData() async{
     try {
-      await _firestore.collection('problem_reports').add({
-        'problemText': reportProblem.problemText,
-        'imageUrl': reportProblem.image,
-        'timestamp': FieldValue.serverTimestamp(),
+            final token = CacheHelpers.getToken();
+
+      var data = await apiConsumer.get('/profile', headers: {
+        'Accept': 'application/vnd.api+json',
+        'Content-Type': 'application/vnd.api+json',
+                'Authorization': "Bearer $token"
+
       });
-    } catch (e) {
-      throw Exception('Failed to submit report');
-    }
-  }
-
-  @override
-  Future<void> updatePassword(String oldPassword, String newPassword) async {
-    final user = FirebaseAuth.instance.currentUser;
-    if (user != null) {
-      final credentials = EmailAuthProvider.credential(
-        email: user.email!,
-        password: oldPassword,
-      );
-      try {
-        await user.reauthenticateWithCredential(credentials);
-        await user.updatePassword(newPassword);
-      } catch (e) {
-        throw Exception('Failed to update password');
+     if (data != null && data['profile'] != null) {
+        Profile profile = Profile.fromJson(data['profile']);
+        return Right(profile);
+      } else {
+        return Left('Error: Invalid data received');
       }
-    } else {
-      throw Exception('No user logged in');
+    } catch (e) {
+      return Left('Error when fetching data: $e');
     }
   }
-
+  
   @override
-  Future<List<BookingModel>> getBookedOffers(String userId) async {
-    final snapshot = await _firestore
-        .collection('bookings')
-        .where('userId', isEqualTo: userId)
-        .get();
+  Future<Profile> updateUserData(Profile user) {
+  try {
+      final token = CacheHelpers.getToken();
 
-    return snapshot.docs
-        .map((doc) => BookingModel.fromFirestore(doc.data()))
-        .toList();
+    return  apiConsumer.post('/profile', data: user.toJson(), headers: {
+      'Accept': 'application/vnd.api+json',
+      'Content-Type': 'application/vnd.api+json',
+            'Authorization': "Bearer $token"
+
+    }).then((data) {
+      return Profile.fromJson(data['profile']);
+    });
+  } catch (e) {
+    throw Exception('Error when updating user data: $e');
   }
-
-  @override
-  Future<void> updateUserData(UserModel user) {
-    // TODO: implement updateUserData
-    throw UnimplementedError();
   }
 }

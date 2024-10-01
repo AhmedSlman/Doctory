@@ -83,10 +83,10 @@ class BookingDialogState extends State<BookingDialog> {
                       validator: Validators.validateEmail,
                     ),
                     SizedBox(height: 10.h),
-                    CustomDatePicker(
-                      hintText: S.of(context).booking,
-                      onSelected: (date) => _bookingDate = date,
-                    ),
+                    // CustomDatePicker(
+                    //   hintText: S.of(context).booking,
+                    //   onSelected: (date) => _bookingDate = date,
+                    // ),
                     SizedBox(height: 10.h),
                     CustomTimePicker(
                       hintText: S.of(context).bookingTime,

@@ -2,17 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:doctory/core/widgets/custom_text_field.dart';
 
 import '../../generated/l10n.dart';
-
 class CustomDatePicker extends StatefulWidget {
   final TextEditingController? controller;
-  final ValueChanged<DateTime>? onSelected; // Updated to use DateTime
+  final ValueChanged<DateTime>? onSelected;
   final String? hintText;
+  final DateTime initialDate; // إضافة initialDate
 
   const CustomDatePicker({
     super.key,
     this.controller,
     this.onSelected,
     this.hintText,
+    required this.initialDate, // تعديل هنا
   });
 
   @override
@@ -28,13 +29,19 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
     super.initState();
     _dateController = widget.controller ?? TextEditingController();
     _onSelected = widget.onSelected;
+
+    // تعيين التاريخ المبدئي في الـ TextField إذا كان محددًا
+    final formattedDate = "${widget.initialDate.year}-${widget.initialDate.month}-${widget.initialDate.day}";
+    _dateController.text = formattedDate;
   }
 
   Future<void> selectDate() async {
     DateTime today = DateTime.now();
+    
+    // استخدم initialDate من الـ widget
     DateTime? selectedDate = await showDatePicker(
       context: context,
-      initialDate: today,
+      initialDate: widget.initialDate, // تعيين initialDate هنا
       firstDate: DateTime(2000),
       lastDate: DateTime(2100),
     );
@@ -45,7 +52,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
       setState(() {
         _dateController.text = formattedDate;
         if (_onSelected != null) {
-          _onSelected(selectedDate); // Updated to use DateTime
+          _onSelected!(selectedDate); 
         }
       });
     }
@@ -74,7 +81,6 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
     super.dispose();
   }
 }
-
 class CustomTimePicker extends StatefulWidget {
   final ValueChanged<TimeOfDay>? onSelected; // Added onSelected parameter
   final String? hintText;

@@ -20,7 +20,7 @@ class SettingsContainer extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 40.h,
+        height: 48.h,
         width: double.infinity,
         decoration: BoxDecoration(
           color: AppColors.whiteColor,

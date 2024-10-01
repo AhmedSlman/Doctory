@@ -3,8 +3,6 @@ import 'package:doctory/features/settings/presentation/views/widgets/settings_bu
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../core/utils/app_colors.dart';
-import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/widgets/custom_app_bar.dart';
 import '../../../../../generated/l10n.dart';
 
