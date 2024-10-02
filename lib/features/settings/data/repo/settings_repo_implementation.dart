@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:doctory/core/dataSource/api/api_consumer.dart';
 import 'package:doctory/core/dataSource/local/cache.dart';
+import 'package:doctory/features/settings/data/models/password_model.dart';
 import 'package:doctory/features/settings/data/models/profile_model.dart';
 import 'package:doctory/features/settings/data/repo/settings_repo.dart';
 class SettingsRepoImplementation implements SettingsRepo {
@@ -53,6 +55,36 @@ class SettingsRepoImplementation implements SettingsRepo {
     });
   } catch (e) {
     throw Exception('Error when updating user data: $e');
+  }
+  }
+
+
+
+  @override
+  Future<Either<String, dynamic>> changePassword(PasswordModel password) async {
+    try {
+                  final token = CacheHelpers.getToken();
+
+      final response = await apiConsumer.post(
+        '/change-password',
+        data: {
+          "current_password":password.oldPassword,
+          "new_password": password.newPassword,
+          "new_password_confirmation": password.confirmPassword,
+        },
+        headers: {
+          'Accept': 'application/vnd.api+json',
+          'Content-Type': 'application/vnd.api+json',
+           'Authorization': "Bearer $token" 
+        }
+      );
+   if (response.containsKey('message')) {
+      return right(response['message']);
+    } else {
+      return left('Unexpected response format');
+    }
+  } catch (error) {
+    return left("Failed to change password: $error");
   }
   }
 }

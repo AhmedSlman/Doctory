@@ -1,4 +1,4 @@
-import 'package:doctory/features/settings/presentation/view_models/cubit/settings_cubit.dart';
+import 'package:doctory/features/settings/view_models/cubit/settings_cubit.dart';
 import 'package:doctory/features/settings/presentation/views/widgets/report_a_problem_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -5,11 +5,11 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../../auth/data/models/user_model.dart';
-import '../../../../home/data/models/booking_model.dart';
-import '../../../../home/data/models/offer_model.dart';
-import '../../../data/models/report_problem_model.dart';
-import '../../../data/repo/settings_repo.dart';
+import '../../../auth/data/models/user_model.dart';
+import '../../../home/data/models/booking_model.dart';
+import '../../../home/data/models/offer_model.dart';
+import '../../data/models/report_problem_model.dart';
+import '../../data/repo/settings_repo.dart';
 
 part 'settings_state.dart';
 

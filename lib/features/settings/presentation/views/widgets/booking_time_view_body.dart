@@ -20,7 +20,7 @@ import '../../../../../core/widgets/custom_toast.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../../booking/presentation/views/widgets/doctors_list_view.dart';
 import '../../../../home/data/models/offer_model.dart';
-import '../../view_models/cubit/settings_cubit.dart';
+import '../../../view_models/cubit/settings_cubit.dart';
 import '../show_dialogs/rating_dialog.dart';
 
 class BookingTimeViewBody extends StatelessWidget {
