@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:doctory/features/settings/data/models/profile_model.dart';
 import 'package:doctory/features/settings/data/repo/settings_repo.dart';
-import 'package:doctory/features/settings/presentation/view_models/profile_cubit/profile_state.dart';
+import 'package:doctory/features/settings/view_models/profile_cubit/profile_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {

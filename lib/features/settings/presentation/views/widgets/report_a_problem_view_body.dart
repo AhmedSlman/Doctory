@@ -10,7 +10,7 @@ import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../generated/l10n.dart';
 import '../../../data/models/report_problem_model.dart';
-import '../../view_models/cubit/settings_cubit.dart';
+import '../../../view_models/cubit/settings_cubit.dart';
 import 'report_problem_textfield.dart';
 
 
