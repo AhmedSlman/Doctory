@@ -10,14 +10,4 @@ class DoctorsBookingCubit extends Cubit<DoctorsBookingState> {
   final DoctorsRepo _doctorsRepo;
 
   DoctorsBookingCubit(this._doctorsRepo) : super(DoctorsBookingInitial());
-
-  Future<void> fetchDoctors() async {
-    try {
-      emit(DoctorsBookingLoading());
-      final doctors = await _doctorsRepo.fetchDoctors();
-      emit(DoctorsBookingSuccess(doctors));
-    } catch (error) {
-      emit(DoctorsBookingFailure(error.toString()));
-    }
-  }
 }

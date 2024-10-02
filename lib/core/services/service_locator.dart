@@ -54,10 +54,12 @@ void setupLocator() {
 //
   getIt.registerLazySingleton<SettingsRepo>(
       () => SettingsRepoImplementation(apiConsumer: getIt<ApiConsumer>()));
-  getIt.registerFactory<ProfileCubit>(() => ProfileCubit(settingsRepo: getIt<SettingsRepo>()));
+  getIt.registerFactory<ProfileCubit>(
+      () => ProfileCubit(settingsRepo: getIt<SettingsRepo>()));
 
   //
-  getIt.registerLazySingleton<DoctorsRepo>(() => DoctorsRepoImplementation());
+  getIt.registerLazySingleton<DoctorsRepo>(
+      () => DoctorsRepoImplementation(apiConsumer: getIt<ApiConsumer>()));
   getIt.registerFactory<DoctorsBookingCubit>(
       () => DoctorsBookingCubit(getIt<DoctorsRepo>()));
 }

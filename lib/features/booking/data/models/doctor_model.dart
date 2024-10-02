@@ -1,54 +1,65 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:doctory/features/home/data/models/offer_model.dart';
 
 class DoctorModel {
-  final String doctorId;
-  final String image;
+  final int id;
   final String name;
-  final String doctorSpec;
-  final String address;
-  final double rating;
-  final String doctorSummary;
-  final List<String> doctorServices;
-  final double price;
+  final String? image;
+  final String price;
+  final String? details;
   final String waitingTime;
-  final String fullAddress;
+  final String address;
+  final int cityId;
+  final int specializationId;
+  final int adminId;
+  final City city;
+  final Specialization specialization;
 
   DoctorModel({
-    required this.doctorId,
-    required this.image,
+    required this.id,
     required this.name,
-    required this.doctorSpec,
-    required this.address,
-    required this.rating,
-    required this.doctorSummary,
-    required this.doctorServices,
+    required this.image,
     required this.price,
+    required this.details,
     required this.waitingTime,
-    required this.fullAddress,
+    required this.address,
+    required this.cityId,
+    required this.specializationId,
+    required this.adminId,
+    required this.city,
+    required this.specialization,
   });
 
-  factory DoctorModel.fromFirestore(DocumentSnapshot doc) {
-    Map<String, dynamic> data = doc.data() as Map<String, dynamic>? ?? {};
-
-    List<String> services = [];
-    if (data['doctorServices'] != null) {
-      data['doctorServices'].forEach((key, value) {
-        services.add(value);
-      });
-    }
-
+  factory DoctorModel.fromJson(Map<String, dynamic> json) {
     return DoctorModel(
-      doctorId: doc.id,
-      image: data['image'] ?? '',
-      name: data['name'] ?? '',
-      doctorSpec: data['doctorSpec'] ?? '',
-      address: data['address'] ?? '',
-      rating: (data['rating'] ?? 0.0).toDouble(),
-      doctorSummary: data['doctorSummary'] ?? '',
-      doctorServices: services,
-      price: (data['price'] ?? 0.0).toDouble(),
-      waitingTime: data['waitingTime'] ?? '',
-      fullAddress: data['fullAddress'] ?? '',
+      id: json['id'],
+      name: json['name'],
+      image: json['image'],
+      price: json['price'],
+      details: json['details'],
+      waitingTime: json['waiting_time'],
+      address: json['address'],
+      cityId: json['city_id'],
+      specializationId: json['specialization_id'],
+      adminId: json['admin_id'],
+      city: City.fromJson(json['city']),
+      specialization: Specialization.fromJson(json['specialization']),
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'image': image,
+      'price': price,
+      'details': details,
+      'waiting_time': waitingTime,
+      'address': address,
+      'city_id': cityId,
+      'specialization_id': specializationId,
+      'admin_id': adminId,
+      'city': city.toJson(),
+      'specialization': specialization.toJson(),
+    };
   }
 }

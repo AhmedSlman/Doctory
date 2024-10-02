@@ -7,7 +7,7 @@ import '../../../../core/utils/app_colors.dart';
 import '../../../../core/utils/app_styles.dart';
 
 class DoctorProfilePictureAndName extends StatelessWidget {
-   const DoctorProfilePictureAndName({super.key,required this.doctor});
+  const DoctorProfilePictureAndName({super.key, required this.doctor});
   final DoctorModel doctor;
 
   @override
@@ -15,8 +15,7 @@ class DoctorProfilePictureAndName extends StatelessWidget {
     return Column(
       children: [
         CachedNetworkImage(
-          imageUrl:
-          doctor.image,
+          imageUrl: "",
           imageBuilder: (context, imageProvider) => Container(
             width: 130,
             height: 130,
@@ -34,7 +33,7 @@ class DoctorProfilePictureAndName extends StatelessWidget {
         SizedBox(
           height: 5.h,
         ),
-         Text(doctor.name, style: AppStyles.sTitle),
+        Text(doctor.name, style: AppStyles.sTitle),
       ],
     );
   }
