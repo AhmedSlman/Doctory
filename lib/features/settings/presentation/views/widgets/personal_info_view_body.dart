@@ -1,4 +1,5 @@
 import 'package:doctory/core/widgets/custom_app_bar.dart';
+import 'package:doctory/core/widgets/custom_toast.dart';
 import 'package:doctory/core/widgets/date_picker.dart';
 import 'package:doctory/features/settings/data/models/profile_model.dart';
 import 'package:doctory/features/settings/presentation/view_models/profile_cubit/profile_cubit.dart';
@@ -84,34 +85,63 @@ class PersonalInfoViewBody extends StatelessWidget {
                         options: const [
                           AppStrings.male,
                           AppStrings.female,
-                        ], initialValue: profile.isMale==0?AppStrings.male : AppStrings.female,
+                        ],
+                        initialValue: profile.isMale == 0
+                            ? AppStrings.male
+                            : AppStrings.female,
                       ),
                     ),
                   ],
                 ),
                 SizedBox(height: 60.h),
-                SaveChangesButton(cancelOnPressed: () {
-                  GoRouter.of(context).pop();
-                }, saveOnPressed: () {
-                  // التحقق من أن النص ليس فارغًا قبل التحديث
-                  context.read<ProfileCubit>().updateUser(
-                      Profile(
-                          id: profile.id,
-                          name: nameController!.text.isNotEmpty
-                              ? nameController!.text
-                              : profile.name,
-                          email: emailController!.text.isNotEmpty
-                              ? emailController!.text
-                              : profile.email,
-                          phone: phoneController!.text.isNotEmpty
-                              ? phoneController!.text
-                              : profile.phone,
-                          isMale: profile.isMale, 
-                          birthdate: profile.birthdate,
-                          createdAt: profile.createdAt,
-                          updatedAt: DateTime.now(), 
-                      ));
-                }),
+
+                // BlocListener لسماع حالة Cubit وتحديث الزر بناءً عليها
+                BlocListener<ProfileCubit, ProfileState>(
+                  listener: (context, state) {
+                    if (state is UserUpdatedSuccess) {
+                      showToast(msg: "Profile updated successfully", color: Colors.green);
+                    } else if (state is UserUpdatedError) {
+                      showToast(msg: state.errorMsg, color: Colors.red);
+                    }
+                  },
+                  child: BlocBuilder<ProfileCubit, ProfileState>(
+                    builder: (context, state) {
+                      bool isLoading = state is UserUpdatedLoading;
+
+                      return SaveChangesButton(
+                        isLoading: isLoading, // يتحكم في عرض مؤشر التحميل
+                        cancelOnPressed: () {
+                          GoRouter.of(context).pop();
+                        },
+                        saveOnPressed: () {
+                          // التحقق من أن النص ليس فارغًا قبل التحديث
+                          context.read<ProfileCubit>().updateUser(
+                              Profile(
+                                  id: profile.id,
+                                  name: nameController!.text.isNotEmpty
+                                      ? nameController!.text
+                                      : profile.name,
+                                  email: emailController!.text.isNotEmpty
+                                      ? emailController!.text
+                                      : profile.email,
+                                  phone: phoneController!.text.isNotEmpty
+                                      ? phoneController!.text
+                                      : profile.phone,
+                                  isMale: profile.isMale, 
+                                  birthdate: profile.birthdate,
+                                  createdAt: profile.createdAt,
+                                  updatedAt: DateTime.now(), 
+                              ));
+                                if (state is UserUpdatedSuccess) {
+                                  GoRouter.of(context).pop();
+                                                                showToast(msg: "Update You Profile", color: Colors.green);
+
+                                }
+                        },
+                      );
+                    },
+                  ),
+                ),
               ],
             );
           }

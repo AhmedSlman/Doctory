@@ -37,7 +37,13 @@ class SettingsRepoImplementation implements SettingsRepo {
   try {
       final token = CacheHelpers.getToken();
 
-    return  apiConsumer.post('/profile', data: user.toJson(), headers: {
+    return  apiConsumer.post('/update-profile', data: {
+        'name': user.name,
+        'phone': user.phone,
+        'email': user.email,
+        'birthdate': user.birthdate.toIso8601String(),
+     
+    }, headers: {
       'Accept': 'application/vnd.api+json',
       'Content-Type': 'application/vnd.api+json',
             'Authorization': "Bearer $token"
