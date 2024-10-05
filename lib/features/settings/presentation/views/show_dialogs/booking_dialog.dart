@@ -1,5 +1,7 @@
 import 'package:doctory/core/widgets/custom_toast.dart';
 import 'package:doctory/core/widgets/validators.dart';
+import 'package:doctory/features/home/presentation/view_models/home_cubit/reserve/reserve_cubit.dart';
+import 'package:doctory/features/home/presentation/view_models/home_cubit/reserve/reserve_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,14 +14,11 @@ import 'package:doctory/features/settings/presentation/views/widgets/save_change
 import '../../../../../generated/l10n.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../home/data/models/booking_model.dart';
-import '../../../../home/data/models/offer_model.dart';
-import '../../../../home/presentation/view_models/home_cubit/home_cubit.dart';
-import '../../../../home/presentation/view_models/home_cubit/home_state.dart';
 
 class BookingDialog extends StatefulWidget {
-  final OffersModel offer;
+  final int offerId;
 
-  const BookingDialog({super.key, required this.offer});
+  const BookingDialog({super.key, required this.offerId});
 
   @override
   BookingDialogState createState() => BookingDialogState();
@@ -29,7 +28,6 @@ class BookingDialogState extends State<BookingDialog> {
   final TextEditingController _patientNameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  final userId = FirebaseAuth.instance.currentUser!.uid;
   DateTime? _bookingDate;
   TimeOfDay? _bookingTime;
   final _formKey = GlobalKey<FormState>();
@@ -43,17 +41,17 @@ class BookingDialogState extends State<BookingDialog> {
       ),
       child: Padding(
         padding: EdgeInsets.all(16.w),
-        child: BlocConsumer<HomeCubit, HomeState>(
+        child: BlocConsumer<ReserveOfferCubit, ReserveOfferState>(
           listener: (context, state) {
-            if (state is BookingSuccess) {
+            if (state is ReserveOfferSuccess) {
               Navigator.of(context).pop();
               showToast(
                 msg: S.of(context).saveEditSuccess,
                 color: AppColors.greenColor,
               );
-            } else if (state is BookingError) {
+            } else if (state is ReserveOfferFailure) {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.message)),
+                SnackBar(content: Text(state.error)),
               );
             }
           },
@@ -83,14 +81,15 @@ class BookingDialogState extends State<BookingDialog> {
                       validator: Validators.validateEmail,
                     ),
                     SizedBox(height: 10.h),
-                    // CustomDatePicker(
-                    //   hintText: S.of(context).booking,
-                    //   onSelected: (date) => _bookingDate = date,
-                    // ),
+                    CustomDatePicker(
+                      hintText: S.of(context).booking,
+                      onSelected: (date) => _bookingDate = date,
+                      initialDate: DateTime.now(),
+                    ),
                     SizedBox(height: 10.h),
                     CustomTimePicker(
                       hintText: S.of(context).bookingTime,
-                      onSelected: (time) => _bookingTime = time,
+                      onSelected: (time) => _bookingTime = time as TimeOfDay?, 
                     ),
                     SizedBox(height: 20.h),
                     SaveChangesButton(
@@ -126,24 +125,22 @@ class BookingDialogState extends State<BookingDialog> {
     final formState = _formKey.currentState;
 
     if (formState != null && formState.validate()) {
-      final cubit = BlocProvider.of<HomeCubit>(context);
+      final cubit = BlocProvider.of<ReserveOfferCubit>(context);
 
       final bookingTimeString = BookingModel.timeOfDayToString(_bookingTime!);
 
       final booking = BookingModel(
-        offerId: widget.offer.id.toString(),
-        userId: userId,
+        offerId: widget.offerId.toString(),
         patientName: _patientNameController.text,
         phone: _phoneController.text,
         email: _emailController.text,
         bookingDate: _bookingDate!,
         bookingTime: bookingTimeString,
-        offersModel: widget.offer,
       );
 
-     // cubit.bookOffer(booking).whenComplete(() {
+      cubit.reserveOffer(booking).whenComplete(() {
         // No need to setState for loading indicator
-     // });
+      });
     } else {
       showToast(
         msg: 'ادخل البيانات بطريقه صحيح',

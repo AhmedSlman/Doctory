@@ -91,10 +91,10 @@ final GoRouter router = GoRouter(
       path: RouterNames.changePasswordView,
       builder: (context, state) => const ChangePasswordView(),
     ),
-    GoRoute(
-      path: RouterNames.bookingTime,
-      builder: (context, state) => const BookingTimeView(),
-    ),
+    // GoRoute(
+    //   path: RouterNames.bookingTime,
+    //   builder: (context, state) => const BookingTimeView(),
+    // ),
     GoRoute(
       path: RouterNames.reportProblemView,
       builder: (context, state) => const ReportAProblemView(),

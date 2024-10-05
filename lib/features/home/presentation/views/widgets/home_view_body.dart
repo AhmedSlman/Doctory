@@ -3,17 +3,17 @@ import 'package:doctory/core/widgets/custom_circular_progress_indicator.dart';
 import 'package:doctory/features/home/presentation/view_models/home_cubit/category/category_cubit.dart';
 import 'package:doctory/features/home/presentation/view_models/home_cubit/category/category_state.dart';
 import 'package:doctory/features/home/presentation/view_models/home_cubit/offers_by_specialization/offers_by_specialization_cubit.dart';
+import 'package:doctory/features/home/presentation/view_models/home_cubit/reserve/reserve_cubit.dart';
 import 'package:doctory/features/settings/presentation/views/show_dialogs/booking_dialog.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/services/service_locator.dart';
 import '../../../../../core/utils/app_colors.dart';
-import '../../../../../core/widgets/custom_toast.dart';
 import '../../../../../generated/l10n.dart';
 import 'categories_list_view.dart';
 import 'custom_home_appbar.dart';
 import 'home_grid_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 // استيراد الترجمة
 class HomeViewBody extends StatefulWidget {
   const HomeViewBody({super.key});
@@ -23,7 +23,7 @@ class HomeViewBody extends StatefulWidget {
 }
 
 class _HomeViewBodyState extends State<HomeViewBody> {
-  String? categoryName; 
+  String? categoryName;
 
   Future<void> _refreshData(BuildContext context) async {
     final categoriesCubit = BlocProvider.of<CategoriesCubit>(context);
@@ -83,18 +83,9 @@ class _HomeViewBodyState extends State<HomeViewBody> {
                             create: (context) => getIt<OffersBySpecCubit>(),
                             child: CustomOffersGridView(
                               // تمرير categoryName المحدثة أو الافتراضية
-                              categoryName: categoryName??state.categories[0].name ,
-                              onPressed: (offer) async {
-                                showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return BlocProvider(
-                                        create: (context) =>
-                                            getIt<CategoriesCubit>(),
-                                        child: BookingDialog(offer: offer),
-                                      );
-                                    });
-                              },
+                              categoryName:
+                                  categoryName ?? state.categories[0].name,
+                             
                             ),
                           ),
                         ),

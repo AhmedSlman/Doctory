@@ -4,6 +4,8 @@ import 'package:doctory/core/widgets/custom_app_bar.dart';
 import 'package:doctory/core/widgets/custom_circular_progress_indicator.dart';
 import 'package:doctory/core/widgets/custom_toast.dart';
 import 'package:doctory/features/settings/presentation/views/widgets/upload_image_button.dart';
+import 'package:doctory/features/settings/view_models/problam_cubit/problam_cubit.dart';
+import 'package:doctory/features/settings/view_models/problam_cubit/problam_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/utils/app_colors.dart';
@@ -20,14 +22,14 @@ class ReportAProblemViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final settingsCubit = BlocProvider.of<SettingsCubit>(context);
+    final reportProblemCubit = BlocProvider.of<ReportProblemCubit>(context);
 
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.symmetric(
             horizontal: MediaQuery.of(context).size.width * 0.025),
         child: Form(
-          key: settingsCubit.formKey,
+          key: reportProblemCubit.formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -37,9 +39,10 @@ class ReportAProblemViewBody extends StatelessWidget {
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.05),
 
+              // حقل النص مع validator
               ReportTextField(
                 hintText: S.of(context).whatIsYourProblem,
-                controller: settingsCubit.problemText,
+                controller: reportProblemCubit.problemText,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return S.of(context).validatorMsg;
@@ -49,23 +52,25 @@ class ReportAProblemViewBody extends StatelessWidget {
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.05),
 
+              // زر اختيار الصورة
               UploadImageButton(
-                onTap: () => settingsCubit.getImage(),
+                onTap: () => reportProblemCubit.getImage(),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.04),
 
-              BlocBuilder<SettingsCubit, SettingsState>(
+              // عرض الصورة المختارة أو رسالة الخطأ
+              BlocBuilder<ReportProblemCubit, ReportProblemState>(
                 builder: (context, state) {
                   if (state is ReportImagePickedSuccess) {
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
-                          width: MediaQuery.of(context).size.width*0.21,
-                          height: MediaQuery.of(context).size.height*0.1,
+                          width: MediaQuery.of(context).size.width * 0.21,
+                          height: MediaQuery.of(context).size.height * 0.1,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12),
-                            color: AppColors.greyColor, // Placeholder color
+                            color: AppColors.greyColor, // لون افتراضي
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(12),
@@ -78,12 +83,11 @@ class ReportAProblemViewBody extends StatelessWidget {
                         SizedBox(width: MediaQuery.of(context).size.width * 0.02),
                         GestureDetector(
                           onTap: () {
-                            settingsCubit.file = null;
-                            settingsCubit.clearImage(); // Reset state
+                            reportProblemCubit.clearImage(); // إعادة تعيين الصورة
                           },
                           child: Container(
-                            width: MediaQuery.of(context).size.width*0.21,
-                            height: MediaQuery.of(context).size.height*0.1,
+                            width: MediaQuery.of(context).size.width * 0.21,
+                            height: MediaQuery.of(context).size.height * 0.1,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(12),
                               color: AppColors.whiteColor,
@@ -100,40 +104,46 @@ class ReportAProblemViewBody extends StatelessWidget {
                       ],
                     );
                   }
-                  return Container();
+                  return Container(); // عدم عرض شيء إذا لم يتم اختيار صورة
                 },
               ),
 
-             SizedBox(height: MediaQuery.of(context).size.height * 0.04),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.04),
 
-
-
-              BlocConsumer<SettingsCubit, SettingsState>(
+              // زر الإرسال مع التعامل مع حالة الـ Cubit
+              BlocConsumer<ReportProblemCubit, ReportProblemState>(
                 listener: (context, state) {
-                  if (state is ReportProblemSubmitted) {
-                    showToast(msg: 'تم ارسال طلبك بنجاح', color: AppColors.primaryColor);
-                    settingsCubit.problemText.clear();
-                  } else if (state is ReportProblemSubmitError) {
+                  if (state is ReportProblemSuccess) {
+                    showToast(
+                        msg: 'تم ارسال طلبك بنجاح',
+                        color: AppColors.primaryColor);
+                    reportProblemCubit.clearFields(); // تفريغ الحقول بعد النجاح
+                  } else if (state is ReportProblemFailure) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(state.errorMsg)),
+                      SnackBar(content: Text(state.error)),
                     );
                   }
                 },
                 builder: (context, state) {
-                  if (state is ReportProblemSubmitting) {
-                    return const CustomCircularProgressIndicator();
+                  if (state is ReportProblemLoading) {
+                    return const CustomCircularProgressIndicator(); // عرض مؤشر تحميل
                   }
                   return CustomButton(
                     width: double.infinity,
                     height: MediaQuery.of(context).size.height * 0.06,
                     text: S.of(context).send,
                     onPressed: () {
-                      if (settingsCubit.formKey.currentState!.validate()) {
-                        final reportProblemModel = ReportProblemModel(
-                          problemText: settingsCubit.problemText.text,
-                          image: settingsCubit.file?.path,
-                        );
-                        settingsCubit.submitReport(reportProblemModel);
+                      // التحقق من صحة المدخلات قبل الإرسال
+                      if (reportProblemCubit.formKey.currentState!.validate()) {
+                        if (reportProblemCubit.file != null) {
+                          // استدعاء reportProblem إذا كانت القيم صالحة
+                          reportProblemCubit.reportProblem(  );
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Please select an image')),
+                          );
+                        }
                       }
                     },
                   );
@@ -146,3 +156,4 @@ class ReportAProblemViewBody extends StatelessWidget {
     );
   }
 }
+

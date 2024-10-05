@@ -61,22 +61,6 @@ class ReportProblemSubmitError extends SettingsState {
   List<Object> get props => [errorMsg];
 }
 
-class ReportImagePickedSuccess extends SettingsState {
-  final String imagePath;
-  ReportImagePickedSuccess(this.imagePath);
-
-  @override
-  List<Object> get props => [imagePath];
-}
-
-class ReportImagePickError extends SettingsState {
-  final String errorMsg;
-  ReportImagePickError(this.errorMsg);
-
-  @override
-  List<Object> get props => [errorMsg];
-}
-
 //change password
 
 class ChangePasswordLoading extends SettingsState {}

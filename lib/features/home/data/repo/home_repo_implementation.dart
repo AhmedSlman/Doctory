@@ -1,12 +1,10 @@
-import 'dart:convert';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:doctory/core/dataSource/api/api_consumer.dart';
 import 'package:doctory/core/dataSource/local/cache.dart';
 import 'package:doctory/core/error/exceptions.dart';
-import 'package:flutter/foundation.dart';
-import '../models/booking_model.dart';
+import 'package:doctory/features/home/data/models/booking_model.dart';
+import 'package:intl/intl.dart';
 import '../models/categories_model.dart';
 import '../models/offer_model.dart';
 import 'home_repo.dart';
@@ -23,19 +21,19 @@ class HomeRepoImplementation implements HomeRepo {
         'Accept': 'application/vnd.api+json',
         'Content-Type': 'application/vnd.api+json',
       });
-      print(data);
+      // print(data);
       if (data is List) {
         List<CategoryModel> categories = [];
         for (var item in data) {
           categories.add(CategoryModel.fromJson(item));
         }
-        print("categories : $categories");
+        // print("categories : $categories");
         return Right(categories);
       } else {
-        return Left('Unexpected data format');
+        return const Left('Unexpected data format');
       }
     } catch (e) {
-      return Left('Error when fetching data');
+      return const Left('Error when fetching data');
     }
   }
 
@@ -48,16 +46,16 @@ class HomeRepoImplementation implements HomeRepo {
         'Content-Type': 'application/vnd.api+json',
         'Authorization': "Bearer $token"
       });
-      print(data);
+      // print(data);
       if (data is List) {
         List<OffersModel> offers = [];
         for (var item in data) {
           offers.add(OffersModel.fromJson(item));
         }
-        print("offers : $offers");
+        // print("offers : $offers");
         return Right(offers);
       } else {
-        return Left('Error when catch data');
+        return const Left('Error when catch data');
       }
     } on ServerException catch (e) {
       return Left(e.errorModel.message);
@@ -80,18 +78,50 @@ class HomeRepoImplementation implements HomeRepo {
         'Content-Type': 'application/vnd.api+json',
         'Authorization': "Bearer $token"
       });
-
-      if (response is List) {
+  print(response.data);
+      if (response.data is List) {
         List<OffersModel> offers = [];
-        for (var item in response) {
+        for (var item in response.data) {
           offers.add(OffersModel.fromJson(item));
-        }
+       }
         return Right(offers);
-      } else {
-        return Left('Error when catch data');
+     } else {
+        return const Left('No Offer ');
       }
     } on ServerException catch (e) {
       return Left(e.errorModel.message);
     }
   }
+  
+  @override
+  Future<Either<String, String>> reserveOffer(BookingModel booking) async {
+    print('///${booking.bookingDate.toIso8601String()}, ${booking.bookingTime},');
+    try {
+      final token = CacheHelpers.getToken();
+      var response =
+          await apiConsumer.post('/offers/18/reserve',
+           data: {
+       
+        'name': booking.patientName,
+        'email': booking.email,
+        'phone': booking.phone,
+        'day': booking.bookingDate.toIso8601String(),
+        'time': booking.bookingTime,
+      }, headers: {
+        'Accept': 'application/vnd.api+json',
+        'Content-Type': 'application/vnd.api+json',
+        'Authorization': "Bearer $token"
+      });
+
+     
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      final message = response.data['message'];
+      return Right(message);
+    } else {
+      return Left(response.data['message']);
+    }
+  } catch (e) {
+    return Left('Error occurred: $e');
+  }
+}
 }

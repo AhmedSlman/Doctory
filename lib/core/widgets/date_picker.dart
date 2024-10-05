@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:doctory/core/widgets/custom_text_field.dart';
+import 'package:intl/intl.dart';
 
 import '../../generated/l10n.dart';
 class CustomDatePicker extends StatefulWidget {
@@ -80,9 +81,8 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
     }
     super.dispose();
   }
-}
-class CustomTimePicker extends StatefulWidget {
-  final ValueChanged<TimeOfDay>? onSelected; // Added onSelected parameter
+}class CustomTimePicker extends StatefulWidget {
+  final ValueChanged<String>? onSelected; // Changed to String for formatted time
   final String? hintText;
 
   const CustomTimePicker({
@@ -97,7 +97,7 @@ class CustomTimePicker extends StatefulWidget {
 
 class _CustomTimePickerState extends State<CustomTimePicker> {
   final TextEditingController _timeController = TextEditingController();
-  late final ValueChanged<TimeOfDay>? _onSelected;
+  late final ValueChanged<String>? _onSelected; // Changed to String
 
   @override
   void initState() {
@@ -113,9 +113,14 @@ class _CustomTimePickerState extends State<CustomTimePicker> {
 
     if (selectedTime != null) {
       setState(() {
-        _timeController.text = selectedTime.format(context);
+        // Format the time to HH:mm
+        final now = DateTime.now();
+        final selectedDateTime = DateTime(now.year, now.month, now.day, selectedTime.hour, selectedTime.minute);
+        final formattedTime = DateFormat('HH:mm').format(selectedDateTime);
+
+        _timeController.text = formattedTime; // Display formatted time
         if (_onSelected != null) {
-          _onSelected(selectedTime); // Updated to use TimeOfDay
+          _onSelected!(formattedTime); // Send formatted time as a string
         }
       });
     }

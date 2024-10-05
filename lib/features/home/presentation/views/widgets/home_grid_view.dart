@@ -1,6 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:doctory/core/services/service_locator.dart';
+import 'package:doctory/core/utils/app_colors.dart';
 import 'package:doctory/features/home/presentation/view_models/home_cubit/offers_by_specialization/offers_by_specialization_cubit.dart';
 import 'package:doctory/features/home/presentation/view_models/home_cubit/offers_by_specialization/offers_by_specialization_state.dart';
+import 'package:doctory/features/home/presentation/view_models/home_cubit/reserve/reserve_cubit.dart';
+import 'package:doctory/features/settings/presentation/views/show_dialogs/booking_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,12 +14,12 @@ import '../../../../../generated/l10n.dart';
 import '../../../data/models/offer_model.dart';
 
 class CustomOffersGridView extends StatefulWidget {
-  final Function(OffersModel) onPressed;
+ // final Function(OffersModel) onPressed;
   final String categoryName;
 
   const CustomOffersGridView({
     super.key,
-    required this.onPressed,
+  //  required this.onPressed,
     required this.categoryName,
   });
 
@@ -63,7 +67,16 @@ class _CustomOffersGridViewState extends State<CustomOffersGridView> {
                     containerHeight: containerHeight,
                     imageHeight: imageHeight,
                     offer: item,
-                    onPressed: (item) => widget.onPressed(item),
+                    onPressed:  ()  {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return BlocProvider(
+                                        create: (context) => getIt<ReserveOfferCubit>(),
+                                        child: BookingDialog(offerId: item.id),
+                                      );
+                                    });
+                              },
                   );
                 },
               );
@@ -92,7 +105,7 @@ class CustomOfferCard extends StatelessWidget {
   final double containerHeight;
   final double imageHeight;
   final OffersModel  offer;
-  final void Function(OffersModel offer) onPressed;
+  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -190,16 +203,16 @@ class CustomOfferCard extends StatelessWidget {
               width: 60.w,
               height: 25.h, // Fixed height
               child: ElevatedButton(
-               onPressed:  () => (){},
+               onPressed: onPressed,
                 style: ElevatedButton.styleFrom(
-                 // backgroundColor: item.isBooked ? Colors.grey : AppColors.primaryColor,
+                  backgroundColor: AppColors.primaryColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5),
                   ),
                   padding: const EdgeInsets.symmetric(horizontal: 0),
                 ),
                 child: Text(
-                  S.of(context).booked ,
+                  S.of(context).bookNow ,
                   style: AppStyles.sTextButton,
                 ),
               ),

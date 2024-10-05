@@ -1,56 +1,45 @@
 import 'package:flutter/material.dart'; // For TimeOfDay
 import 'package:intl/intl.dart'; // For DateFormat
-import 'offer_model.dart';
 
 class BookingModel {
   final String offerId;
-  final String userId;
   final String patientName;
   final String phone;
   final String email;
   final DateTime bookingDate;
   final String bookingTime; // Store time as "h:mm a" format
-  final OffersModel offersModel;
 
 
   BookingModel({
     required this.offerId,
-    required this.userId,
     required this.patientName,
     required this.phone,
     required this.email,
     required this.bookingDate,
     required this.bookingTime,
-    required this.offersModel,
 
   });
 
-  Map<String, dynamic> toFirestore() {
+  Map<String, dynamic> toJson() {
     return {
       'offerId': offerId,
-      'userId': userId,
       'patientName': patientName,
       'phone': phone,
       'email': email,
       'bookingDate': bookingDate.toIso8601String(),
       'bookingTime': bookingTime, // Store time as "h:mm a"
-      'offersModel': offersModel.toJson(),
     };
   }
 
-  factory BookingModel.fromFirestore(Map<String, dynamic> data) {
+  factory BookingModel.fromJson(Map<String, dynamic> data) {
     return BookingModel(
       offerId: data['offerId'],
-      userId: data['userId'],
       patientName: data['patientName'],
       phone: data['phone'],
       email: data['email'],
       bookingDate: DateTime.parse(data['bookingDate']),
       bookingTime: data['bookingTime'], // Time as "h:mm a"
-      offersModel: OffersModel.fromJson(
-        data['offersModel'] as Map<String, dynamic>,
-       // data['offersModel']['id'] as String,
-      ),
+      
     );
   }
 

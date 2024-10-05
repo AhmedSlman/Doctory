@@ -23,7 +23,7 @@ class AuthRepoImplementation implements AuthRepository {
           'password': password,
         },
       );
-      final data = LoginResponse.fromJson(response);
+      final data = LoginResponse.fromJson(response.data);
       CacheHelpers.saveToken(value: data.data.token);
       return Right(data);
     } on ServerException catch (e) {
@@ -64,7 +64,7 @@ class AuthRepoImplementation implements AuthRepository {
         isFormData: true,
       );
 
-      var user = UserModel.fromJson(response['data']['user']);
+      var user = UserModel.fromJson(response.data['data']['user']);
       return Right(user);
     } on ServerException catch (e) {
       return Left(e.errorModel.message);
