@@ -17,7 +17,6 @@ class DoctorProfileViewBody extends StatelessWidget {
   const DoctorProfileViewBody({super.key, required this.doctor});
   final DoctorModel doctor;
 
-
   @override
   Widget build(BuildContext context) {
     final isRtl = Localizations.localeOf(context).languageCode == 'ar';
@@ -32,13 +31,15 @@ class DoctorProfileViewBody extends StatelessWidget {
             const CustomAppBar(
               showBackButton: true,
             ),
-             DoctorProfilePictureAndName(doctor: doctor,),
+            DoctorProfilePictureAndName(
+              doctor: doctor,
+            ),
             SizedBox(
               height: 15.h,
             ),
             IconTextWidget(
               iconPath: 'assets/images/work.svg',
-              primaryText: doctor.doctorSpec,
+              primaryText: doctor.price,
               primaryTextStyle:
                   AppStyles.sBlack12.copyWith(color: AppColors.greyForIcon),
             ),
@@ -50,20 +51,19 @@ class DoctorProfileViewBody extends StatelessWidget {
                   AppStyles.sBlack12.copyWith(color: AppColors.greyForIcon),
             ),
             SizedBox(height: 5.h),
-             Align(
+            Align(
               alignment: isRtl ? Alignment.topRight : Alignment.topLeft,
               child: CustomRatingBar(
-                rating:doctor.rating,
+                rating: 2,
               ),
             ),
             SizedBox(
               height: 15.h,
             ),
             CustomContainerCard(
-
               title: AppStrings.doctorSummary,
               content: Text(
-                doctor.doctorSummary,
+                doctor.address,
                 style:
                     AppStyles.sBlack12.copyWith(color: AppColors.greyForIcon),
                 maxLines: 8,
@@ -73,10 +73,10 @@ class DoctorProfileViewBody extends StatelessWidget {
             SizedBox(
               height: 15.h,
             ),
-             CustomContainerCard(
+            CustomContainerCard(
               title: AppStrings.doctorServices,
               content: DoctorServices(
-                services: doctor.doctorServices,
+                services: [],
               ),
             ),
             SizedBox(
@@ -95,7 +95,7 @@ class DoctorProfileViewBody extends StatelessWidget {
                   SizedBox(
                     height: 5.h,
                   ),
-                   IconTextWidget(
+                  IconTextWidget(
                     iconPath: 'assets/images/clock.svg',
                     primaryText: 'وقت الانتظار',
                     finalText: '${doctor.waitingTime} دقيقة',
@@ -103,9 +103,9 @@ class DoctorProfileViewBody extends StatelessWidget {
                   SizedBox(
                     height: 5.h,
                   ),
-                   IconTextWidget(
+                  IconTextWidget(
                     iconPath: 'assets/images/location.svg',
-                    primaryText: doctor.fullAddress,
+                    primaryText: doctor.address,
                   ),
                   SizedBox(
                     height: 5.h,
@@ -114,7 +114,8 @@ class DoctorProfileViewBody extends StatelessWidget {
                     padding: const EdgeInsets.all(5.0),
                     child: Text(
                       'الدخول بميعاد معين',
-                      style: AppStyles.sBlack12.copyWith(color: AppColors.greyForIcon),
+                      style: AppStyles.sBlack12
+                          .copyWith(color: AppColors.greyForIcon),
                     ),
                   ),
                   Row(
@@ -124,7 +125,8 @@ class DoctorProfileViewBody extends StatelessWidget {
                         padding: const EdgeInsets.all(5.0),
                         child: Text(
                           "احجز اونلاين, ادفع في العياده \n الدكتور يشترط الحجز المسبق",
-                          style: AppStyles.sBlack12.copyWith(color: AppColors.greyForIcon),
+                          style: AppStyles.sBlack12
+                              .copyWith(color: AppColors.greyForIcon),
                         ),
                       ),
                       ElevatedButton(
@@ -135,7 +137,8 @@ class DoctorProfileViewBody extends StatelessWidget {
                               return Placeholder();
                               //return const BookingDialog();
                             },
-                          );                        },
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primaryColor,
                           shape: RoundedRectangleBorder(

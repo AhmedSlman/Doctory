@@ -11,7 +11,7 @@ class BookingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<DoctorsBookingCubit>()..fetchDoctors(),
+      create: (context) => getIt<DoctorsBookingCubit>(),
       child: const SafeArea(
         child: Scaffold(
           body: BookingViewBody(),

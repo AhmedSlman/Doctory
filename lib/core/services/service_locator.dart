@@ -61,7 +61,8 @@ void setupLocator() {
   getIt.registerFactory<ReportProblemCubit>(() => ReportProblemCubit(getIt<SettingsRepo>()));
 
   //
-  getIt.registerLazySingleton<DoctorsRepo>(() => DoctorsRepoImplementation());
+  getIt.registerLazySingleton<DoctorsRepo>(
+      () => DoctorsRepoImplementation(apiConsumer: getIt<ApiConsumer>()));
   getIt.registerFactory<DoctorsBookingCubit>(
       () => DoctorsBookingCubit(getIt<DoctorsRepo>()));
 }
