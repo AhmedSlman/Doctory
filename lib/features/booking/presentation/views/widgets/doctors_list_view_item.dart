@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:doctory/core/routes/router_names.dart';
-import 'package:doctory/core/widgets/custom_circular_progress_indicator.dart';
+import 'package:doctory/features/booking/data/models/doctor_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -10,11 +10,10 @@ import '../../../../../core/utils/app_colors.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/app_styles.dart';
 import '../../../../../core/widgets/custom_rating_bar.dart';
-import '../../../data/models/doctor_model.dart';
 
 class DoctorsListViewItem extends StatelessWidget {
-  const DoctorsListViewItem({super.key});
-
+  const DoctorsListViewItem({super.key, required this.doctor});
+final DoctorModel doctor;
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -38,11 +37,11 @@ class DoctorsListViewItem extends StatelessWidget {
                 height: double.infinity,
                 width: screenWidth * 0.33,
                 child: CachedNetworkImage(
-                    imageUrl: "",
+                    imageUrl: doctor.image??"",
                     fit: BoxFit.cover,
                     placeholder: (context, url) => Skeletonizer(
                           child: CachedNetworkImage(
-                            imageUrl: " doctor.image,",
+                            imageUrl: doctor.image ?? '',
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -58,7 +57,7 @@ class DoctorsListViewItem extends StatelessWidget {
                 children: [
                   Flexible(
                     child: Text(
-                      "",
+                    doctor.name,
                       style: AppStyles.sBlack12.copyWith(
                         fontWeight: FontWeight.bold,
                         fontSize: screenWidth * 0.04,
@@ -70,7 +69,7 @@ class DoctorsListViewItem extends StatelessWidget {
                   const SizedBox(height: 5),
                   Flexible(
                     child: Text(
-                      "",
+                      doctor.specialization!.name,
                       style: AppStyles.sSubTitleGrey.copyWith(
                         fontSize: screenWidth * 0.035,
                       ),
@@ -81,7 +80,7 @@ class DoctorsListViewItem extends StatelessWidget {
                   const SizedBox(height: 3),
                   Flexible(
                     child: Text(
-                      "doctor.address",
+                      doctor.address,
                       style: AppStyles.sSubTitleGrey.copyWith(
                         fontSize: screenWidth * 0.035,
                       ),
@@ -92,7 +91,7 @@ class DoctorsListViewItem extends StatelessWidget {
                   const SizedBox(height: 3),
                   Flexible(
                     child: Text(
-                      '0 جنيه',
+                      '${doctor.price} جنيه',
                       style: AppStyles.sSubTitleGrey.copyWith(
                         fontSize: screenWidth * 0.035,
                       ),
@@ -118,7 +117,7 @@ class DoctorsListViewItem extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       GoRouter.of(context).push(
-                        RouterNames.doctorProfileInfo,
+                        RouterNames.doctorProfileInfo,extra: doctor.id
                       );
                     },
                     style: ElevatedButton.styleFrom(

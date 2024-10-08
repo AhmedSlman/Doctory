@@ -14,7 +14,7 @@ class BookingViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-          horizontal: MediaQuery.of(context).size.width * 0.03),
+          horizontal: MediaQuery.of(context).size.width * 0.06),
       child: Column(children: [
         const CustomAppBar(
           title: AppStrings.booking,
@@ -31,7 +31,7 @@ class BookingViewBody extends StatelessWidget {
               hintText: 'المدينه',
             ),
             SizedBox(
-              width: MediaQuery.of(context).size.width * 0.025,
+              width: MediaQuery.of(context).size.width * 0.25,
             ),
             const DropDownButtonMenu(
               items: [
@@ -42,8 +42,7 @@ class BookingViewBody extends StatelessWidget {
               ],
               hintText: 'التخصص',
             ),
-            const Spacer(),
-            const LocationButton()
+           
           ],
         ),
         SizedBox(

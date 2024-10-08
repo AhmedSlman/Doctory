@@ -29,7 +29,7 @@ class BookingDialogState extends State<BookingDialog> {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   DateTime? _bookingDate;
-  TimeOfDay? _bookingTime;
+  String? _bookingTime;
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -89,7 +89,7 @@ class BookingDialogState extends State<BookingDialog> {
                     SizedBox(height: 10.h),
                     CustomTimePicker(
                       hintText: S.of(context).bookingTime,
-                      onSelected: (time) => _bookingTime = time as TimeOfDay?, 
+                      onSelected: (time) => _bookingTime = time, 
                     ),
                     SizedBox(height: 20.h),
                     SaveChangesButton(
@@ -121,31 +121,35 @@ class BookingDialogState extends State<BookingDialog> {
     );
   }
 
-  void _submitBooking(BuildContext context) {
-    final formState = _formKey.currentState;
+ void _submitBooking(BuildContext context) {
+  final formState = _formKey.currentState;
 
-    if (formState != null && formState.validate()) {
-      final cubit = BlocProvider.of<ReserveOfferCubit>(context);
+  if (formState != null && formState.validate()) {
+    final cubit = BlocProvider.of<ReserveOfferCubit>(context);
 
-      final bookingTimeString = BookingModel.timeOfDayToString(_bookingTime!);
+    // تنسيق الوقت والتاريخ
+   // final bookingTimeString = BookingModel.timeOfDayToString(_bookingTime! as TimeOfDay);
+    // final bookingDateString = DateFormat('yyyy-MM-dd').format(_bookingDate!);
 
-      final booking = BookingModel(
-        offerId: widget.offerId.toString(),
-        patientName: _patientNameController.text,
-        phone: _phoneController.text,
-        email: _emailController.text,
-        bookingDate: _bookingDate!,
-        bookingTime: bookingTimeString,
-      );
+    final booking = BookingModel(
+      offerId: widget.offerId.toString(),
+      patientName: _patientNameController.text,
+      phone: _phoneController.text,
+      email: _emailController.text,
+      bookingDate: _bookingDate!, // Keep the DateTime object
+      bookingTime: _bookingTime!,
+    );
 
-      cubit.reserveOffer(booking).whenComplete(() {
-        // No need to setState for loading indicator
-      });
-    } else {
-      showToast(
-        msg: 'ادخل البيانات بطريقه صحيح',
-        color: AppColors.redColor,
-      );
-    }
+    cubit.reserveOffer(booking).whenComplete(() {
+ showToast(
+      msg: 'تم الحجز',
+      color: AppColors.greenColor,
+    );    });
+  } else {
+    showToast(
+      msg: 'ادخل البيانات بطريقه صحيح',
+      color: AppColors.redColor,
+    );
   }
+}
 }

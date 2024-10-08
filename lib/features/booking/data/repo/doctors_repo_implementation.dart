@@ -10,22 +10,22 @@ class DoctorsRepoImplementation implements DoctorsRepo {
   final ApiConsumer apiConsumer;
 
   DoctorsRepoImplementation({required this.apiConsumer});
-
+final token = CacheHelpers.getToken();
   @override
-  Future<Either<ErrorModel, List<DoctorModel>>> getDoctors(
-      {int? doctorId}) async {
+  Future<Either<ErrorModel, List<DoctorModel>>> getDoctors() async {
     try {
-      if (doctorId != null) {
-        final response = await apiConsumer.get("doctors/$doctorId");
-        final doctor = DoctorModel.fromJson(response);
-        return Right([doctor]);
-      } else {
-        final response = await apiConsumer.get("doctors");
+     
+        final response = await apiConsumer.get("/doctors", headers: {
+          'Accept': 'application/vnd.api+json',
+          'Content-Type': 'application/vnd.api+json',
+          'Authorization': "Bearer $token"
+        });
         final doctors = (response as List)
             .map((json) => DoctorModel.fromJson(json))
             .toList();
+
         return Right(doctors);
-      }
+      
     } on ServerException catch (e) {
       return Left(e.errorModel);
     }
@@ -36,14 +36,14 @@ class DoctorsRepoImplementation implements DoctorsRepo {
       {required String city}) async {
     try {
       final response = await apiConsumer.post(
-        "doctorsByCity",
+        "/doctorsByCity",
         data: {
           'name': city,
         },
         headers: {
           'Accept': 'application/vnd.api+json',
           'Content-Type': 'application/vnd.api+json',
-          'Authorization': CacheHelpers.getToken()
+          'Authorization':  "Bearer $token"
         },
         isFormData: true,
       );
@@ -60,14 +60,14 @@ class DoctorsRepoImplementation implements DoctorsRepo {
       {required String specializationName}) async {
     try {
       final response = await apiConsumer.post(
-        "doctorsByCity",
+        "/doctorsBySpecialization",
         data: {
           'name': specializationName,
         },
         headers: {
           'Accept': 'application/vnd.api+json',
           'Content-Type': 'application/vnd.api+json',
-          'Authorization': CacheHelpers.getToken()
+          'Authorization':  "Bearer $token"
         },
         isFormData: true,
       );
@@ -94,13 +94,14 @@ class DoctorsRepoImplementation implements DoctorsRepo {
         headers: {
           'Accept': 'application/vnd.api+json',
           'Content-Type': 'application/vnd.api+json',
-          'Authorization': CacheHelpers.getToken()
+          'Authorization':  "Bearer $token"
         },
         isFormData: true,
       );
-      final doctors =
-          (response as List).map((json) => DoctorModel.fromJson(json)).toList();
-      return Right(doctors);
+      final doctorsList = (response['doctors'] as List)
+        .map((json) => DoctorModel.fromJson(json))
+        .toList();
+      return Right(doctorsList);
     } on ServerException catch (e) {
       return Left(e.errorModel);
     }

@@ -1,6 +1,5 @@
 // ignore_for_file: library_private_types_in_public_api
 
-import 'package:doctory/core/routes/router_names.dart';
 import 'package:doctory/core/utils/app_assets.dart';
 import 'package:doctory/core/widgets/custom_button.dart';
 import 'package:doctory/core/widgets/custom_text_field.dart';
@@ -9,8 +8,6 @@ import 'package:doctory/features/auth/presentation/widgets/forget_password_app_b
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
-
 import '../../../../generated/l10n.dart';
 import '../cubit/auth_cubit.dart';
 

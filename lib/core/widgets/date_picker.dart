@@ -81,7 +81,9 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
     }
     super.dispose();
   }
-}class CustomTimePicker extends StatefulWidget {
+}
+
+class CustomTimePicker extends StatefulWidget {
   final ValueChanged<String>? onSelected; // Changed to String for formatted time
   final String? hintText;
 

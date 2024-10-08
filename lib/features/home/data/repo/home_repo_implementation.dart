@@ -94,26 +94,27 @@ class HomeRepoImplementation implements HomeRepo {
   }
   
   @override
-  Future<Either<String, String>> reserveOffer(BookingModel booking) async {
-    print('///${booking.bookingDate.toIso8601String()}, ${booking.bookingTime},');
-    try {
-      final token = CacheHelpers.getToken();
-      var response =
-          await apiConsumer.post('/offers/18/reserve',
-           data: {
-       
+ Future<Either<String, String>> reserveOffer(BookingModel booking) async {
+  try {
+    final token = CacheHelpers.getToken();
+
+    // تنسيق التاريخ والوقت
+    final formattedDate = DateFormat('yyyy-MM-dd').format(booking.bookingDate);
+    final formattedTime = booking.bookingTime; // تم تنسيقه مسبقًا ليكون HH:mm
+
+    var response = await apiConsumer.post('/offers/${booking.offerId}/reserve',
+      data: {
         'name': booking.patientName,
         'email': booking.email,
         'phone': booking.phone,
-        'day': booking.bookingDate.toIso8601String(),
-        'time': booking.bookingTime,
+        'day': formattedDate, // إرسال التاريخ بتنسيق yyyy-MM-dd
+        'time': formattedTime, // إرسال الوقت بتنسيق HH:mm
       }, headers: {
         'Accept': 'application/vnd.api+json',
         'Content-Type': 'application/vnd.api+json',
         'Authorization': "Bearer $token"
       });
 
-     
     if (response.statusCode == 200 || response.statusCode == 201) {
       final message = response.data['message'];
       return Right(message);

@@ -30,16 +30,7 @@ class _SplashViewState extends State<SplashView> {
     return user != null;
   }
 
-  // Future<void> _checkLoginStatusAndNavigate() async {
-  //   context.go(RouterNames.login);
-  //   // bool loggedIn = await isUserLoggedIn();
-  //   // if (loggedIn) {
-  //   //   context.go(RouterNames.bottomNavBar);
-  //   // } else {
-  //   //   context.go(RouterNames.login);
-  //   // }
-  // }
-
+ 
   // @override
   Widget build(BuildContext context) {
     return Scaffold(

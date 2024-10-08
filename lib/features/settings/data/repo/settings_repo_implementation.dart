@@ -7,6 +7,7 @@ import 'package:doctory/core/dataSource/local/cache.dart';
 import 'package:doctory/features/settings/data/models/password_model.dart';
 import 'package:doctory/features/settings/data/models/profile_model.dart';
 import 'package:doctory/features/settings/data/models/report_problem_model.dart';
+import 'package:doctory/features/settings/data/models/reserve_model.dart';
 import 'package:doctory/features/settings/data/repo/settings_repo.dart';
 
 class SettingsRepoImplementation implements SettingsRepo {
@@ -125,5 +126,29 @@ Future<Either<String, ProblemResponse>> reportProblemModel(
     return left('An unexpected error occurred: $error');
   }
 }
+
+  @override
+  Future<Either<String, List<Appointment>>> getReserve()async {
+    try {
+      final token = CacheHelpers.getToken();
+
+      var data = await apiConsumer.get('/reservations', headers: {
+        'Accept': 'application/vnd.api+json',
+        'Content-Type': 'application/vnd.api+json',
+        'Authorization': "Bearer $token"
+      });
+          if (data != null && data is List) {
+        List<Appointment> appointments = data
+            .map((appointmentJson) => Appointment.fromJson(appointmentJson))
+            .toList();
+
+        return Right(appointments);
+      } else {
+        return const Left('Error: Invalid data received');
+      }
+    } catch (e) {
+      return Left('Error when fetching data: $e');
+    }
+  }
 
 }

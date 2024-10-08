@@ -5,12 +5,16 @@ import 'package:doctory/core/dataSource/local/cache.dart';
 
 import 'package:doctory/features/booking/data/repo/doctors_repo_implementation.dart';
 import 'package:doctory/features/booking/presentation/view_models/cubit/doctors_booking_cubit.dart';
+import 'package:doctory/features/doctor_profile/data/repo/doctor_profile_repo.dart';
+import 'package:doctory/features/doctor_profile/data/repo/doctor_profile_repo_impl.dart';
+import 'package:doctory/features/doctor_profile/cubit/doctor_profile_cubit.dart';
 import 'package:doctory/features/home/presentation/view_models/home_cubit/category/category_cubit.dart';
 import 'package:doctory/features/home/presentation/view_models/home_cubit/offer/offer_cubit.dart';
 import 'package:doctory/features/home/presentation/view_models/home_cubit/offers_by_specialization/offers_by_specialization_cubit.dart';
 import 'package:doctory/features/home/presentation/view_models/home_cubit/reserve/reserve_cubit.dart';
 import 'package:doctory/features/pharmacies/data/repo/pharmacies_repo.dart';
 import 'package:doctory/features/pharmacies/presentation/view_models/pharmacies_cubit.dart';
+import 'package:doctory/features/settings/view_models/get_reserve_cubit/reservation_cubit.dart';
 import 'package:doctory/features/settings/view_models/password_cubit/update_password_cubit.dart';
 import 'package:doctory/features/settings/view_models/problam_cubit/problam_cubit.dart';
 import 'package:doctory/features/settings/view_models/profile_cubit/profile_cubit.dart';
@@ -45,7 +49,8 @@ void setupLocator() {
   getIt.registerFactory<OffersCubit>(() => OffersCubit(getIt<HomeRepo>()));
   getIt.registerFactory<OffersBySpecCubit>(
       () => OffersBySpecCubit(getIt<HomeRepo>()));
-  getIt.registerFactory<ReserveOfferCubit>(() => ReserveOfferCubit(getIt<HomeRepo>()));
+  getIt.registerFactory<ReserveOfferCubit>(
+      () => ReserveOfferCubit(getIt<HomeRepo>()));
 
 //
   getIt.registerLazySingleton<PharmaciesRepo>(
@@ -56,13 +61,25 @@ void setupLocator() {
 //
   getIt.registerLazySingleton<SettingsRepo>(
       () => SettingsRepoImplementation(apiConsumer: getIt<ApiConsumer>()));
-  getIt.registerFactory<ProfileCubit>(() => ProfileCubit(settingsRepo: getIt<SettingsRepo>()));
-  getIt.registerFactory<PasswordCubit>(() => PasswordCubit(getIt<SettingsRepo>()));
-  getIt.registerFactory<ReportProblemCubit>(() => ReportProblemCubit(getIt<SettingsRepo>()));
+  getIt.registerFactory<ProfileCubit>(
+      () => ProfileCubit(settingsRepo: getIt<SettingsRepo>()));
+  getIt.registerFactory<PasswordCubit>(
+      () => PasswordCubit(getIt<SettingsRepo>()));
+  getIt.registerFactory<ReportProblemCubit>(
+      () => ReportProblemCubit(getIt<SettingsRepo>()));
+  getIt.registerFactory<ReservationCubit>(
+      () => ReservationCubit(getIt<SettingsRepo>()));
 
   //
   getIt.registerLazySingleton<DoctorsRepo>(
       () => DoctorsRepoImplementation(apiConsumer: getIt<ApiConsumer>()));
-  getIt.registerFactory<DoctorsBookingCubit>(
-      () => DoctorsBookingCubit(getIt<DoctorsRepo>()));
+  getIt.registerFactory<DoctorsCubit>(
+      () => DoctorsCubit(doctorsRepo: getIt<DoctorsRepo>()));
+
+// doctor profile
+  getIt.registerLazySingleton<DoctorProfileRepo>(
+      () => DoctorProfileRepoImpl(apiConsumer: getIt<ApiConsumer>()));
+
+  getIt.registerFactory<DoctorsProfileCubit>(
+      () => DoctorsProfileCubit(doctorsRepo: getIt<DoctorProfileRepo>(), ));
 }

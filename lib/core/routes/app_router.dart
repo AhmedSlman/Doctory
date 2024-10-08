@@ -8,17 +8,14 @@ import 'package:doctory/features/auth/presentation/views/sign_up_view.dart';
 import 'package:doctory/features/auth/presentation/views/verify_email_view.dart';
 import 'package:doctory/features/booking/presentation/views/booking_view.dart';
 import 'package:doctory/features/doctor_profile/views/doctor_profile_view.dart';
-import 'package:doctory/features/home/presentation/view_models/home_cubit/category/category_cubit.dart';
 import 'package:doctory/features/home/presentation/views/botton_nav_bar_view.dart';
 import 'package:doctory/features/settings/presentation/views/booking_time_view.dart';
 import 'package:doctory/features/settings/presentation/views/change_password_view.dart';
 import 'package:doctory/features/settings/presentation/views/report_a_problem_view.dart';
 import 'package:doctory/features/splash/splash_view.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../features/booking/data/models/doctor_model.dart';
 import '../../features/home/presentation/views/home_view.dart';
 import '../../features/settings/presentation/views/personal_info_view.dart';
 
@@ -91,10 +88,10 @@ final GoRouter router = GoRouter(
       path: RouterNames.changePasswordView,
       builder: (context, state) => const ChangePasswordView(),
     ),
-    // GoRoute(
-    //   path: RouterNames.bookingTime,
-    //   builder: (context, state) => const BookingTimeView(),
-    // ),
+    GoRoute(
+      path: RouterNames.bookingTime,
+      builder: (context, state) => const BookingTimeView(),
+    ),
     GoRoute(
       path: RouterNames.reportProblemView,
       builder: (context, state) => const ReportAProblemView(),
@@ -102,13 +99,8 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: RouterNames.doctorProfileInfo,
       builder: (context, state) {
-        final doctor = state.extra as DoctorModel?;
-        if (doctor == null) {
-          return const Scaffold(
-            body: Center(child: Text('No doctor data available')),
-          );
-        }
-        return DoctorProfileInfoView(doctor: doctor);
+        final doctorId = state.extra as int?;
+        return DoctorProfileInfoView(doctorId: doctorId!);
       },
     ),
   ],

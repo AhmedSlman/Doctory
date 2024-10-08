@@ -1,31 +1,68 @@
-part of 'doctors_booking_cubit.dart';
 
+import 'package:doctory/core/error/error_model.dart';
+import 'package:doctory/features/booking/data/models/doctor_model.dart';
 
-sealed class DoctorsBookingState extends Equatable {
-  const DoctorsBookingState();
+abstract class DoctorsBookingState {}
 
-  @override
-  List<Object?> get props => [];
-}
+// الحالة الافتراضية
+class DoctorsInitial extends DoctorsBookingState {}
 
-final class DoctorsBookingInitial extends DoctorsBookingState {}
+// حالات getDoctors
+class GetDoctorsLoading extends DoctorsBookingState {}
 
-final class DoctorsBookingLoading extends DoctorsBookingState {}
-
-final class DoctorsBookingSuccess extends DoctorsBookingState {
+class GetDoctorsSuccess extends DoctorsBookingState {
   final List<DoctorModel> doctors;
 
-  const DoctorsBookingSuccess(this.doctors);
-
-  @override
-  List<Object?> get props => [doctors];
+  GetDoctorsSuccess(this.doctors);
 }
 
-final class DoctorsBookingFailure extends DoctorsBookingState {
-  final String error;
+class GetDoctorsFailure extends DoctorsBookingState {
+  final ErrorModel error;
 
-  const DoctorsBookingFailure(this.error);
+  GetDoctorsFailure(this.error);
+}
 
-  @override
-  List<Object?> get props => [error];
+// حالات getDoctorsByCity
+class GetDoctorsByCityLoading extends DoctorsBookingState {}
+
+class GetDoctorsByCitySuccess extends DoctorsBookingState {
+  final List<DoctorModel> doctors;
+
+  GetDoctorsByCitySuccess(this.doctors);
+}
+
+class GetDoctorsByCityFailure extends DoctorsBookingState {
+  final ErrorModel error;
+
+  GetDoctorsByCityFailure(this.error);
+}
+
+// حالات getDoctorsBySpecialization
+class GetDoctorsBySpecializationLoading extends DoctorsBookingState {}
+
+class GetDoctorsBySpecializationSuccess extends DoctorsBookingState {
+  final List<DoctorModel> doctors;
+
+  GetDoctorsBySpecializationSuccess(this.doctors);
+}
+
+class GetDoctorsBySpecializationFailure extends DoctorsBookingState {
+  final ErrorModel error;
+
+  GetDoctorsBySpecializationFailure(this.error);
+}
+
+// حالات filtteredDoctors
+class FilteredDoctorsLoading extends DoctorsBookingState {}
+
+class FilteredDoctorsSuccess extends DoctorsBookingState {
+  final List<DoctorModel> doctors;
+
+  FilteredDoctorsSuccess(this.doctors);
+}
+
+class FilteredDoctorsFailure extends DoctorsBookingState {
+  final ErrorModel error;
+
+  FilteredDoctorsFailure(this.error);
 }
